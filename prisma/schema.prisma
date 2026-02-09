@@ -1,0 +1,274 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Company {
+  id                String  @id @default(cuid())
+  name              String?
+  code              String  @unique
+  numberOfEmployees Int?
+  address           String?
+  logo              Json?
+
+  email           String?       @unique
+  phone           String?       @unique
+  website         String?
+  gstNumber       String?       @unique
+  estiblishedDate DateTime?
+  status          CompanyStatus @default(ACTIVE)
+  payPeriod       PayPeriod     @default(WEEK_OFF_PAID)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  geofences Geofence[]
+  shifts    Shift[]
+  employees Employee[]
+}
+
+enum CompanyStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum PayPeriod {
+  FIXED_30_DAYS
+  WEEK_OFF_PAID
+  WEEK_OFF_UNPAID
+}
+
+model Shift {
+  id               String @id @default(cuid())
+  name             String
+  startTime        String // e.g., "09:00"
+  endTime          String // e.g., "18:00"
+  latePunchInLimit Int    @default(0) // minutes allowed before being marked as Half Day
+
+  companyId String
+  company   Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  employees Employee?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model otp {
+  id              BigInt    @id @default(autoincrement())
+  mobile          String    @unique
+  otp             String
+  expiresAt       DateTime
+  attempts        Int       @default(0)
+  lastAttemptedAt DateTime?
+  isUsed          Boolean   @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([mobile])
+}
+
+// Employee 
+
+model Employee {
+  id     String @id @default(cuid())
+  userId String @unique
+
+  firstname             String?
+  lastname              String?
+  profilePicture        Json?
+  password              String?
+  email                 String?     @unique
+  employeeCode          Int?        @unique
+  designation           String?
+  phoneNumber           String      @unique
+  Country               String?
+  salary                Int?
+  birthDate             DateTime?
+  emergencyContactPhone String?
+  emergencyContactName  String?
+  gender                Gender?
+  bloodGroup            BloodGroup?
+  shiftId               String?     @unique
+  shift                 Shift?      @relation(fields: [shiftId], references: [id], onDelete: Cascade)
+  companyId             String
+  company               Company     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  // Relations
+  settings EmployeeSetting?
+  bank     EmployeeBankDetails?
+
+  attendances Attendance[]
+  leaves      Leave[]
+}
+
+enum BloodGroup {
+  A_POSITIVE
+  A_NEGATIVE
+  B_POSITIVE
+  B_NEGATIVE
+  AB_POSITIVE
+  AB_NEGATIVE
+  O_POSITIVE
+  O_NEGATIVE
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum SalaryType {
+  MONTHLY
+  DAILY
+  HOURLY
+}
+
+// user settings model
+
+model EmployeeSetting {
+  id         String @id @default(cuid())
+  employeeId String @unique
+
+  weekOffExtraPayment       Boolean           @default(true)
+  weekOffDay                String?
+  applicableToOvertime      Boolean           @default(true)
+  shiftwiseAttendance       Boolean           @default(true)
+  payrollConfiguration      String
+  numberOfCasualLeaves      Int?
+  numberOfSickLeaves        Int?
+  numberOfPrivilegeLeaves   Int?
+  numberOfEmergencyLeaves   Int?
+  addDocument               Json?
+  multipleAttendance        Boolean           @default(true)
+  liveTracking              Boolean           @default(true)
+  mobileAttendance          Boolean           @default(true)
+  aiFingerprintVerification Boolean           @default(true)
+  selfCustomDaywiseSalary   Boolean           @default(true)
+  viewSelfSalary            Boolean           @default(true)
+  selfOdometerReading       Boolean           @default(true)
+  dateOfJoining             DateTime
+  punchFromGeofence         PunchFromGeofence @default(PUNCH_FROM_GEOFENCE)
+
+  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+}
+
+enum weekOffDay {
+  SUNDAY
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+}
+
+enum PunchFromGeofence {
+  PUNCH_FROM_GEOFENCE
+  PUNCH_FROM_ANYWHERE
+}
+
+model EmployeeBankDetails {
+  id         String @id @default(cuid())
+  employeeId String @unique
+
+  panNumber         String
+  bankAccountNumber String
+  bankIfscCode      String
+  bankName          String
+  bankBranchName    String
+  accountHolderName String
+  address           String
+
+  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+}
+
+model Geofence {
+  id        String  @id @default(cuid())
+  name      String
+  latitude  Float
+  longitude Float
+  radius    Float // in meters
+  companyId String
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  checkInAttendance  Attendance[] @relation("CheckInGeofence")
+  checkOutAttendance Attendance[] @relation("CheckOutGeofence")
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+}
+
+model Attendance {
+  id         String   @id @default(cuid())
+  employeeId String
+  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  date     DateTime  @db.Date // Store only the date part
+  checkIn  DateTime?
+  checkOut DateTime?
+
+  checkInLat        Float?
+  checkInLng        Float?
+  checkOutLat       Float?
+  checkOutLng       Float?
+  checkInGeofenceId String?
+  checkInGeofence   Geofence? @relation("CheckInGeofence", fields: [checkInGeofenceId], references: [id])
+
+  checkOutGeofenceId String?
+  checkOutGeofence   Geofence?        @relation("CheckOutGeofence", fields: [checkOutGeofenceId], references: [id])
+  status             AttendanceStatus @default(ABSENT)
+  remarks            String?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  @@unique([employeeId, date])
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  HALF_DAY
+  ON_LEAVE
+}
+
+model Leave {
+  id         String   @id @default(cuid())
+  employeeId String
+  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  type      LeaveType
+  startDate DateTime
+  endDate   DateTime
+  reason    String?
+  status    LeaveStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([employeeId])
+}
+
+enum LeaveType {
+  CASUAL
+  SICK
+  PRIVILEGE
+  EMERGENCY
+}
+
+enum LeaveStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}

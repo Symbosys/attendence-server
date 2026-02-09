@@ -1,0 +1,17 @@
+-- AlterTable
+ALTER TABLE "EmployeeSetting" ALTER COLUMN "weekOffExtraPayment" SET DEFAULT true,
+ALTER COLUMN "weekOffDay" DROP NOT NULL,
+ALTER COLUMN "applicableToOvertime" SET DEFAULT true,
+ALTER COLUMN "shiftwiseAttendance" SET DEFAULT true,
+ALTER COLUMN "numberOfCasualLeaves" DROP NOT NULL,
+ALTER COLUMN "numberOfSickLeaves" DROP NOT NULL,
+ALTER COLUMN "numberOfPrivilegeLeaves" DROP NOT NULL,
+ALTER COLUMN "numberOfEmergencyLeaves" DROP NOT NULL,
+ALTER COLUMN "multipleAttendance" SET DEFAULT true,
+ALTER COLUMN "liveTracking" SET DEFAULT true,
+ALTER COLUMN "mobileAttendance" SET DEFAULT true,
+ALTER COLUMN "aiFingerprintVerification" SET DEFAULT true,
+ALTER COLUMN "selfCustomDaywiseSalary" SET DEFAULT true,
+ALTER COLUMN "viewSelfSalary" SET DEFAULT true,
+ALTER COLUMN "selfOdometerReading" SET DEFAULT true,
+ALTER COLUMN "punchFromGeofence" SET DEFAULT 'PUNCH_FROM_GEOFENCE';
