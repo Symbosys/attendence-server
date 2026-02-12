@@ -14,10 +14,16 @@ import geofenceRoute from "./module/company/routes/geofence.route";
 import shiftRoute from "./module/company/routes/sift.routes";
 
 //employee routes
+import decisionRoutes from "./module/decision/routes/decision.routes";
 import attendanceRoutes from "./module/empolyee/routes/attendance.routes";
 import employeeAuthRoute from "./module/empolyee/routes/auth.routes";
+import employeeCategoryRoute from "./module/empolyee/routes/employee.category.routes";
 import employeeOnboardingRoute from "./module/empolyee/routes/employee.routes";
+import holidayRoutes from "./module/holiday/routes/holiday.routes";
 import leavesRoutes from "./module/leaves/routes/leaves.route";
+import taskRoutes from "./module/task/routes/task.routes";
+
+
 
 const app = express();
 
@@ -70,9 +76,14 @@ app.use("/api/v1/company", companyRoute);
  * Employee routes
 */
 app.use("/api/v1/employee/auth", employeeAuthRoute);
+app.use("/api/v1/employee/category", employeeCategoryRoute);
 app.use("/api/v1/employee", employeeOnboardingRoute);
 app.use("/api/v1/attendance", attendanceRoutes);
 app.use("/api/v1/leaves", leavesRoutes);
+app.use("/api/v1/task", taskRoutes);
+app.use("/api/v1/decision", decisionRoutes);
+app.use("/api/v1/holiday", holidayRoutes);
+
 
 app.use(errorMiddleware);
 

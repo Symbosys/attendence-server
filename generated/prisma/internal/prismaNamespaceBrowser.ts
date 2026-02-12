@@ -58,8 +58,13 @@ export const ModelName = {
   EmployeeSetting: 'EmployeeSetting',
   EmployeeBankDetails: 'EmployeeBankDetails',
   Geofence: 'Geofence',
+  Category: 'Category',
+  Task: 'Task',
   Attendance: 'Attendance',
-  Leave: 'Leave'
+  Leave: 'Leave',
+  Decision: 'Decision',
+  DecisionParticipant: 'DecisionParticipant',
+  Holiday: 'Holiday'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -146,7 +151,8 @@ export const EmployeeScalarFieldEnum = {
   emergencyContactName: 'emergencyContactName',
   gender: 'gender',
   bloodGroup: 'bloodGroup',
-  shiftId: 'shiftId'
+  shiftId: 'shiftId',
+  companyId: 'companyId'
 } as const
 
 export type EmployeeScalarFieldEnum = (typeof EmployeeScalarFieldEnum)[keyof typeof EmployeeScalarFieldEnum]
@@ -208,6 +214,33 @@ export const GeofenceScalarFieldEnum = {
 export type GeofenceScalarFieldEnum = (typeof GeofenceScalarFieldEnum)[keyof typeof GeofenceScalarFieldEnum]
 
 
+export const CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
+
+
+export const TaskScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  status: 'status',
+  priority: 'priority',
+  dueDate: 'dueDate',
+  companyId: 'companyId',
+  employeeId: 'employeeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
+
+
 export const AttendanceScalarFieldEnum = {
   id: 'id',
   employeeId: 'employeeId',
@@ -218,8 +251,6 @@ export const AttendanceScalarFieldEnum = {
   checkInLng: 'checkInLng',
   checkOutLat: 'checkOutLat',
   checkOutLng: 'checkOutLng',
-  checkInGeofenceId: 'checkInGeofenceId',
-  checkOutGeofenceId: 'checkOutGeofenceId',
   status: 'status',
   remarks: 'remarks',
   createdAt: 'createdAt',
@@ -242,6 +273,47 @@ export const LeaveScalarFieldEnum = {
 } as const
 
 export type LeaveScalarFieldEnum = (typeof LeaveScalarFieldEnum)[keyof typeof LeaveScalarFieldEnum]
+
+
+export const DecisionScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  creatorId: 'creatorId',
+  companyId: 'companyId',
+  status: 'status',
+  companyApproval: 'companyApproval',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DecisionScalarFieldEnum = (typeof DecisionScalarFieldEnum)[keyof typeof DecisionScalarFieldEnum]
+
+
+export const DecisionParticipantScalarFieldEnum = {
+  id: 'id',
+  decisionId: 'decisionId',
+  employeeId: 'employeeId',
+  status: 'status',
+  comment: 'comment',
+  approvedAt: 'approvedAt'
+} as const
+
+export type DecisionParticipantScalarFieldEnum = (typeof DecisionParticipantScalarFieldEnum)[keyof typeof DecisionParticipantScalarFieldEnum]
+
+
+export const HolidayScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  date: 'date',
+  isPaid: 'isPaid',
+  companyId: 'companyId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type HolidayScalarFieldEnum = (typeof HolidayScalarFieldEnum)[keyof typeof HolidayScalarFieldEnum]
 
 
 export const SortOrder = {

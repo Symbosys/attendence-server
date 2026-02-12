@@ -6,8 +6,8 @@ import { generateToken } from "../../../utils/jwt";
 import { generateOtp } from "../../../utils/otp";
 import { ErrorResponse, SuccessResponse } from "../../../utils/response.util.js";
 import {
-    EmployeeLoginValidator,
-    EmployeeOtpValidator,
+  EmployeeLoginValidator,
+  EmployeeOtpValidator,
 } from "../validator/auth.validator";
 
 const OTP_LENGTH = 4;
@@ -109,6 +109,9 @@ export const verifyOtp = asyncHandler(async (req, res, next) => {
   // Check if employee exists in the database
   const employee = await prisma.employee.findUnique({
     where: { phoneNumber: validData.mobile },
+    include: {
+      company: true,
+    },
   });
 
   if (!employee) {
@@ -174,6 +177,7 @@ export const verifyOtp = asyncHandler(async (req, res, next) => {
         phoneNumber: employee.phoneNumber,
         designation: employee.designation,
         employeeCode: employee.employeeCode,
-      }
+      },
+      company: employee.company
     });
 });

@@ -50,8 +50,6 @@ export type AttendanceMinAggregateOutputType = {
   checkInLng: number | null
   checkOutLat: number | null
   checkOutLng: number | null
-  checkInGeofenceId: string | null
-  checkOutGeofenceId: string | null
   status: $Enums.AttendanceStatus | null
   remarks: string | null
   createdAt: Date | null
@@ -68,8 +66,6 @@ export type AttendanceMaxAggregateOutputType = {
   checkInLng: number | null
   checkOutLat: number | null
   checkOutLng: number | null
-  checkInGeofenceId: string | null
-  checkOutGeofenceId: string | null
   status: $Enums.AttendanceStatus | null
   remarks: string | null
   createdAt: Date | null
@@ -86,8 +82,6 @@ export type AttendanceCountAggregateOutputType = {
   checkInLng: number
   checkOutLat: number
   checkOutLng: number
-  checkInGeofenceId: number
-  checkOutGeofenceId: number
   status: number
   remarks: number
   createdAt: number
@@ -120,8 +114,6 @@ export type AttendanceMinAggregateInputType = {
   checkInLng?: true
   checkOutLat?: true
   checkOutLng?: true
-  checkInGeofenceId?: true
-  checkOutGeofenceId?: true
   status?: true
   remarks?: true
   createdAt?: true
@@ -138,8 +130,6 @@ export type AttendanceMaxAggregateInputType = {
   checkInLng?: true
   checkOutLat?: true
   checkOutLng?: true
-  checkInGeofenceId?: true
-  checkOutGeofenceId?: true
   status?: true
   remarks?: true
   createdAt?: true
@@ -156,8 +146,6 @@ export type AttendanceCountAggregateInputType = {
   checkInLng?: true
   checkOutLat?: true
   checkOutLng?: true
-  checkInGeofenceId?: true
-  checkOutGeofenceId?: true
   status?: true
   remarks?: true
   createdAt?: true
@@ -261,8 +249,6 @@ export type AttendanceGroupByOutputType = {
   checkInLng: number | null
   checkOutLat: number | null
   checkOutLng: number | null
-  checkInGeofenceId: string | null
-  checkOutGeofenceId: string | null
   status: $Enums.AttendanceStatus
   remarks: string | null
   createdAt: Date
@@ -302,15 +288,11 @@ export type AttendanceWhereInput = {
   checkInLng?: Prisma.FloatNullableFilter<"Attendance"> | number | null
   checkOutLat?: Prisma.FloatNullableFilter<"Attendance"> | number | null
   checkOutLng?: Prisma.FloatNullableFilter<"Attendance"> | number | null
-  checkInGeofenceId?: Prisma.StringNullableFilter<"Attendance"> | string | null
-  checkOutGeofenceId?: Prisma.StringNullableFilter<"Attendance"> | string | null
   status?: Prisma.EnumAttendanceStatusFilter<"Attendance"> | $Enums.AttendanceStatus
   remarks?: Prisma.StringNullableFilter<"Attendance"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Attendance"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Attendance"> | Date | string
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
-  checkInGeofence?: Prisma.XOR<Prisma.GeofenceNullableScalarRelationFilter, Prisma.GeofenceWhereInput> | null
-  checkOutGeofence?: Prisma.XOR<Prisma.GeofenceNullableScalarRelationFilter, Prisma.GeofenceWhereInput> | null
 }
 
 export type AttendanceOrderByWithRelationInput = {
@@ -323,15 +305,11 @@ export type AttendanceOrderByWithRelationInput = {
   checkInLng?: Prisma.SortOrderInput | Prisma.SortOrder
   checkOutLat?: Prisma.SortOrderInput | Prisma.SortOrder
   checkOutLng?: Prisma.SortOrderInput | Prisma.SortOrder
-  checkInGeofenceId?: Prisma.SortOrderInput | Prisma.SortOrder
-  checkOutGeofenceId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   employee?: Prisma.EmployeeOrderByWithRelationInput
-  checkInGeofence?: Prisma.GeofenceOrderByWithRelationInput
-  checkOutGeofence?: Prisma.GeofenceOrderByWithRelationInput
 }
 
 export type AttendanceWhereUniqueInput = Prisma.AtLeast<{
@@ -348,15 +326,11 @@ export type AttendanceWhereUniqueInput = Prisma.AtLeast<{
   checkInLng?: Prisma.FloatNullableFilter<"Attendance"> | number | null
   checkOutLat?: Prisma.FloatNullableFilter<"Attendance"> | number | null
   checkOutLng?: Prisma.FloatNullableFilter<"Attendance"> | number | null
-  checkInGeofenceId?: Prisma.StringNullableFilter<"Attendance"> | string | null
-  checkOutGeofenceId?: Prisma.StringNullableFilter<"Attendance"> | string | null
   status?: Prisma.EnumAttendanceStatusFilter<"Attendance"> | $Enums.AttendanceStatus
   remarks?: Prisma.StringNullableFilter<"Attendance"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Attendance"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Attendance"> | Date | string
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
-  checkInGeofence?: Prisma.XOR<Prisma.GeofenceNullableScalarRelationFilter, Prisma.GeofenceWhereInput> | null
-  checkOutGeofence?: Prisma.XOR<Prisma.GeofenceNullableScalarRelationFilter, Prisma.GeofenceWhereInput> | null
 }, "id" | "employeeId_date">
 
 export type AttendanceOrderByWithAggregationInput = {
@@ -369,8 +343,6 @@ export type AttendanceOrderByWithAggregationInput = {
   checkInLng?: Prisma.SortOrderInput | Prisma.SortOrder
   checkOutLat?: Prisma.SortOrderInput | Prisma.SortOrder
   checkOutLng?: Prisma.SortOrderInput | Prisma.SortOrder
-  checkInGeofenceId?: Prisma.SortOrderInput | Prisma.SortOrder
-  checkOutGeofenceId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -395,8 +367,6 @@ export type AttendanceScalarWhereWithAggregatesInput = {
   checkInLng?: Prisma.FloatNullableWithAggregatesFilter<"Attendance"> | number | null
   checkOutLat?: Prisma.FloatNullableWithAggregatesFilter<"Attendance"> | number | null
   checkOutLng?: Prisma.FloatNullableWithAggregatesFilter<"Attendance"> | number | null
-  checkInGeofenceId?: Prisma.StringNullableWithAggregatesFilter<"Attendance"> | string | null
-  checkOutGeofenceId?: Prisma.StringNullableWithAggregatesFilter<"Attendance"> | string | null
   status?: Prisma.EnumAttendanceStatusWithAggregatesFilter<"Attendance"> | $Enums.AttendanceStatus
   remarks?: Prisma.StringNullableWithAggregatesFilter<"Attendance"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Attendance"> | Date | string
@@ -417,8 +387,6 @@ export type AttendanceCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   employee: Prisma.EmployeeCreateNestedOneWithoutAttendancesInput
-  checkInGeofence?: Prisma.GeofenceCreateNestedOneWithoutCheckInAttendanceInput
-  checkOutGeofence?: Prisma.GeofenceCreateNestedOneWithoutCheckOutAttendanceInput
 }
 
 export type AttendanceUncheckedCreateInput = {
@@ -431,8 +399,6 @@ export type AttendanceUncheckedCreateInput = {
   checkInLng?: number | null
   checkOutLat?: number | null
   checkOutLng?: number | null
-  checkInGeofenceId?: string | null
-  checkOutGeofenceId?: string | null
   status?: $Enums.AttendanceStatus
   remarks?: string | null
   createdAt?: Date | string
@@ -453,8 +419,6 @@ export type AttendanceUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutAttendancesNestedInput
-  checkInGeofence?: Prisma.GeofenceUpdateOneWithoutCheckInAttendanceNestedInput
-  checkOutGeofence?: Prisma.GeofenceUpdateOneWithoutCheckOutAttendanceNestedInput
 }
 
 export type AttendanceUncheckedUpdateInput = {
@@ -467,8 +431,6 @@ export type AttendanceUncheckedUpdateInput = {
   checkInLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   checkOutLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   checkOutLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkInGeofenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  checkOutGeofenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -485,8 +447,6 @@ export type AttendanceCreateManyInput = {
   checkInLng?: number | null
   checkOutLat?: number | null
   checkOutLng?: number | null
-  checkInGeofenceId?: string | null
-  checkOutGeofenceId?: string | null
   status?: $Enums.AttendanceStatus
   remarks?: string | null
   createdAt?: Date | string
@@ -518,8 +478,6 @@ export type AttendanceUncheckedUpdateManyInput = {
   checkInLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   checkOutLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   checkOutLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkInGeofenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  checkOutGeofenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -551,8 +509,6 @@ export type AttendanceCountOrderByAggregateInput = {
   checkInLng?: Prisma.SortOrder
   checkOutLat?: Prisma.SortOrder
   checkOutLng?: Prisma.SortOrder
-  checkInGeofenceId?: Prisma.SortOrder
-  checkOutGeofenceId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -576,8 +532,6 @@ export type AttendanceMaxOrderByAggregateInput = {
   checkInLng?: Prisma.SortOrder
   checkOutLat?: Prisma.SortOrder
   checkOutLng?: Prisma.SortOrder
-  checkInGeofenceId?: Prisma.SortOrder
-  checkOutGeofenceId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -594,8 +548,6 @@ export type AttendanceMinOrderByAggregateInput = {
   checkInLng?: Prisma.SortOrder
   checkOutLat?: Prisma.SortOrder
   checkOutLng?: Prisma.SortOrder
-  checkInGeofenceId?: Prisma.SortOrder
-  checkOutGeofenceId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   remarks?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -651,90 +603,6 @@ export type AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput = {
   deleteMany?: Prisma.AttendanceScalarWhereInput | Prisma.AttendanceScalarWhereInput[]
 }
 
-export type AttendanceCreateNestedManyWithoutCheckInGeofenceInput = {
-  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutCheckInGeofenceInput, Prisma.AttendanceUncheckedCreateWithoutCheckInGeofenceInput> | Prisma.AttendanceCreateWithoutCheckInGeofenceInput[] | Prisma.AttendanceUncheckedCreateWithoutCheckInGeofenceInput[]
-  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutCheckInGeofenceInput | Prisma.AttendanceCreateOrConnectWithoutCheckInGeofenceInput[]
-  createMany?: Prisma.AttendanceCreateManyCheckInGeofenceInputEnvelope
-  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-}
-
-export type AttendanceCreateNestedManyWithoutCheckOutGeofenceInput = {
-  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutCheckOutGeofenceInput, Prisma.AttendanceUncheckedCreateWithoutCheckOutGeofenceInput> | Prisma.AttendanceCreateWithoutCheckOutGeofenceInput[] | Prisma.AttendanceUncheckedCreateWithoutCheckOutGeofenceInput[]
-  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutCheckOutGeofenceInput | Prisma.AttendanceCreateOrConnectWithoutCheckOutGeofenceInput[]
-  createMany?: Prisma.AttendanceCreateManyCheckOutGeofenceInputEnvelope
-  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-}
-
-export type AttendanceUncheckedCreateNestedManyWithoutCheckInGeofenceInput = {
-  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutCheckInGeofenceInput, Prisma.AttendanceUncheckedCreateWithoutCheckInGeofenceInput> | Prisma.AttendanceCreateWithoutCheckInGeofenceInput[] | Prisma.AttendanceUncheckedCreateWithoutCheckInGeofenceInput[]
-  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutCheckInGeofenceInput | Prisma.AttendanceCreateOrConnectWithoutCheckInGeofenceInput[]
-  createMany?: Prisma.AttendanceCreateManyCheckInGeofenceInputEnvelope
-  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-}
-
-export type AttendanceUncheckedCreateNestedManyWithoutCheckOutGeofenceInput = {
-  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutCheckOutGeofenceInput, Prisma.AttendanceUncheckedCreateWithoutCheckOutGeofenceInput> | Prisma.AttendanceCreateWithoutCheckOutGeofenceInput[] | Prisma.AttendanceUncheckedCreateWithoutCheckOutGeofenceInput[]
-  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutCheckOutGeofenceInput | Prisma.AttendanceCreateOrConnectWithoutCheckOutGeofenceInput[]
-  createMany?: Prisma.AttendanceCreateManyCheckOutGeofenceInputEnvelope
-  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-}
-
-export type AttendanceUpdateManyWithoutCheckInGeofenceNestedInput = {
-  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutCheckInGeofenceInput, Prisma.AttendanceUncheckedCreateWithoutCheckInGeofenceInput> | Prisma.AttendanceCreateWithoutCheckInGeofenceInput[] | Prisma.AttendanceUncheckedCreateWithoutCheckInGeofenceInput[]
-  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutCheckInGeofenceInput | Prisma.AttendanceCreateOrConnectWithoutCheckInGeofenceInput[]
-  upsert?: Prisma.AttendanceUpsertWithWhereUniqueWithoutCheckInGeofenceInput | Prisma.AttendanceUpsertWithWhereUniqueWithoutCheckInGeofenceInput[]
-  createMany?: Prisma.AttendanceCreateManyCheckInGeofenceInputEnvelope
-  set?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-  disconnect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-  delete?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-  update?: Prisma.AttendanceUpdateWithWhereUniqueWithoutCheckInGeofenceInput | Prisma.AttendanceUpdateWithWhereUniqueWithoutCheckInGeofenceInput[]
-  updateMany?: Prisma.AttendanceUpdateManyWithWhereWithoutCheckInGeofenceInput | Prisma.AttendanceUpdateManyWithWhereWithoutCheckInGeofenceInput[]
-  deleteMany?: Prisma.AttendanceScalarWhereInput | Prisma.AttendanceScalarWhereInput[]
-}
-
-export type AttendanceUpdateManyWithoutCheckOutGeofenceNestedInput = {
-  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutCheckOutGeofenceInput, Prisma.AttendanceUncheckedCreateWithoutCheckOutGeofenceInput> | Prisma.AttendanceCreateWithoutCheckOutGeofenceInput[] | Prisma.AttendanceUncheckedCreateWithoutCheckOutGeofenceInput[]
-  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutCheckOutGeofenceInput | Prisma.AttendanceCreateOrConnectWithoutCheckOutGeofenceInput[]
-  upsert?: Prisma.AttendanceUpsertWithWhereUniqueWithoutCheckOutGeofenceInput | Prisma.AttendanceUpsertWithWhereUniqueWithoutCheckOutGeofenceInput[]
-  createMany?: Prisma.AttendanceCreateManyCheckOutGeofenceInputEnvelope
-  set?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-  disconnect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-  delete?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-  update?: Prisma.AttendanceUpdateWithWhereUniqueWithoutCheckOutGeofenceInput | Prisma.AttendanceUpdateWithWhereUniqueWithoutCheckOutGeofenceInput[]
-  updateMany?: Prisma.AttendanceUpdateManyWithWhereWithoutCheckOutGeofenceInput | Prisma.AttendanceUpdateManyWithWhereWithoutCheckOutGeofenceInput[]
-  deleteMany?: Prisma.AttendanceScalarWhereInput | Prisma.AttendanceScalarWhereInput[]
-}
-
-export type AttendanceUncheckedUpdateManyWithoutCheckInGeofenceNestedInput = {
-  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutCheckInGeofenceInput, Prisma.AttendanceUncheckedCreateWithoutCheckInGeofenceInput> | Prisma.AttendanceCreateWithoutCheckInGeofenceInput[] | Prisma.AttendanceUncheckedCreateWithoutCheckInGeofenceInput[]
-  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutCheckInGeofenceInput | Prisma.AttendanceCreateOrConnectWithoutCheckInGeofenceInput[]
-  upsert?: Prisma.AttendanceUpsertWithWhereUniqueWithoutCheckInGeofenceInput | Prisma.AttendanceUpsertWithWhereUniqueWithoutCheckInGeofenceInput[]
-  createMany?: Prisma.AttendanceCreateManyCheckInGeofenceInputEnvelope
-  set?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-  disconnect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-  delete?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-  update?: Prisma.AttendanceUpdateWithWhereUniqueWithoutCheckInGeofenceInput | Prisma.AttendanceUpdateWithWhereUniqueWithoutCheckInGeofenceInput[]
-  updateMany?: Prisma.AttendanceUpdateManyWithWhereWithoutCheckInGeofenceInput | Prisma.AttendanceUpdateManyWithWhereWithoutCheckInGeofenceInput[]
-  deleteMany?: Prisma.AttendanceScalarWhereInput | Prisma.AttendanceScalarWhereInput[]
-}
-
-export type AttendanceUncheckedUpdateManyWithoutCheckOutGeofenceNestedInput = {
-  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutCheckOutGeofenceInput, Prisma.AttendanceUncheckedCreateWithoutCheckOutGeofenceInput> | Prisma.AttendanceCreateWithoutCheckOutGeofenceInput[] | Prisma.AttendanceUncheckedCreateWithoutCheckOutGeofenceInput[]
-  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutCheckOutGeofenceInput | Prisma.AttendanceCreateOrConnectWithoutCheckOutGeofenceInput[]
-  upsert?: Prisma.AttendanceUpsertWithWhereUniqueWithoutCheckOutGeofenceInput | Prisma.AttendanceUpsertWithWhereUniqueWithoutCheckOutGeofenceInput[]
-  createMany?: Prisma.AttendanceCreateManyCheckOutGeofenceInputEnvelope
-  set?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-  disconnect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-  delete?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
-  update?: Prisma.AttendanceUpdateWithWhereUniqueWithoutCheckOutGeofenceInput | Prisma.AttendanceUpdateWithWhereUniqueWithoutCheckOutGeofenceInput[]
-  updateMany?: Prisma.AttendanceUpdateManyWithWhereWithoutCheckOutGeofenceInput | Prisma.AttendanceUpdateManyWithWhereWithoutCheckOutGeofenceInput[]
-  deleteMany?: Prisma.AttendanceScalarWhereInput | Prisma.AttendanceScalarWhereInput[]
-}
-
 export type NullableFloatFieldUpdateOperationsInput = {
   set?: number | null
   increment?: number
@@ -760,8 +628,6 @@ export type AttendanceCreateWithoutEmployeeInput = {
   remarks?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  checkInGeofence?: Prisma.GeofenceCreateNestedOneWithoutCheckInAttendanceInput
-  checkOutGeofence?: Prisma.GeofenceCreateNestedOneWithoutCheckOutAttendanceInput
 }
 
 export type AttendanceUncheckedCreateWithoutEmployeeInput = {
@@ -773,8 +639,6 @@ export type AttendanceUncheckedCreateWithoutEmployeeInput = {
   checkInLng?: number | null
   checkOutLat?: number | null
   checkOutLng?: number | null
-  checkInGeofenceId?: string | null
-  checkOutGeofenceId?: string | null
   status?: $Enums.AttendanceStatus
   remarks?: string | null
   createdAt?: Date | string
@@ -820,132 +684,10 @@ export type AttendanceScalarWhereInput = {
   checkInLng?: Prisma.FloatNullableFilter<"Attendance"> | number | null
   checkOutLat?: Prisma.FloatNullableFilter<"Attendance"> | number | null
   checkOutLng?: Prisma.FloatNullableFilter<"Attendance"> | number | null
-  checkInGeofenceId?: Prisma.StringNullableFilter<"Attendance"> | string | null
-  checkOutGeofenceId?: Prisma.StringNullableFilter<"Attendance"> | string | null
   status?: Prisma.EnumAttendanceStatusFilter<"Attendance"> | $Enums.AttendanceStatus
   remarks?: Prisma.StringNullableFilter<"Attendance"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Attendance"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Attendance"> | Date | string
-}
-
-export type AttendanceCreateWithoutCheckInGeofenceInput = {
-  id?: string
-  date: Date | string
-  checkIn?: Date | string | null
-  checkOut?: Date | string | null
-  checkInLat?: number | null
-  checkInLng?: number | null
-  checkOutLat?: number | null
-  checkOutLng?: number | null
-  status?: $Enums.AttendanceStatus
-  remarks?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  employee: Prisma.EmployeeCreateNestedOneWithoutAttendancesInput
-  checkOutGeofence?: Prisma.GeofenceCreateNestedOneWithoutCheckOutAttendanceInput
-}
-
-export type AttendanceUncheckedCreateWithoutCheckInGeofenceInput = {
-  id?: string
-  employeeId: string
-  date: Date | string
-  checkIn?: Date | string | null
-  checkOut?: Date | string | null
-  checkInLat?: number | null
-  checkInLng?: number | null
-  checkOutLat?: number | null
-  checkOutLng?: number | null
-  checkOutGeofenceId?: string | null
-  status?: $Enums.AttendanceStatus
-  remarks?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type AttendanceCreateOrConnectWithoutCheckInGeofenceInput = {
-  where: Prisma.AttendanceWhereUniqueInput
-  create: Prisma.XOR<Prisma.AttendanceCreateWithoutCheckInGeofenceInput, Prisma.AttendanceUncheckedCreateWithoutCheckInGeofenceInput>
-}
-
-export type AttendanceCreateManyCheckInGeofenceInputEnvelope = {
-  data: Prisma.AttendanceCreateManyCheckInGeofenceInput | Prisma.AttendanceCreateManyCheckInGeofenceInput[]
-  skipDuplicates?: boolean
-}
-
-export type AttendanceCreateWithoutCheckOutGeofenceInput = {
-  id?: string
-  date: Date | string
-  checkIn?: Date | string | null
-  checkOut?: Date | string | null
-  checkInLat?: number | null
-  checkInLng?: number | null
-  checkOutLat?: number | null
-  checkOutLng?: number | null
-  status?: $Enums.AttendanceStatus
-  remarks?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  employee: Prisma.EmployeeCreateNestedOneWithoutAttendancesInput
-  checkInGeofence?: Prisma.GeofenceCreateNestedOneWithoutCheckInAttendanceInput
-}
-
-export type AttendanceUncheckedCreateWithoutCheckOutGeofenceInput = {
-  id?: string
-  employeeId: string
-  date: Date | string
-  checkIn?: Date | string | null
-  checkOut?: Date | string | null
-  checkInLat?: number | null
-  checkInLng?: number | null
-  checkOutLat?: number | null
-  checkOutLng?: number | null
-  checkInGeofenceId?: string | null
-  status?: $Enums.AttendanceStatus
-  remarks?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type AttendanceCreateOrConnectWithoutCheckOutGeofenceInput = {
-  where: Prisma.AttendanceWhereUniqueInput
-  create: Prisma.XOR<Prisma.AttendanceCreateWithoutCheckOutGeofenceInput, Prisma.AttendanceUncheckedCreateWithoutCheckOutGeofenceInput>
-}
-
-export type AttendanceCreateManyCheckOutGeofenceInputEnvelope = {
-  data: Prisma.AttendanceCreateManyCheckOutGeofenceInput | Prisma.AttendanceCreateManyCheckOutGeofenceInput[]
-  skipDuplicates?: boolean
-}
-
-export type AttendanceUpsertWithWhereUniqueWithoutCheckInGeofenceInput = {
-  where: Prisma.AttendanceWhereUniqueInput
-  update: Prisma.XOR<Prisma.AttendanceUpdateWithoutCheckInGeofenceInput, Prisma.AttendanceUncheckedUpdateWithoutCheckInGeofenceInput>
-  create: Prisma.XOR<Prisma.AttendanceCreateWithoutCheckInGeofenceInput, Prisma.AttendanceUncheckedCreateWithoutCheckInGeofenceInput>
-}
-
-export type AttendanceUpdateWithWhereUniqueWithoutCheckInGeofenceInput = {
-  where: Prisma.AttendanceWhereUniqueInput
-  data: Prisma.XOR<Prisma.AttendanceUpdateWithoutCheckInGeofenceInput, Prisma.AttendanceUncheckedUpdateWithoutCheckInGeofenceInput>
-}
-
-export type AttendanceUpdateManyWithWhereWithoutCheckInGeofenceInput = {
-  where: Prisma.AttendanceScalarWhereInput
-  data: Prisma.XOR<Prisma.AttendanceUpdateManyMutationInput, Prisma.AttendanceUncheckedUpdateManyWithoutCheckInGeofenceInput>
-}
-
-export type AttendanceUpsertWithWhereUniqueWithoutCheckOutGeofenceInput = {
-  where: Prisma.AttendanceWhereUniqueInput
-  update: Prisma.XOR<Prisma.AttendanceUpdateWithoutCheckOutGeofenceInput, Prisma.AttendanceUncheckedUpdateWithoutCheckOutGeofenceInput>
-  create: Prisma.XOR<Prisma.AttendanceCreateWithoutCheckOutGeofenceInput, Prisma.AttendanceUncheckedCreateWithoutCheckOutGeofenceInput>
-}
-
-export type AttendanceUpdateWithWhereUniqueWithoutCheckOutGeofenceInput = {
-  where: Prisma.AttendanceWhereUniqueInput
-  data: Prisma.XOR<Prisma.AttendanceUpdateWithoutCheckOutGeofenceInput, Prisma.AttendanceUncheckedUpdateWithoutCheckOutGeofenceInput>
-}
-
-export type AttendanceUpdateManyWithWhereWithoutCheckOutGeofenceInput = {
-  where: Prisma.AttendanceScalarWhereInput
-  data: Prisma.XOR<Prisma.AttendanceUpdateManyMutationInput, Prisma.AttendanceUncheckedUpdateManyWithoutCheckOutGeofenceInput>
 }
 
 export type AttendanceCreateManyEmployeeInput = {
@@ -957,8 +699,6 @@ export type AttendanceCreateManyEmployeeInput = {
   checkInLng?: number | null
   checkOutLat?: number | null
   checkOutLng?: number | null
-  checkInGeofenceId?: string | null
-  checkOutGeofenceId?: string | null
   status?: $Enums.AttendanceStatus
   remarks?: string | null
   createdAt?: Date | string
@@ -978,8 +718,6 @@ export type AttendanceUpdateWithoutEmployeeInput = {
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  checkInGeofence?: Prisma.GeofenceUpdateOneWithoutCheckInAttendanceNestedInput
-  checkOutGeofence?: Prisma.GeofenceUpdateOneWithoutCheckOutAttendanceNestedInput
 }
 
 export type AttendanceUncheckedUpdateWithoutEmployeeInput = {
@@ -991,8 +729,6 @@ export type AttendanceUncheckedUpdateWithoutEmployeeInput = {
   checkInLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   checkOutLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   checkOutLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkInGeofenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  checkOutGeofenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1008,144 +744,6 @@ export type AttendanceUncheckedUpdateManyWithoutEmployeeInput = {
   checkInLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   checkOutLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   checkOutLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkInGeofenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  checkOutGeofenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type AttendanceCreateManyCheckInGeofenceInput = {
-  id?: string
-  employeeId: string
-  date: Date | string
-  checkIn?: Date | string | null
-  checkOut?: Date | string | null
-  checkInLat?: number | null
-  checkInLng?: number | null
-  checkOutLat?: number | null
-  checkOutLng?: number | null
-  checkOutGeofenceId?: string | null
-  status?: $Enums.AttendanceStatus
-  remarks?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type AttendanceCreateManyCheckOutGeofenceInput = {
-  id?: string
-  employeeId: string
-  date: Date | string
-  checkIn?: Date | string | null
-  checkOut?: Date | string | null
-  checkInLat?: number | null
-  checkInLng?: number | null
-  checkOutLat?: number | null
-  checkOutLng?: number | null
-  checkInGeofenceId?: string | null
-  status?: $Enums.AttendanceStatus
-  remarks?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type AttendanceUpdateWithoutCheckInGeofenceInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  checkIn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  checkOut?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  checkInLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkInLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkOutLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkOutLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  employee?: Prisma.EmployeeUpdateOneRequiredWithoutAttendancesNestedInput
-  checkOutGeofence?: Prisma.GeofenceUpdateOneWithoutCheckOutAttendanceNestedInput
-}
-
-export type AttendanceUncheckedUpdateWithoutCheckInGeofenceInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  employeeId?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  checkIn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  checkOut?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  checkInLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkInLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkOutLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkOutLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkOutGeofenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type AttendanceUncheckedUpdateManyWithoutCheckInGeofenceInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  employeeId?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  checkIn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  checkOut?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  checkInLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkInLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkOutLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkOutLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkOutGeofenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type AttendanceUpdateWithoutCheckOutGeofenceInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  checkIn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  checkOut?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  checkInLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkInLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkOutLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkOutLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  employee?: Prisma.EmployeeUpdateOneRequiredWithoutAttendancesNestedInput
-  checkInGeofence?: Prisma.GeofenceUpdateOneWithoutCheckInAttendanceNestedInput
-}
-
-export type AttendanceUncheckedUpdateWithoutCheckOutGeofenceInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  employeeId?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  checkIn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  checkOut?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  checkInLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkInLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkOutLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkOutLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkInGeofenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
-  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type AttendanceUncheckedUpdateManyWithoutCheckOutGeofenceInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  employeeId?: Prisma.StringFieldUpdateOperationsInput | string
-  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  checkIn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  checkOut?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  checkInLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkInLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkOutLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkOutLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  checkInGeofenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1164,15 +762,11 @@ export type AttendanceSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   checkInLng?: boolean
   checkOutLat?: boolean
   checkOutLng?: boolean
-  checkInGeofenceId?: boolean
-  checkOutGeofenceId?: boolean
   status?: boolean
   remarks?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
-  checkInGeofence?: boolean | Prisma.Attendance$checkInGeofenceArgs<ExtArgs>
-  checkOutGeofence?: boolean | Prisma.Attendance$checkOutGeofenceArgs<ExtArgs>
 }, ExtArgs["result"]["attendance"]>
 
 export type AttendanceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1185,15 +779,11 @@ export type AttendanceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   checkInLng?: boolean
   checkOutLat?: boolean
   checkOutLng?: boolean
-  checkInGeofenceId?: boolean
-  checkOutGeofenceId?: boolean
   status?: boolean
   remarks?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
-  checkInGeofence?: boolean | Prisma.Attendance$checkInGeofenceArgs<ExtArgs>
-  checkOutGeofence?: boolean | Prisma.Attendance$checkOutGeofenceArgs<ExtArgs>
 }, ExtArgs["result"]["attendance"]>
 
 export type AttendanceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1206,15 +796,11 @@ export type AttendanceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   checkInLng?: boolean
   checkOutLat?: boolean
   checkOutLng?: boolean
-  checkInGeofenceId?: boolean
-  checkOutGeofenceId?: boolean
   status?: boolean
   remarks?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
-  checkInGeofence?: boolean | Prisma.Attendance$checkInGeofenceArgs<ExtArgs>
-  checkOutGeofence?: boolean | Prisma.Attendance$checkOutGeofenceArgs<ExtArgs>
 }, ExtArgs["result"]["attendance"]>
 
 export type AttendanceSelectScalar = {
@@ -1227,37 +813,27 @@ export type AttendanceSelectScalar = {
   checkInLng?: boolean
   checkOutLat?: boolean
   checkOutLng?: boolean
-  checkInGeofenceId?: boolean
-  checkOutGeofenceId?: boolean
   status?: boolean
   remarks?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type AttendanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employeeId" | "date" | "checkIn" | "checkOut" | "checkInLat" | "checkInLng" | "checkOutLat" | "checkOutLng" | "checkInGeofenceId" | "checkOutGeofenceId" | "status" | "remarks" | "createdAt" | "updatedAt", ExtArgs["result"]["attendance"]>
+export type AttendanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employeeId" | "date" | "checkIn" | "checkOut" | "checkInLat" | "checkInLng" | "checkOutLat" | "checkOutLng" | "status" | "remarks" | "createdAt" | "updatedAt", ExtArgs["result"]["attendance"]>
 export type AttendanceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
-  checkInGeofence?: boolean | Prisma.Attendance$checkInGeofenceArgs<ExtArgs>
-  checkOutGeofence?: boolean | Prisma.Attendance$checkOutGeofenceArgs<ExtArgs>
 }
 export type AttendanceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
-  checkInGeofence?: boolean | Prisma.Attendance$checkInGeofenceArgs<ExtArgs>
-  checkOutGeofence?: boolean | Prisma.Attendance$checkOutGeofenceArgs<ExtArgs>
 }
 export type AttendanceIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
-  checkInGeofence?: boolean | Prisma.Attendance$checkInGeofenceArgs<ExtArgs>
-  checkOutGeofence?: boolean | Prisma.Attendance$checkOutGeofenceArgs<ExtArgs>
 }
 
 export type $AttendancePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Attendance"
   objects: {
     employee: Prisma.$EmployeePayload<ExtArgs>
-    checkInGeofence: Prisma.$GeofencePayload<ExtArgs> | null
-    checkOutGeofence: Prisma.$GeofencePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1269,8 +845,6 @@ export type $AttendancePayload<ExtArgs extends runtime.Types.Extensions.Internal
     checkInLng: number | null
     checkOutLat: number | null
     checkOutLng: number | null
-    checkInGeofenceId: string | null
-    checkOutGeofenceId: string | null
     status: $Enums.AttendanceStatus
     remarks: string | null
     createdAt: Date
@@ -1670,8 +1244,6 @@ readonly fields: AttendanceFieldRefs;
 export interface Prisma__AttendanceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   employee<T extends Prisma.EmployeeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmployeeDefaultArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  checkInGeofence<T extends Prisma.Attendance$checkInGeofenceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Attendance$checkInGeofenceArgs<ExtArgs>>): Prisma.Prisma__GeofenceClient<runtime.Types.Result.GetResult<Prisma.$GeofencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  checkOutGeofence<T extends Prisma.Attendance$checkOutGeofenceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Attendance$checkOutGeofenceArgs<ExtArgs>>): Prisma.Prisma__GeofenceClient<runtime.Types.Result.GetResult<Prisma.$GeofencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1710,8 +1282,6 @@ export interface AttendanceFieldRefs {
   readonly checkInLng: Prisma.FieldRef<"Attendance", 'Float'>
   readonly checkOutLat: Prisma.FieldRef<"Attendance", 'Float'>
   readonly checkOutLng: Prisma.FieldRef<"Attendance", 'Float'>
-  readonly checkInGeofenceId: Prisma.FieldRef<"Attendance", 'String'>
-  readonly checkOutGeofenceId: Prisma.FieldRef<"Attendance", 'String'>
   readonly status: Prisma.FieldRef<"Attendance", 'AttendanceStatus'>
   readonly remarks: Prisma.FieldRef<"Attendance", 'String'>
   readonly createdAt: Prisma.FieldRef<"Attendance", 'DateTime'>
@@ -2109,44 +1679,6 @@ export type AttendanceDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many Attendances to delete.
    */
   limit?: number
-}
-
-/**
- * Attendance.checkInGeofence
- */
-export type Attendance$checkInGeofenceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Geofence
-   */
-  select?: Prisma.GeofenceSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Geofence
-   */
-  omit?: Prisma.GeofenceOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.GeofenceInclude<ExtArgs> | null
-  where?: Prisma.GeofenceWhereInput
-}
-
-/**
- * Attendance.checkOutGeofence
- */
-export type Attendance$checkOutGeofenceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Geofence
-   */
-  select?: Prisma.GeofenceSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Geofence
-   */
-  omit?: Prisma.GeofenceOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.GeofenceInclude<ExtArgs> | null
-  where?: Prisma.GeofenceWhereInput
 }
 
 /**

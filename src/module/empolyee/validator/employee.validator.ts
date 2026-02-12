@@ -66,6 +66,7 @@ export const EmployeeIdValidator = z.object({
 export const GetEmployeesQueryValidator = z.object({
   companyId: z.string().cuid("Invalid Company ID").optional(),
   search: z.string().optional(),
+  categoryId: z.string().cuid("Invalid Category ID").optional(),
   designation: z.string().optional(),
   page: z.string().optional().transform((val) => (val ? parseInt(val) : 1)),
   limit: z.string().optional().transform((val) => (val ? parseInt(val) : 10)),

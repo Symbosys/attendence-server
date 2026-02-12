@@ -75,6 +75,16 @@ export type EmployeeBankDetails = Prisma.EmployeeBankDetailsModel
  */
 export type Geofence = Prisma.GeofenceModel
 /**
+ * Model Category
+ * 
+ */
+export type Category = Prisma.CategoryModel
+/**
+ * Model Task
+ * 
+ */
+export type Task = Prisma.TaskModel
+/**
  * Model Attendance
  * 
  */
@@ -84,3 +94,18 @@ export type Attendance = Prisma.AttendanceModel
  * 
  */
 export type Leave = Prisma.LeaveModel
+/**
+ * Model Decision
+ * 
+ */
+export type Decision = Prisma.DecisionModel
+/**
+ * Model DecisionParticipant
+ * 
+ */
+export type DecisionParticipant = Prisma.DecisionParticipantModel
+/**
+ * Model Holiday
+ * 
+ */
+export type Holiday = Prisma.HolidayModel

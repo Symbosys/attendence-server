@@ -5,6 +5,7 @@ export const createGeofenceSchema = z.object({
   latitude: z.number().min(-90).max(90, "Invalid latitude"),
   longitude: z.number().min(-180).max(180, "Invalid longitude"),
   radius: z.number().positive("Radius must be a positive number"),
+  employeeIds: z.array(z.string()).optional(),
 });
 
 export const updateGeofenceSchema = createGeofenceSchema.partial();

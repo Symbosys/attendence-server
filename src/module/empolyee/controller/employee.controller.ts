@@ -8,11 +8,12 @@ import { asyncHandler } from "../../../middleware/error.middleware.js";
 import { statusCode } from "../../../types/type.js";
 import { ErrorResponse, SuccessResponse } from "../../../utils/response.util.js";
 import { EmployeeIdValidator, EmployeeOnboardValidator, GetEmployeesQueryValidator } from "../validator/employee.validator.js";
+import type { Prisma } from "../../../../generated/prisma/client.js";
 
 /**
  * @desc Onboard a new employee with settings and bank details
  * @route POST /api/v1/employee/onboard
- * @access Private/Admin
+ * @access Private/Admin   
  */
 export const onboardEmployee = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   const validatedData = EmployeeOnboardValidator.parse(req.body);
@@ -162,17 +163,25 @@ export const onboardEmployee = asyncHandler(async (req: Request, res: Response, 
  * @access Private/Admin
  */
 export const getAllEmployees = asyncHandler(async (req: Request, res: Response) => {
-  const { companyId, search, designation, page, limit } = GetEmployeesQueryValidator.parse(req.query);
+  const { companyId, search, designation, categoryId, page, limit } = GetEmployeesQueryValidator.parse(req.query);
 
   const skip = (page - 1) * limit;
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const where: any = {};
+  const where: Prisma.EmployeeWhereInput = {};
 
   if (companyId) {
     where.companyId = companyId;
+  }
+
+  if(categoryId){
+    where.categories = {
+      some: {
+        id: categoryId,
+      },
+    }
   }
 
   if (designation) {

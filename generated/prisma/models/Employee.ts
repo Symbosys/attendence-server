@@ -54,6 +54,7 @@ export type EmployeeMinAggregateOutputType = {
   gender: $Enums.Gender | null
   bloodGroup: $Enums.BloodGroup | null
   shiftId: string | null
+  companyId: string | null
 }
 
 export type EmployeeMaxAggregateOutputType = {
@@ -74,6 +75,7 @@ export type EmployeeMaxAggregateOutputType = {
   gender: $Enums.Gender | null
   bloodGroup: $Enums.BloodGroup | null
   shiftId: string | null
+  companyId: string | null
 }
 
 export type EmployeeCountAggregateOutputType = {
@@ -95,6 +97,7 @@ export type EmployeeCountAggregateOutputType = {
   gender: number
   bloodGroup: number
   shiftId: number
+  companyId: number
   _all: number
 }
 
@@ -127,6 +130,7 @@ export type EmployeeMinAggregateInputType = {
   gender?: true
   bloodGroup?: true
   shiftId?: true
+  companyId?: true
 }
 
 export type EmployeeMaxAggregateInputType = {
@@ -147,6 +151,7 @@ export type EmployeeMaxAggregateInputType = {
   gender?: true
   bloodGroup?: true
   shiftId?: true
+  companyId?: true
 }
 
 export type EmployeeCountAggregateInputType = {
@@ -168,6 +173,7 @@ export type EmployeeCountAggregateInputType = {
   gender?: true
   bloodGroup?: true
   shiftId?: true
+  companyId?: true
   _all?: true
 }
 
@@ -276,6 +282,7 @@ export type EmployeeGroupByOutputType = {
   gender: $Enums.Gender | null
   bloodGroup: $Enums.BloodGroup | null
   shiftId: string | null
+  companyId: string
   _count: EmployeeCountAggregateOutputType | null
   _avg: EmployeeAvgAggregateOutputType | null
   _sum: EmployeeSumAggregateOutputType | null
@@ -320,11 +327,18 @@ export type EmployeeWhereInput = {
   gender?: Prisma.EnumGenderNullableFilter<"Employee"> | $Enums.Gender | null
   bloodGroup?: Prisma.EnumBloodGroupNullableFilter<"Employee"> | $Enums.BloodGroup | null
   shiftId?: Prisma.StringNullableFilter<"Employee"> | string | null
+  companyId?: Prisma.StringFilter<"Employee"> | string
   shift?: Prisma.XOR<Prisma.ShiftNullableScalarRelationFilter, Prisma.ShiftWhereInput> | null
+  company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
   settings?: Prisma.XOR<Prisma.EmployeeSettingNullableScalarRelationFilter, Prisma.EmployeeSettingWhereInput> | null
   bank?: Prisma.XOR<Prisma.EmployeeBankDetailsNullableScalarRelationFilter, Prisma.EmployeeBankDetailsWhereInput> | null
   attendances?: Prisma.AttendanceListRelationFilter
   leaves?: Prisma.LeaveListRelationFilter
+  geofences?: Prisma.GeofenceListRelationFilter
+  categories?: Prisma.CategoryListRelationFilter
+  tasks?: Prisma.TaskListRelationFilter
+  createdDecisions?: Prisma.DecisionListRelationFilter
+  decisionParticipations?: Prisma.DecisionParticipantListRelationFilter
 }
 
 export type EmployeeOrderByWithRelationInput = {
@@ -346,11 +360,18 @@ export type EmployeeOrderByWithRelationInput = {
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
   bloodGroup?: Prisma.SortOrderInput | Prisma.SortOrder
   shiftId?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyId?: Prisma.SortOrder
   shift?: Prisma.ShiftOrderByWithRelationInput
+  company?: Prisma.CompanyOrderByWithRelationInput
   settings?: Prisma.EmployeeSettingOrderByWithRelationInput
   bank?: Prisma.EmployeeBankDetailsOrderByWithRelationInput
   attendances?: Prisma.AttendanceOrderByRelationAggregateInput
   leaves?: Prisma.LeaveOrderByRelationAggregateInput
+  geofences?: Prisma.GeofenceOrderByRelationAggregateInput
+  categories?: Prisma.CategoryOrderByRelationAggregateInput
+  tasks?: Prisma.TaskOrderByRelationAggregateInput
+  createdDecisions?: Prisma.DecisionOrderByRelationAggregateInput
+  decisionParticipations?: Prisma.DecisionParticipantOrderByRelationAggregateInput
 }
 
 export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
@@ -375,11 +396,18 @@ export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
   emergencyContactName?: Prisma.StringNullableFilter<"Employee"> | string | null
   gender?: Prisma.EnumGenderNullableFilter<"Employee"> | $Enums.Gender | null
   bloodGroup?: Prisma.EnumBloodGroupNullableFilter<"Employee"> | $Enums.BloodGroup | null
+  companyId?: Prisma.StringFilter<"Employee"> | string
   shift?: Prisma.XOR<Prisma.ShiftNullableScalarRelationFilter, Prisma.ShiftWhereInput> | null
+  company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
   settings?: Prisma.XOR<Prisma.EmployeeSettingNullableScalarRelationFilter, Prisma.EmployeeSettingWhereInput> | null
   bank?: Prisma.XOR<Prisma.EmployeeBankDetailsNullableScalarRelationFilter, Prisma.EmployeeBankDetailsWhereInput> | null
   attendances?: Prisma.AttendanceListRelationFilter
   leaves?: Prisma.LeaveListRelationFilter
+  geofences?: Prisma.GeofenceListRelationFilter
+  categories?: Prisma.CategoryListRelationFilter
+  tasks?: Prisma.TaskListRelationFilter
+  createdDecisions?: Prisma.DecisionListRelationFilter
+  decisionParticipations?: Prisma.DecisionParticipantListRelationFilter
 }, "id" | "userId" | "email" | "employeeCode" | "phoneNumber" | "shiftId">
 
 export type EmployeeOrderByWithAggregationInput = {
@@ -401,6 +429,7 @@ export type EmployeeOrderByWithAggregationInput = {
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
   bloodGroup?: Prisma.SortOrderInput | Prisma.SortOrder
   shiftId?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyId?: Prisma.SortOrder
   _count?: Prisma.EmployeeCountOrderByAggregateInput
   _avg?: Prisma.EmployeeAvgOrderByAggregateInput
   _max?: Prisma.EmployeeMaxOrderByAggregateInput
@@ -430,6 +459,7 @@ export type EmployeeScalarWhereWithAggregatesInput = {
   gender?: Prisma.EnumGenderNullableWithAggregatesFilter<"Employee"> | $Enums.Gender | null
   bloodGroup?: Prisma.EnumBloodGroupNullableWithAggregatesFilter<"Employee"> | $Enums.BloodGroup | null
   shiftId?: Prisma.StringNullableWithAggregatesFilter<"Employee"> | string | null
+  companyId?: Prisma.StringWithAggregatesFilter<"Employee"> | string
 }
 
 export type EmployeeCreateInput = {
@@ -451,10 +481,16 @@ export type EmployeeCreateInput = {
   gender?: $Enums.Gender | null
   bloodGroup?: $Enums.BloodGroup | null
   shift?: Prisma.ShiftCreateNestedOneWithoutEmployeesInput
+  company: Prisma.CompanyCreateNestedOneWithoutEmployeesInput
   settings?: Prisma.EmployeeSettingCreateNestedOneWithoutEmployeeInput
   bank?: Prisma.EmployeeBankDetailsCreateNestedOneWithoutEmployeeInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
   leaves?: Prisma.LeaveCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeUncheckedCreateInput = {
@@ -476,10 +512,16 @@ export type EmployeeUncheckedCreateInput = {
   gender?: $Enums.Gender | null
   bloodGroup?: $Enums.BloodGroup | null
   shiftId?: string | null
+  companyId: string
   settings?: Prisma.EmployeeSettingUncheckedCreateNestedOneWithoutEmployeeInput
   bank?: Prisma.EmployeeBankDetailsUncheckedCreateNestedOneWithoutEmployeeInput
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
   leaves?: Prisma.LeaveUncheckedCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeUpdateInput = {
@@ -501,10 +543,16 @@ export type EmployeeUpdateInput = {
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
   shift?: Prisma.ShiftUpdateOneWithoutEmployeesNestedInput
+  company?: Prisma.CompanyUpdateOneRequiredWithoutEmployeesNestedInput
   settings?: Prisma.EmployeeSettingUpdateOneWithoutEmployeeNestedInput
   bank?: Prisma.EmployeeBankDetailsUpdateOneWithoutEmployeeNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
   leaves?: Prisma.LeaveUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeUncheckedUpdateInput = {
@@ -526,10 +574,16 @@ export type EmployeeUncheckedUpdateInput = {
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
   shiftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
   settings?: Prisma.EmployeeSettingUncheckedUpdateOneWithoutEmployeeNestedInput
   bank?: Prisma.EmployeeBankDetailsUncheckedUpdateOneWithoutEmployeeNestedInput
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
   leaves?: Prisma.LeaveUncheckedUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUncheckedUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeCreateManyInput = {
@@ -551,6 +605,7 @@ export type EmployeeCreateManyInput = {
   gender?: $Enums.Gender | null
   bloodGroup?: $Enums.BloodGroup | null
   shiftId?: string | null
+  companyId: string
 }
 
 export type EmployeeUpdateManyMutationInput = {
@@ -592,6 +647,17 @@ export type EmployeeUncheckedUpdateManyInput = {
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
   shiftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type EmployeeListRelationFilter = {
+  every?: Prisma.EmployeeWhereInput
+  some?: Prisma.EmployeeWhereInput
+  none?: Prisma.EmployeeWhereInput
+}
+
+export type EmployeeOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type EmployeeNullableScalarRelationFilter = {
@@ -618,6 +684,7 @@ export type EmployeeCountOrderByAggregateInput = {
   gender?: Prisma.SortOrder
   bloodGroup?: Prisma.SortOrder
   shiftId?: Prisma.SortOrder
+  companyId?: Prisma.SortOrder
 }
 
 export type EmployeeAvgOrderByAggregateInput = {
@@ -643,6 +710,7 @@ export type EmployeeMaxOrderByAggregateInput = {
   gender?: Prisma.SortOrder
   bloodGroup?: Prisma.SortOrder
   shiftId?: Prisma.SortOrder
+  companyId?: Prisma.SortOrder
 }
 
 export type EmployeeMinOrderByAggregateInput = {
@@ -663,6 +731,7 @@ export type EmployeeMinOrderByAggregateInput = {
   gender?: Prisma.SortOrder
   bloodGroup?: Prisma.SortOrder
   shiftId?: Prisma.SortOrder
+  companyId?: Prisma.SortOrder
 }
 
 export type EmployeeSumOrderByAggregateInput = {
@@ -673,6 +742,48 @@ export type EmployeeSumOrderByAggregateInput = {
 export type EmployeeScalarRelationFilter = {
   is?: Prisma.EmployeeWhereInput
   isNot?: Prisma.EmployeeWhereInput
+}
+
+export type EmployeeCreateNestedManyWithoutCompanyInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutCompanyInput, Prisma.EmployeeUncheckedCreateWithoutCompanyInput> | Prisma.EmployeeCreateWithoutCompanyInput[] | Prisma.EmployeeUncheckedCreateWithoutCompanyInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutCompanyInput | Prisma.EmployeeCreateOrConnectWithoutCompanyInput[]
+  createMany?: Prisma.EmployeeCreateManyCompanyInputEnvelope
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+}
+
+export type EmployeeUncheckedCreateNestedManyWithoutCompanyInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutCompanyInput, Prisma.EmployeeUncheckedCreateWithoutCompanyInput> | Prisma.EmployeeCreateWithoutCompanyInput[] | Prisma.EmployeeUncheckedCreateWithoutCompanyInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutCompanyInput | Prisma.EmployeeCreateOrConnectWithoutCompanyInput[]
+  createMany?: Prisma.EmployeeCreateManyCompanyInputEnvelope
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+}
+
+export type EmployeeUpdateManyWithoutCompanyNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutCompanyInput, Prisma.EmployeeUncheckedCreateWithoutCompanyInput> | Prisma.EmployeeCreateWithoutCompanyInput[] | Prisma.EmployeeUncheckedCreateWithoutCompanyInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutCompanyInput | Prisma.EmployeeCreateOrConnectWithoutCompanyInput[]
+  upsert?: Prisma.EmployeeUpsertWithWhereUniqueWithoutCompanyInput | Prisma.EmployeeUpsertWithWhereUniqueWithoutCompanyInput[]
+  createMany?: Prisma.EmployeeCreateManyCompanyInputEnvelope
+  set?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  disconnect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  delete?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  update?: Prisma.EmployeeUpdateWithWhereUniqueWithoutCompanyInput | Prisma.EmployeeUpdateWithWhereUniqueWithoutCompanyInput[]
+  updateMany?: Prisma.EmployeeUpdateManyWithWhereWithoutCompanyInput | Prisma.EmployeeUpdateManyWithWhereWithoutCompanyInput[]
+  deleteMany?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
+}
+
+export type EmployeeUncheckedUpdateManyWithoutCompanyNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutCompanyInput, Prisma.EmployeeUncheckedCreateWithoutCompanyInput> | Prisma.EmployeeCreateWithoutCompanyInput[] | Prisma.EmployeeUncheckedCreateWithoutCompanyInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutCompanyInput | Prisma.EmployeeCreateOrConnectWithoutCompanyInput[]
+  upsert?: Prisma.EmployeeUpsertWithWhereUniqueWithoutCompanyInput | Prisma.EmployeeUpsertWithWhereUniqueWithoutCompanyInput[]
+  createMany?: Prisma.EmployeeCreateManyCompanyInputEnvelope
+  set?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  disconnect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  delete?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  update?: Prisma.EmployeeUpdateWithWhereUniqueWithoutCompanyInput | Prisma.EmployeeUpdateWithWhereUniqueWithoutCompanyInput[]
+  updateMany?: Prisma.EmployeeUpdateManyWithWhereWithoutCompanyInput | Prisma.EmployeeUpdateManyWithWhereWithoutCompanyInput[]
+  deleteMany?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
 }
 
 export type EmployeeCreateNestedOneWithoutShiftInput = {
@@ -743,6 +854,98 @@ export type EmployeeUpdateOneRequiredWithoutBankNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutBankInput, Prisma.EmployeeUpdateWithoutBankInput>, Prisma.EmployeeUncheckedUpdateWithoutBankInput>
 }
 
+export type EmployeeCreateNestedManyWithoutGeofencesInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutGeofencesInput, Prisma.EmployeeUncheckedCreateWithoutGeofencesInput> | Prisma.EmployeeCreateWithoutGeofencesInput[] | Prisma.EmployeeUncheckedCreateWithoutGeofencesInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutGeofencesInput | Prisma.EmployeeCreateOrConnectWithoutGeofencesInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+}
+
+export type EmployeeUncheckedCreateNestedManyWithoutGeofencesInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutGeofencesInput, Prisma.EmployeeUncheckedCreateWithoutGeofencesInput> | Prisma.EmployeeCreateWithoutGeofencesInput[] | Prisma.EmployeeUncheckedCreateWithoutGeofencesInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutGeofencesInput | Prisma.EmployeeCreateOrConnectWithoutGeofencesInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+}
+
+export type EmployeeUpdateManyWithoutGeofencesNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutGeofencesInput, Prisma.EmployeeUncheckedCreateWithoutGeofencesInput> | Prisma.EmployeeCreateWithoutGeofencesInput[] | Prisma.EmployeeUncheckedCreateWithoutGeofencesInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutGeofencesInput | Prisma.EmployeeCreateOrConnectWithoutGeofencesInput[]
+  upsert?: Prisma.EmployeeUpsertWithWhereUniqueWithoutGeofencesInput | Prisma.EmployeeUpsertWithWhereUniqueWithoutGeofencesInput[]
+  set?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  disconnect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  delete?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  update?: Prisma.EmployeeUpdateWithWhereUniqueWithoutGeofencesInput | Prisma.EmployeeUpdateWithWhereUniqueWithoutGeofencesInput[]
+  updateMany?: Prisma.EmployeeUpdateManyWithWhereWithoutGeofencesInput | Prisma.EmployeeUpdateManyWithWhereWithoutGeofencesInput[]
+  deleteMany?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
+}
+
+export type EmployeeUncheckedUpdateManyWithoutGeofencesNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutGeofencesInput, Prisma.EmployeeUncheckedCreateWithoutGeofencesInput> | Prisma.EmployeeCreateWithoutGeofencesInput[] | Prisma.EmployeeUncheckedCreateWithoutGeofencesInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutGeofencesInput | Prisma.EmployeeCreateOrConnectWithoutGeofencesInput[]
+  upsert?: Prisma.EmployeeUpsertWithWhereUniqueWithoutGeofencesInput | Prisma.EmployeeUpsertWithWhereUniqueWithoutGeofencesInput[]
+  set?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  disconnect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  delete?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  update?: Prisma.EmployeeUpdateWithWhereUniqueWithoutGeofencesInput | Prisma.EmployeeUpdateWithWhereUniqueWithoutGeofencesInput[]
+  updateMany?: Prisma.EmployeeUpdateManyWithWhereWithoutGeofencesInput | Prisma.EmployeeUpdateManyWithWhereWithoutGeofencesInput[]
+  deleteMany?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
+}
+
+export type EmployeeCreateNestedManyWithoutCategoriesInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutCategoriesInput, Prisma.EmployeeUncheckedCreateWithoutCategoriesInput> | Prisma.EmployeeCreateWithoutCategoriesInput[] | Prisma.EmployeeUncheckedCreateWithoutCategoriesInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutCategoriesInput | Prisma.EmployeeCreateOrConnectWithoutCategoriesInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+}
+
+export type EmployeeUncheckedCreateNestedManyWithoutCategoriesInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutCategoriesInput, Prisma.EmployeeUncheckedCreateWithoutCategoriesInput> | Prisma.EmployeeCreateWithoutCategoriesInput[] | Prisma.EmployeeUncheckedCreateWithoutCategoriesInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutCategoriesInput | Prisma.EmployeeCreateOrConnectWithoutCategoriesInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+}
+
+export type EmployeeUpdateManyWithoutCategoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutCategoriesInput, Prisma.EmployeeUncheckedCreateWithoutCategoriesInput> | Prisma.EmployeeCreateWithoutCategoriesInput[] | Prisma.EmployeeUncheckedCreateWithoutCategoriesInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutCategoriesInput | Prisma.EmployeeCreateOrConnectWithoutCategoriesInput[]
+  upsert?: Prisma.EmployeeUpsertWithWhereUniqueWithoutCategoriesInput | Prisma.EmployeeUpsertWithWhereUniqueWithoutCategoriesInput[]
+  set?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  disconnect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  delete?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  update?: Prisma.EmployeeUpdateWithWhereUniqueWithoutCategoriesInput | Prisma.EmployeeUpdateWithWhereUniqueWithoutCategoriesInput[]
+  updateMany?: Prisma.EmployeeUpdateManyWithWhereWithoutCategoriesInput | Prisma.EmployeeUpdateManyWithWhereWithoutCategoriesInput[]
+  deleteMany?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
+}
+
+export type EmployeeUncheckedUpdateManyWithoutCategoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutCategoriesInput, Prisma.EmployeeUncheckedCreateWithoutCategoriesInput> | Prisma.EmployeeCreateWithoutCategoriesInput[] | Prisma.EmployeeUncheckedCreateWithoutCategoriesInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutCategoriesInput | Prisma.EmployeeCreateOrConnectWithoutCategoriesInput[]
+  upsert?: Prisma.EmployeeUpsertWithWhereUniqueWithoutCategoriesInput | Prisma.EmployeeUpsertWithWhereUniqueWithoutCategoriesInput[]
+  set?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  disconnect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  delete?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  update?: Prisma.EmployeeUpdateWithWhereUniqueWithoutCategoriesInput | Prisma.EmployeeUpdateWithWhereUniqueWithoutCategoriesInput[]
+  updateMany?: Prisma.EmployeeUpdateManyWithWhereWithoutCategoriesInput | Prisma.EmployeeUpdateManyWithWhereWithoutCategoriesInput[]
+  deleteMany?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
+}
+
+export type EmployeeCreateNestedOneWithoutTasksInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutTasksInput, Prisma.EmployeeUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutTasksInput
+  connect?: Prisma.EmployeeWhereUniqueInput
+}
+
+export type EmployeeUpdateOneWithoutTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutTasksInput, Prisma.EmployeeUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutTasksInput
+  upsert?: Prisma.EmployeeUpsertWithoutTasksInput
+  disconnect?: Prisma.EmployeeWhereInput | boolean
+  delete?: Prisma.EmployeeWhereInput | boolean
+  connect?: Prisma.EmployeeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutTasksInput, Prisma.EmployeeUpdateWithoutTasksInput>, Prisma.EmployeeUncheckedUpdateWithoutTasksInput>
+}
+
 export type EmployeeCreateNestedOneWithoutAttendancesInput = {
   create?: Prisma.XOR<Prisma.EmployeeCreateWithoutAttendancesInput, Prisma.EmployeeUncheckedCreateWithoutAttendancesInput>
   connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutAttendancesInput
@@ -771,6 +974,147 @@ export type EmployeeUpdateOneRequiredWithoutLeavesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutLeavesInput, Prisma.EmployeeUpdateWithoutLeavesInput>, Prisma.EmployeeUncheckedUpdateWithoutLeavesInput>
 }
 
+export type EmployeeCreateNestedOneWithoutCreatedDecisionsInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutCreatedDecisionsInput, Prisma.EmployeeUncheckedCreateWithoutCreatedDecisionsInput>
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutCreatedDecisionsInput
+  connect?: Prisma.EmployeeWhereUniqueInput
+}
+
+export type EmployeeUpdateOneWithoutCreatedDecisionsNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutCreatedDecisionsInput, Prisma.EmployeeUncheckedCreateWithoutCreatedDecisionsInput>
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutCreatedDecisionsInput
+  upsert?: Prisma.EmployeeUpsertWithoutCreatedDecisionsInput
+  disconnect?: Prisma.EmployeeWhereInput | boolean
+  delete?: Prisma.EmployeeWhereInput | boolean
+  connect?: Prisma.EmployeeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutCreatedDecisionsInput, Prisma.EmployeeUpdateWithoutCreatedDecisionsInput>, Prisma.EmployeeUncheckedUpdateWithoutCreatedDecisionsInput>
+}
+
+export type EmployeeCreateNestedOneWithoutDecisionParticipationsInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutDecisionParticipationsInput, Prisma.EmployeeUncheckedCreateWithoutDecisionParticipationsInput>
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutDecisionParticipationsInput
+  connect?: Prisma.EmployeeWhereUniqueInput
+}
+
+export type EmployeeUpdateOneRequiredWithoutDecisionParticipationsNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutDecisionParticipationsInput, Prisma.EmployeeUncheckedCreateWithoutDecisionParticipationsInput>
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutDecisionParticipationsInput
+  upsert?: Prisma.EmployeeUpsertWithoutDecisionParticipationsInput
+  connect?: Prisma.EmployeeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutDecisionParticipationsInput, Prisma.EmployeeUpdateWithoutDecisionParticipationsInput>, Prisma.EmployeeUncheckedUpdateWithoutDecisionParticipationsInput>
+}
+
+export type EmployeeCreateWithoutCompanyInput = {
+  id?: string
+  userId: string
+  firstname?: string | null
+  lastname?: string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: string | null
+  email?: string | null
+  employeeCode?: number | null
+  designation?: string | null
+  phoneNumber: string
+  Country?: string | null
+  salary?: number | null
+  birthDate?: Date | string | null
+  emergencyContactPhone?: string | null
+  emergencyContactName?: string | null
+  gender?: $Enums.Gender | null
+  bloodGroup?: $Enums.BloodGroup | null
+  shift?: Prisma.ShiftCreateNestedOneWithoutEmployeesInput
+  settings?: Prisma.EmployeeSettingCreateNestedOneWithoutEmployeeInput
+  bank?: Prisma.EmployeeBankDetailsCreateNestedOneWithoutEmployeeInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
+  leaves?: Prisma.LeaveCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeUncheckedCreateWithoutCompanyInput = {
+  id?: string
+  userId: string
+  firstname?: string | null
+  lastname?: string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: string | null
+  email?: string | null
+  employeeCode?: number | null
+  designation?: string | null
+  phoneNumber: string
+  Country?: string | null
+  salary?: number | null
+  birthDate?: Date | string | null
+  emergencyContactPhone?: string | null
+  emergencyContactName?: string | null
+  gender?: $Enums.Gender | null
+  bloodGroup?: $Enums.BloodGroup | null
+  shiftId?: string | null
+  settings?: Prisma.EmployeeSettingUncheckedCreateNestedOneWithoutEmployeeInput
+  bank?: Prisma.EmployeeBankDetailsUncheckedCreateNestedOneWithoutEmployeeInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
+  leaves?: Prisma.LeaveUncheckedCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeCreateOrConnectWithoutCompanyInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutCompanyInput, Prisma.EmployeeUncheckedCreateWithoutCompanyInput>
+}
+
+export type EmployeeCreateManyCompanyInputEnvelope = {
+  data: Prisma.EmployeeCreateManyCompanyInput | Prisma.EmployeeCreateManyCompanyInput[]
+  skipDuplicates?: boolean
+}
+
+export type EmployeeUpsertWithWhereUniqueWithoutCompanyInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  update: Prisma.XOR<Prisma.EmployeeUpdateWithoutCompanyInput, Prisma.EmployeeUncheckedUpdateWithoutCompanyInput>
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutCompanyInput, Prisma.EmployeeUncheckedCreateWithoutCompanyInput>
+}
+
+export type EmployeeUpdateWithWhereUniqueWithoutCompanyInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateWithoutCompanyInput, Prisma.EmployeeUncheckedUpdateWithoutCompanyInput>
+}
+
+export type EmployeeUpdateManyWithWhereWithoutCompanyInput = {
+  where: Prisma.EmployeeScalarWhereInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateManyMutationInput, Prisma.EmployeeUncheckedUpdateManyWithoutCompanyInput>
+}
+
+export type EmployeeScalarWhereInput = {
+  AND?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
+  OR?: Prisma.EmployeeScalarWhereInput[]
+  NOT?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
+  id?: Prisma.StringFilter<"Employee"> | string
+  userId?: Prisma.StringFilter<"Employee"> | string
+  firstname?: Prisma.StringNullableFilter<"Employee"> | string | null
+  lastname?: Prisma.StringNullableFilter<"Employee"> | string | null
+  profilePicture?: Prisma.JsonNullableFilter<"Employee">
+  password?: Prisma.StringNullableFilter<"Employee"> | string | null
+  email?: Prisma.StringNullableFilter<"Employee"> | string | null
+  employeeCode?: Prisma.IntNullableFilter<"Employee"> | number | null
+  designation?: Prisma.StringNullableFilter<"Employee"> | string | null
+  phoneNumber?: Prisma.StringFilter<"Employee"> | string
+  Country?: Prisma.StringNullableFilter<"Employee"> | string | null
+  salary?: Prisma.IntNullableFilter<"Employee"> | number | null
+  birthDate?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
+  emergencyContactPhone?: Prisma.StringNullableFilter<"Employee"> | string | null
+  emergencyContactName?: Prisma.StringNullableFilter<"Employee"> | string | null
+  gender?: Prisma.EnumGenderNullableFilter<"Employee"> | $Enums.Gender | null
+  bloodGroup?: Prisma.EnumBloodGroupNullableFilter<"Employee"> | $Enums.BloodGroup | null
+  shiftId?: Prisma.StringNullableFilter<"Employee"> | string | null
+  companyId?: Prisma.StringFilter<"Employee"> | string
+}
+
 export type EmployeeCreateWithoutShiftInput = {
   id?: string
   userId: string
@@ -789,10 +1133,16 @@ export type EmployeeCreateWithoutShiftInput = {
   emergencyContactName?: string | null
   gender?: $Enums.Gender | null
   bloodGroup?: $Enums.BloodGroup | null
+  company: Prisma.CompanyCreateNestedOneWithoutEmployeesInput
   settings?: Prisma.EmployeeSettingCreateNestedOneWithoutEmployeeInput
   bank?: Prisma.EmployeeBankDetailsCreateNestedOneWithoutEmployeeInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
   leaves?: Prisma.LeaveCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeUncheckedCreateWithoutShiftInput = {
@@ -813,10 +1163,16 @@ export type EmployeeUncheckedCreateWithoutShiftInput = {
   emergencyContactName?: string | null
   gender?: $Enums.Gender | null
   bloodGroup?: $Enums.BloodGroup | null
+  companyId: string
   settings?: Prisma.EmployeeSettingUncheckedCreateNestedOneWithoutEmployeeInput
   bank?: Prisma.EmployeeBankDetailsUncheckedCreateNestedOneWithoutEmployeeInput
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
   leaves?: Prisma.LeaveUncheckedCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeCreateOrConnectWithoutShiftInput = {
@@ -853,10 +1209,16 @@ export type EmployeeUpdateWithoutShiftInput = {
   emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
+  company?: Prisma.CompanyUpdateOneRequiredWithoutEmployeesNestedInput
   settings?: Prisma.EmployeeSettingUpdateOneWithoutEmployeeNestedInput
   bank?: Prisma.EmployeeBankDetailsUpdateOneWithoutEmployeeNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
   leaves?: Prisma.LeaveUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutShiftInput = {
@@ -877,10 +1239,16 @@ export type EmployeeUncheckedUpdateWithoutShiftInput = {
   emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
   settings?: Prisma.EmployeeSettingUncheckedUpdateOneWithoutEmployeeNestedInput
   bank?: Prisma.EmployeeBankDetailsUncheckedUpdateOneWithoutEmployeeNestedInput
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
   leaves?: Prisma.LeaveUncheckedUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUncheckedUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeCreateWithoutSettingsInput = {
@@ -902,9 +1270,15 @@ export type EmployeeCreateWithoutSettingsInput = {
   gender?: $Enums.Gender | null
   bloodGroup?: $Enums.BloodGroup | null
   shift?: Prisma.ShiftCreateNestedOneWithoutEmployeesInput
+  company: Prisma.CompanyCreateNestedOneWithoutEmployeesInput
   bank?: Prisma.EmployeeBankDetailsCreateNestedOneWithoutEmployeeInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
   leaves?: Prisma.LeaveCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeUncheckedCreateWithoutSettingsInput = {
@@ -926,9 +1300,15 @@ export type EmployeeUncheckedCreateWithoutSettingsInput = {
   gender?: $Enums.Gender | null
   bloodGroup?: $Enums.BloodGroup | null
   shiftId?: string | null
+  companyId: string
   bank?: Prisma.EmployeeBankDetailsUncheckedCreateNestedOneWithoutEmployeeInput
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
   leaves?: Prisma.LeaveUncheckedCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeCreateOrConnectWithoutSettingsInput = {
@@ -966,9 +1346,15 @@ export type EmployeeUpdateWithoutSettingsInput = {
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
   shift?: Prisma.ShiftUpdateOneWithoutEmployeesNestedInput
+  company?: Prisma.CompanyUpdateOneRequiredWithoutEmployeesNestedInput
   bank?: Prisma.EmployeeBankDetailsUpdateOneWithoutEmployeeNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
   leaves?: Prisma.LeaveUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutSettingsInput = {
@@ -990,9 +1376,15 @@ export type EmployeeUncheckedUpdateWithoutSettingsInput = {
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
   shiftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
   bank?: Prisma.EmployeeBankDetailsUncheckedUpdateOneWithoutEmployeeNestedInput
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
   leaves?: Prisma.LeaveUncheckedUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUncheckedUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeCreateWithoutBankInput = {
@@ -1014,9 +1406,15 @@ export type EmployeeCreateWithoutBankInput = {
   gender?: $Enums.Gender | null
   bloodGroup?: $Enums.BloodGroup | null
   shift?: Prisma.ShiftCreateNestedOneWithoutEmployeesInput
+  company: Prisma.CompanyCreateNestedOneWithoutEmployeesInput
   settings?: Prisma.EmployeeSettingCreateNestedOneWithoutEmployeeInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
   leaves?: Prisma.LeaveCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeUncheckedCreateWithoutBankInput = {
@@ -1038,9 +1436,15 @@ export type EmployeeUncheckedCreateWithoutBankInput = {
   gender?: $Enums.Gender | null
   bloodGroup?: $Enums.BloodGroup | null
   shiftId?: string | null
+  companyId: string
   settings?: Prisma.EmployeeSettingUncheckedCreateNestedOneWithoutEmployeeInput
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
   leaves?: Prisma.LeaveUncheckedCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeCreateOrConnectWithoutBankInput = {
@@ -1078,9 +1482,15 @@ export type EmployeeUpdateWithoutBankInput = {
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
   shift?: Prisma.ShiftUpdateOneWithoutEmployeesNestedInput
+  company?: Prisma.CompanyUpdateOneRequiredWithoutEmployeesNestedInput
   settings?: Prisma.EmployeeSettingUpdateOneWithoutEmployeeNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
   leaves?: Prisma.LeaveUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutBankInput = {
@@ -1102,9 +1512,313 @@ export type EmployeeUncheckedUpdateWithoutBankInput = {
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
   shiftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
   settings?: Prisma.EmployeeSettingUncheckedUpdateOneWithoutEmployeeNestedInput
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
   leaves?: Prisma.LeaveUncheckedUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUncheckedUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeCreateWithoutGeofencesInput = {
+  id?: string
+  userId: string
+  firstname?: string | null
+  lastname?: string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: string | null
+  email?: string | null
+  employeeCode?: number | null
+  designation?: string | null
+  phoneNumber: string
+  Country?: string | null
+  salary?: number | null
+  birthDate?: Date | string | null
+  emergencyContactPhone?: string | null
+  emergencyContactName?: string | null
+  gender?: $Enums.Gender | null
+  bloodGroup?: $Enums.BloodGroup | null
+  shift?: Prisma.ShiftCreateNestedOneWithoutEmployeesInput
+  company: Prisma.CompanyCreateNestedOneWithoutEmployeesInput
+  settings?: Prisma.EmployeeSettingCreateNestedOneWithoutEmployeeInput
+  bank?: Prisma.EmployeeBankDetailsCreateNestedOneWithoutEmployeeInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
+  leaves?: Prisma.LeaveCreateNestedManyWithoutEmployeeInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeUncheckedCreateWithoutGeofencesInput = {
+  id?: string
+  userId: string
+  firstname?: string | null
+  lastname?: string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: string | null
+  email?: string | null
+  employeeCode?: number | null
+  designation?: string | null
+  phoneNumber: string
+  Country?: string | null
+  salary?: number | null
+  birthDate?: Date | string | null
+  emergencyContactPhone?: string | null
+  emergencyContactName?: string | null
+  gender?: $Enums.Gender | null
+  bloodGroup?: $Enums.BloodGroup | null
+  shiftId?: string | null
+  companyId: string
+  settings?: Prisma.EmployeeSettingUncheckedCreateNestedOneWithoutEmployeeInput
+  bank?: Prisma.EmployeeBankDetailsUncheckedCreateNestedOneWithoutEmployeeInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
+  leaves?: Prisma.LeaveUncheckedCreateNestedManyWithoutEmployeeInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeCreateOrConnectWithoutGeofencesInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutGeofencesInput, Prisma.EmployeeUncheckedCreateWithoutGeofencesInput>
+}
+
+export type EmployeeUpsertWithWhereUniqueWithoutGeofencesInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  update: Prisma.XOR<Prisma.EmployeeUpdateWithoutGeofencesInput, Prisma.EmployeeUncheckedUpdateWithoutGeofencesInput>
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutGeofencesInput, Prisma.EmployeeUncheckedCreateWithoutGeofencesInput>
+}
+
+export type EmployeeUpdateWithWhereUniqueWithoutGeofencesInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateWithoutGeofencesInput, Prisma.EmployeeUncheckedUpdateWithoutGeofencesInput>
+}
+
+export type EmployeeUpdateManyWithWhereWithoutGeofencesInput = {
+  where: Prisma.EmployeeScalarWhereInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateManyMutationInput, Prisma.EmployeeUncheckedUpdateManyWithoutGeofencesInput>
+}
+
+export type EmployeeCreateWithoutCategoriesInput = {
+  id?: string
+  userId: string
+  firstname?: string | null
+  lastname?: string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: string | null
+  email?: string | null
+  employeeCode?: number | null
+  designation?: string | null
+  phoneNumber: string
+  Country?: string | null
+  salary?: number | null
+  birthDate?: Date | string | null
+  emergencyContactPhone?: string | null
+  emergencyContactName?: string | null
+  gender?: $Enums.Gender | null
+  bloodGroup?: $Enums.BloodGroup | null
+  shift?: Prisma.ShiftCreateNestedOneWithoutEmployeesInput
+  company: Prisma.CompanyCreateNestedOneWithoutEmployeesInput
+  settings?: Prisma.EmployeeSettingCreateNestedOneWithoutEmployeeInput
+  bank?: Prisma.EmployeeBankDetailsCreateNestedOneWithoutEmployeeInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
+  leaves?: Prisma.LeaveCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeUncheckedCreateWithoutCategoriesInput = {
+  id?: string
+  userId: string
+  firstname?: string | null
+  lastname?: string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: string | null
+  email?: string | null
+  employeeCode?: number | null
+  designation?: string | null
+  phoneNumber: string
+  Country?: string | null
+  salary?: number | null
+  birthDate?: Date | string | null
+  emergencyContactPhone?: string | null
+  emergencyContactName?: string | null
+  gender?: $Enums.Gender | null
+  bloodGroup?: $Enums.BloodGroup | null
+  shiftId?: string | null
+  companyId: string
+  settings?: Prisma.EmployeeSettingUncheckedCreateNestedOneWithoutEmployeeInput
+  bank?: Prisma.EmployeeBankDetailsUncheckedCreateNestedOneWithoutEmployeeInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
+  leaves?: Prisma.LeaveUncheckedCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeCreateOrConnectWithoutCategoriesInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutCategoriesInput, Prisma.EmployeeUncheckedCreateWithoutCategoriesInput>
+}
+
+export type EmployeeUpsertWithWhereUniqueWithoutCategoriesInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  update: Prisma.XOR<Prisma.EmployeeUpdateWithoutCategoriesInput, Prisma.EmployeeUncheckedUpdateWithoutCategoriesInput>
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutCategoriesInput, Prisma.EmployeeUncheckedCreateWithoutCategoriesInput>
+}
+
+export type EmployeeUpdateWithWhereUniqueWithoutCategoriesInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateWithoutCategoriesInput, Prisma.EmployeeUncheckedUpdateWithoutCategoriesInput>
+}
+
+export type EmployeeUpdateManyWithWhereWithoutCategoriesInput = {
+  where: Prisma.EmployeeScalarWhereInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateManyMutationInput, Prisma.EmployeeUncheckedUpdateManyWithoutCategoriesInput>
+}
+
+export type EmployeeCreateWithoutTasksInput = {
+  id?: string
+  userId: string
+  firstname?: string | null
+  lastname?: string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: string | null
+  email?: string | null
+  employeeCode?: number | null
+  designation?: string | null
+  phoneNumber: string
+  Country?: string | null
+  salary?: number | null
+  birthDate?: Date | string | null
+  emergencyContactPhone?: string | null
+  emergencyContactName?: string | null
+  gender?: $Enums.Gender | null
+  bloodGroup?: $Enums.BloodGroup | null
+  shift?: Prisma.ShiftCreateNestedOneWithoutEmployeesInput
+  company: Prisma.CompanyCreateNestedOneWithoutEmployeesInput
+  settings?: Prisma.EmployeeSettingCreateNestedOneWithoutEmployeeInput
+  bank?: Prisma.EmployeeBankDetailsCreateNestedOneWithoutEmployeeInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
+  leaves?: Prisma.LeaveCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutEmployeesInput
+  createdDecisions?: Prisma.DecisionCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeUncheckedCreateWithoutTasksInput = {
+  id?: string
+  userId: string
+  firstname?: string | null
+  lastname?: string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: string | null
+  email?: string | null
+  employeeCode?: number | null
+  designation?: string | null
+  phoneNumber: string
+  Country?: string | null
+  salary?: number | null
+  birthDate?: Date | string | null
+  emergencyContactPhone?: string | null
+  emergencyContactName?: string | null
+  gender?: $Enums.Gender | null
+  bloodGroup?: $Enums.BloodGroup | null
+  shiftId?: string | null
+  companyId: string
+  settings?: Prisma.EmployeeSettingUncheckedCreateNestedOneWithoutEmployeeInput
+  bank?: Prisma.EmployeeBankDetailsUncheckedCreateNestedOneWithoutEmployeeInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
+  leaves?: Prisma.LeaveUncheckedCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutEmployeesInput
+  createdDecisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeCreateOrConnectWithoutTasksInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutTasksInput, Prisma.EmployeeUncheckedCreateWithoutTasksInput>
+}
+
+export type EmployeeUpsertWithoutTasksInput = {
+  update: Prisma.XOR<Prisma.EmployeeUpdateWithoutTasksInput, Prisma.EmployeeUncheckedUpdateWithoutTasksInput>
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutTasksInput, Prisma.EmployeeUncheckedCreateWithoutTasksInput>
+  where?: Prisma.EmployeeWhereInput
+}
+
+export type EmployeeUpdateToOneWithWhereWithoutTasksInput = {
+  where?: Prisma.EmployeeWhereInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateWithoutTasksInput, Prisma.EmployeeUncheckedUpdateWithoutTasksInput>
+}
+
+export type EmployeeUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  Country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emergencyContactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
+  shift?: Prisma.ShiftUpdateOneWithoutEmployeesNestedInput
+  company?: Prisma.CompanyUpdateOneRequiredWithoutEmployeesNestedInput
+  settings?: Prisma.EmployeeSettingUpdateOneWithoutEmployeeNestedInput
+  bank?: Prisma.EmployeeBankDetailsUpdateOneWithoutEmployeeNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
+  leaves?: Prisma.LeaveUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutEmployeesNestedInput
+  createdDecisions?: Prisma.DecisionUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeUncheckedUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  Country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emergencyContactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
+  shiftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  settings?: Prisma.EmployeeSettingUncheckedUpdateOneWithoutEmployeeNestedInput
+  bank?: Prisma.EmployeeBankDetailsUncheckedUpdateOneWithoutEmployeeNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
+  leaves?: Prisma.LeaveUncheckedUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutEmployeesNestedInput
+  createdDecisions?: Prisma.DecisionUncheckedUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeCreateWithoutAttendancesInput = {
@@ -1126,9 +1840,15 @@ export type EmployeeCreateWithoutAttendancesInput = {
   gender?: $Enums.Gender | null
   bloodGroup?: $Enums.BloodGroup | null
   shift?: Prisma.ShiftCreateNestedOneWithoutEmployeesInput
+  company: Prisma.CompanyCreateNestedOneWithoutEmployeesInput
   settings?: Prisma.EmployeeSettingCreateNestedOneWithoutEmployeeInput
   bank?: Prisma.EmployeeBankDetailsCreateNestedOneWithoutEmployeeInput
   leaves?: Prisma.LeaveCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeUncheckedCreateWithoutAttendancesInput = {
@@ -1150,9 +1870,15 @@ export type EmployeeUncheckedCreateWithoutAttendancesInput = {
   gender?: $Enums.Gender | null
   bloodGroup?: $Enums.BloodGroup | null
   shiftId?: string | null
+  companyId: string
   settings?: Prisma.EmployeeSettingUncheckedCreateNestedOneWithoutEmployeeInput
   bank?: Prisma.EmployeeBankDetailsUncheckedCreateNestedOneWithoutEmployeeInput
   leaves?: Prisma.LeaveUncheckedCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeCreateOrConnectWithoutAttendancesInput = {
@@ -1190,9 +1916,15 @@ export type EmployeeUpdateWithoutAttendancesInput = {
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
   shift?: Prisma.ShiftUpdateOneWithoutEmployeesNestedInput
+  company?: Prisma.CompanyUpdateOneRequiredWithoutEmployeesNestedInput
   settings?: Prisma.EmployeeSettingUpdateOneWithoutEmployeeNestedInput
   bank?: Prisma.EmployeeBankDetailsUpdateOneWithoutEmployeeNestedInput
   leaves?: Prisma.LeaveUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutAttendancesInput = {
@@ -1214,9 +1946,15 @@ export type EmployeeUncheckedUpdateWithoutAttendancesInput = {
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
   shiftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
   settings?: Prisma.EmployeeSettingUncheckedUpdateOneWithoutEmployeeNestedInput
   bank?: Prisma.EmployeeBankDetailsUncheckedUpdateOneWithoutEmployeeNestedInput
   leaves?: Prisma.LeaveUncheckedUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUncheckedUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeCreateWithoutLeavesInput = {
@@ -1238,9 +1976,15 @@ export type EmployeeCreateWithoutLeavesInput = {
   gender?: $Enums.Gender | null
   bloodGroup?: $Enums.BloodGroup | null
   shift?: Prisma.ShiftCreateNestedOneWithoutEmployeesInput
+  company: Prisma.CompanyCreateNestedOneWithoutEmployeesInput
   settings?: Prisma.EmployeeSettingCreateNestedOneWithoutEmployeeInput
   bank?: Prisma.EmployeeBankDetailsCreateNestedOneWithoutEmployeeInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeUncheckedCreateWithoutLeavesInput = {
@@ -1262,9 +2006,15 @@ export type EmployeeUncheckedCreateWithoutLeavesInput = {
   gender?: $Enums.Gender | null
   bloodGroup?: $Enums.BloodGroup | null
   shiftId?: string | null
+  companyId: string
   settings?: Prisma.EmployeeSettingUncheckedCreateNestedOneWithoutEmployeeInput
   bank?: Prisma.EmployeeBankDetailsUncheckedCreateNestedOneWithoutEmployeeInput
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCreatorInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeCreateOrConnectWithoutLeavesInput = {
@@ -1302,9 +2052,15 @@ export type EmployeeUpdateWithoutLeavesInput = {
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
   shift?: Prisma.ShiftUpdateOneWithoutEmployeesNestedInput
+  company?: Prisma.CompanyUpdateOneRequiredWithoutEmployeesNestedInput
   settings?: Prisma.EmployeeSettingUpdateOneWithoutEmployeeNestedInput
   bank?: Prisma.EmployeeBankDetailsUpdateOneWithoutEmployeeNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutLeavesInput = {
@@ -1326,9 +2082,553 @@ export type EmployeeUncheckedUpdateWithoutLeavesInput = {
   gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
   bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
   shiftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
   settings?: Prisma.EmployeeSettingUncheckedUpdateOneWithoutEmployeeNestedInput
   bank?: Prisma.EmployeeBankDetailsUncheckedUpdateOneWithoutEmployeeNestedInput
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUncheckedUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeCreateWithoutCreatedDecisionsInput = {
+  id?: string
+  userId: string
+  firstname?: string | null
+  lastname?: string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: string | null
+  email?: string | null
+  employeeCode?: number | null
+  designation?: string | null
+  phoneNumber: string
+  Country?: string | null
+  salary?: number | null
+  birthDate?: Date | string | null
+  emergencyContactPhone?: string | null
+  emergencyContactName?: string | null
+  gender?: $Enums.Gender | null
+  bloodGroup?: $Enums.BloodGroup | null
+  shift?: Prisma.ShiftCreateNestedOneWithoutEmployeesInput
+  company: Prisma.CompanyCreateNestedOneWithoutEmployeesInput
+  settings?: Prisma.EmployeeSettingCreateNestedOneWithoutEmployeeInput
+  bank?: Prisma.EmployeeBankDetailsCreateNestedOneWithoutEmployeeInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
+  leaves?: Prisma.LeaveCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutEmployeeInput
+  decisionParticipations?: Prisma.DecisionParticipantCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeUncheckedCreateWithoutCreatedDecisionsInput = {
+  id?: string
+  userId: string
+  firstname?: string | null
+  lastname?: string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: string | null
+  email?: string | null
+  employeeCode?: number | null
+  designation?: string | null
+  phoneNumber: string
+  Country?: string | null
+  salary?: number | null
+  birthDate?: Date | string | null
+  emergencyContactPhone?: string | null
+  emergencyContactName?: string | null
+  gender?: $Enums.Gender | null
+  bloodGroup?: $Enums.BloodGroup | null
+  shiftId?: string | null
+  companyId: string
+  settings?: Prisma.EmployeeSettingUncheckedCreateNestedOneWithoutEmployeeInput
+  bank?: Prisma.EmployeeBankDetailsUncheckedCreateNestedOneWithoutEmployeeInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
+  leaves?: Prisma.LeaveUncheckedCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutEmployeeInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeCreateOrConnectWithoutCreatedDecisionsInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutCreatedDecisionsInput, Prisma.EmployeeUncheckedCreateWithoutCreatedDecisionsInput>
+}
+
+export type EmployeeUpsertWithoutCreatedDecisionsInput = {
+  update: Prisma.XOR<Prisma.EmployeeUpdateWithoutCreatedDecisionsInput, Prisma.EmployeeUncheckedUpdateWithoutCreatedDecisionsInput>
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutCreatedDecisionsInput, Prisma.EmployeeUncheckedCreateWithoutCreatedDecisionsInput>
+  where?: Prisma.EmployeeWhereInput
+}
+
+export type EmployeeUpdateToOneWithWhereWithoutCreatedDecisionsInput = {
+  where?: Prisma.EmployeeWhereInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateWithoutCreatedDecisionsInput, Prisma.EmployeeUncheckedUpdateWithoutCreatedDecisionsInput>
+}
+
+export type EmployeeUpdateWithoutCreatedDecisionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  Country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emergencyContactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
+  shift?: Prisma.ShiftUpdateOneWithoutEmployeesNestedInput
+  company?: Prisma.CompanyUpdateOneRequiredWithoutEmployeesNestedInput
+  settings?: Prisma.EmployeeSettingUpdateOneWithoutEmployeeNestedInput
+  bank?: Prisma.EmployeeBankDetailsUpdateOneWithoutEmployeeNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
+  leaves?: Prisma.LeaveUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutEmployeeNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeUncheckedUpdateWithoutCreatedDecisionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  Country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emergencyContactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
+  shiftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  settings?: Prisma.EmployeeSettingUncheckedUpdateOneWithoutEmployeeNestedInput
+  bank?: Prisma.EmployeeBankDetailsUncheckedUpdateOneWithoutEmployeeNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
+  leaves?: Prisma.LeaveUncheckedUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutEmployeeNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeCreateWithoutDecisionParticipationsInput = {
+  id?: string
+  userId: string
+  firstname?: string | null
+  lastname?: string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: string | null
+  email?: string | null
+  employeeCode?: number | null
+  designation?: string | null
+  phoneNumber: string
+  Country?: string | null
+  salary?: number | null
+  birthDate?: Date | string | null
+  emergencyContactPhone?: string | null
+  emergencyContactName?: string | null
+  gender?: $Enums.Gender | null
+  bloodGroup?: $Enums.BloodGroup | null
+  shift?: Prisma.ShiftCreateNestedOneWithoutEmployeesInput
+  company: Prisma.CompanyCreateNestedOneWithoutEmployeesInput
+  settings?: Prisma.EmployeeSettingCreateNestedOneWithoutEmployeeInput
+  bank?: Prisma.EmployeeBankDetailsCreateNestedOneWithoutEmployeeInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
+  leaves?: Prisma.LeaveCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionCreateNestedManyWithoutCreatorInput
+}
+
+export type EmployeeUncheckedCreateWithoutDecisionParticipationsInput = {
+  id?: string
+  userId: string
+  firstname?: string | null
+  lastname?: string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: string | null
+  email?: string | null
+  employeeCode?: number | null
+  designation?: string | null
+  phoneNumber: string
+  Country?: string | null
+  salary?: number | null
+  birthDate?: Date | string | null
+  emergencyContactPhone?: string | null
+  emergencyContactName?: string | null
+  gender?: $Enums.Gender | null
+  bloodGroup?: $Enums.BloodGroup | null
+  shiftId?: string | null
+  companyId: string
+  settings?: Prisma.EmployeeSettingUncheckedCreateNestedOneWithoutEmployeeInput
+  bank?: Prisma.EmployeeBankDetailsUncheckedCreateNestedOneWithoutEmployeeInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
+  leaves?: Prisma.LeaveUncheckedCreateNestedManyWithoutEmployeeInput
+  geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutEmployeesInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutEmployeesInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutEmployeeInput
+  createdDecisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCreatorInput
+}
+
+export type EmployeeCreateOrConnectWithoutDecisionParticipationsInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutDecisionParticipationsInput, Prisma.EmployeeUncheckedCreateWithoutDecisionParticipationsInput>
+}
+
+export type EmployeeUpsertWithoutDecisionParticipationsInput = {
+  update: Prisma.XOR<Prisma.EmployeeUpdateWithoutDecisionParticipationsInput, Prisma.EmployeeUncheckedUpdateWithoutDecisionParticipationsInput>
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutDecisionParticipationsInput, Prisma.EmployeeUncheckedCreateWithoutDecisionParticipationsInput>
+  where?: Prisma.EmployeeWhereInput
+}
+
+export type EmployeeUpdateToOneWithWhereWithoutDecisionParticipationsInput = {
+  where?: Prisma.EmployeeWhereInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateWithoutDecisionParticipationsInput, Prisma.EmployeeUncheckedUpdateWithoutDecisionParticipationsInput>
+}
+
+export type EmployeeUpdateWithoutDecisionParticipationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  Country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emergencyContactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
+  shift?: Prisma.ShiftUpdateOneWithoutEmployeesNestedInput
+  company?: Prisma.CompanyUpdateOneRequiredWithoutEmployeesNestedInput
+  settings?: Prisma.EmployeeSettingUpdateOneWithoutEmployeeNestedInput
+  bank?: Prisma.EmployeeBankDetailsUpdateOneWithoutEmployeeNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
+  leaves?: Prisma.LeaveUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUpdateManyWithoutCreatorNestedInput
+}
+
+export type EmployeeUncheckedUpdateWithoutDecisionParticipationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  Country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emergencyContactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
+  shiftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  settings?: Prisma.EmployeeSettingUncheckedUpdateOneWithoutEmployeeNestedInput
+  bank?: Prisma.EmployeeBankDetailsUncheckedUpdateOneWithoutEmployeeNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
+  leaves?: Prisma.LeaveUncheckedUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUncheckedUpdateManyWithoutCreatorNestedInput
+}
+
+export type EmployeeCreateManyCompanyInput = {
+  id?: string
+  userId: string
+  firstname?: string | null
+  lastname?: string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: string | null
+  email?: string | null
+  employeeCode?: number | null
+  designation?: string | null
+  phoneNumber: string
+  Country?: string | null
+  salary?: number | null
+  birthDate?: Date | string | null
+  emergencyContactPhone?: string | null
+  emergencyContactName?: string | null
+  gender?: $Enums.Gender | null
+  bloodGroup?: $Enums.BloodGroup | null
+  shiftId?: string | null
+}
+
+export type EmployeeUpdateWithoutCompanyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  Country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emergencyContactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
+  shift?: Prisma.ShiftUpdateOneWithoutEmployeesNestedInput
+  settings?: Prisma.EmployeeSettingUpdateOneWithoutEmployeeNestedInput
+  bank?: Prisma.EmployeeBankDetailsUpdateOneWithoutEmployeeNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
+  leaves?: Prisma.LeaveUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeUncheckedUpdateWithoutCompanyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  Country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emergencyContactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
+  shiftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  settings?: Prisma.EmployeeSettingUncheckedUpdateOneWithoutEmployeeNestedInput
+  bank?: Prisma.EmployeeBankDetailsUncheckedUpdateOneWithoutEmployeeNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
+  leaves?: Prisma.LeaveUncheckedUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutEmployeesNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUncheckedUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeUncheckedUpdateManyWithoutCompanyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  Country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emergencyContactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
+  shiftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type EmployeeUpdateWithoutGeofencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  Country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emergencyContactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
+  shift?: Prisma.ShiftUpdateOneWithoutEmployeesNestedInput
+  company?: Prisma.CompanyUpdateOneRequiredWithoutEmployeesNestedInput
+  settings?: Prisma.EmployeeSettingUpdateOneWithoutEmployeeNestedInput
+  bank?: Prisma.EmployeeBankDetailsUpdateOneWithoutEmployeeNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
+  leaves?: Prisma.LeaveUpdateManyWithoutEmployeeNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeUncheckedUpdateWithoutGeofencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  Country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emergencyContactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
+  shiftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  settings?: Prisma.EmployeeSettingUncheckedUpdateOneWithoutEmployeeNestedInput
+  bank?: Prisma.EmployeeBankDetailsUncheckedUpdateOneWithoutEmployeeNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
+  leaves?: Prisma.LeaveUncheckedUpdateManyWithoutEmployeeNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUncheckedUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeUncheckedUpdateManyWithoutGeofencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  Country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emergencyContactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
+  shiftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type EmployeeUpdateWithoutCategoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  Country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emergencyContactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
+  shift?: Prisma.ShiftUpdateOneWithoutEmployeesNestedInput
+  company?: Prisma.CompanyUpdateOneRequiredWithoutEmployeesNestedInput
+  settings?: Prisma.EmployeeSettingUpdateOneWithoutEmployeeNestedInput
+  bank?: Prisma.EmployeeBankDetailsUpdateOneWithoutEmployeeNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
+  leaves?: Prisma.LeaveUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeUncheckedUpdateWithoutCategoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  Country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emergencyContactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
+  shiftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  settings?: Prisma.EmployeeSettingUncheckedUpdateOneWithoutEmployeeNestedInput
+  bank?: Prisma.EmployeeBankDetailsUncheckedUpdateOneWithoutEmployeeNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
+  leaves?: Prisma.LeaveUncheckedUpdateManyWithoutEmployeeNestedInput
+  geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutEmployeesNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutEmployeeNestedInput
+  createdDecisions?: Prisma.DecisionUncheckedUpdateManyWithoutCreatorNestedInput
+  decisionParticipations?: Prisma.DecisionParticipantUncheckedUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeUncheckedUpdateManyWithoutCategoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profilePicture?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  employeeCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  Country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  salary?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emergencyContactPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  bloodGroup?: Prisma.NullableEnumBloodGroupFieldUpdateOperationsInput | $Enums.BloodGroup | null
+  shiftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -1339,11 +2639,21 @@ export type EmployeeUncheckedUpdateWithoutLeavesInput = {
 export type EmployeeCountOutputType = {
   attendances: number
   leaves: number
+  geofences: number
+  categories: number
+  tasks: number
+  createdDecisions: number
+  decisionParticipations: number
 }
 
 export type EmployeeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   attendances?: boolean | EmployeeCountOutputTypeCountAttendancesArgs
   leaves?: boolean | EmployeeCountOutputTypeCountLeavesArgs
+  geofences?: boolean | EmployeeCountOutputTypeCountGeofencesArgs
+  categories?: boolean | EmployeeCountOutputTypeCountCategoriesArgs
+  tasks?: boolean | EmployeeCountOutputTypeCountTasksArgs
+  createdDecisions?: boolean | EmployeeCountOutputTypeCountCreatedDecisionsArgs
+  decisionParticipations?: boolean | EmployeeCountOutputTypeCountDecisionParticipationsArgs
 }
 
 /**
@@ -1370,6 +2680,41 @@ export type EmployeeCountOutputTypeCountLeavesArgs<ExtArgs extends runtime.Types
   where?: Prisma.LeaveWhereInput
 }
 
+/**
+ * EmployeeCountOutputType without action
+ */
+export type EmployeeCountOutputTypeCountGeofencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GeofenceWhereInput
+}
+
+/**
+ * EmployeeCountOutputType without action
+ */
+export type EmployeeCountOutputTypeCountCategoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CategoryWhereInput
+}
+
+/**
+ * EmployeeCountOutputType without action
+ */
+export type EmployeeCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TaskWhereInput
+}
+
+/**
+ * EmployeeCountOutputType without action
+ */
+export type EmployeeCountOutputTypeCountCreatedDecisionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DecisionWhereInput
+}
+
+/**
+ * EmployeeCountOutputType without action
+ */
+export type EmployeeCountOutputTypeCountDecisionParticipationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DecisionParticipantWhereInput
+}
+
 
 export type EmployeeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1390,11 +2735,18 @@ export type EmployeeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   gender?: boolean
   bloodGroup?: boolean
   shiftId?: boolean
+  companyId?: boolean
   shift?: boolean | Prisma.Employee$shiftArgs<ExtArgs>
+  company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
   settings?: boolean | Prisma.Employee$settingsArgs<ExtArgs>
   bank?: boolean | Prisma.Employee$bankArgs<ExtArgs>
   attendances?: boolean | Prisma.Employee$attendancesArgs<ExtArgs>
   leaves?: boolean | Prisma.Employee$leavesArgs<ExtArgs>
+  geofences?: boolean | Prisma.Employee$geofencesArgs<ExtArgs>
+  categories?: boolean | Prisma.Employee$categoriesArgs<ExtArgs>
+  tasks?: boolean | Prisma.Employee$tasksArgs<ExtArgs>
+  createdDecisions?: boolean | Prisma.Employee$createdDecisionsArgs<ExtArgs>
+  decisionParticipations?: boolean | Prisma.Employee$decisionParticipationsArgs<ExtArgs>
   _count?: boolean | Prisma.EmployeeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["employee"]>
 
@@ -1417,7 +2769,9 @@ export type EmployeeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   gender?: boolean
   bloodGroup?: boolean
   shiftId?: boolean
+  companyId?: boolean
   shift?: boolean | Prisma.Employee$shiftArgs<ExtArgs>
+  company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["employee"]>
 
 export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1439,7 +2793,9 @@ export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   gender?: boolean
   bloodGroup?: boolean
   shiftId?: boolean
+  companyId?: boolean
   shift?: boolean | Prisma.Employee$shiftArgs<ExtArgs>
+  company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["employee"]>
 
 export type EmployeeSelectScalar = {
@@ -1461,32 +2817,47 @@ export type EmployeeSelectScalar = {
   gender?: boolean
   bloodGroup?: boolean
   shiftId?: boolean
+  companyId?: boolean
 }
 
-export type EmployeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "firstname" | "lastname" | "profilePicture" | "password" | "email" | "employeeCode" | "designation" | "phoneNumber" | "Country" | "salary" | "birthDate" | "emergencyContactPhone" | "emergencyContactName" | "gender" | "bloodGroup" | "shiftId", ExtArgs["result"]["employee"]>
+export type EmployeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "firstname" | "lastname" | "profilePicture" | "password" | "email" | "employeeCode" | "designation" | "phoneNumber" | "Country" | "salary" | "birthDate" | "emergencyContactPhone" | "emergencyContactName" | "gender" | "bloodGroup" | "shiftId" | "companyId", ExtArgs["result"]["employee"]>
 export type EmployeeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   shift?: boolean | Prisma.Employee$shiftArgs<ExtArgs>
+  company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
   settings?: boolean | Prisma.Employee$settingsArgs<ExtArgs>
   bank?: boolean | Prisma.Employee$bankArgs<ExtArgs>
   attendances?: boolean | Prisma.Employee$attendancesArgs<ExtArgs>
   leaves?: boolean | Prisma.Employee$leavesArgs<ExtArgs>
+  geofences?: boolean | Prisma.Employee$geofencesArgs<ExtArgs>
+  categories?: boolean | Prisma.Employee$categoriesArgs<ExtArgs>
+  tasks?: boolean | Prisma.Employee$tasksArgs<ExtArgs>
+  createdDecisions?: boolean | Prisma.Employee$createdDecisionsArgs<ExtArgs>
+  decisionParticipations?: boolean | Prisma.Employee$decisionParticipationsArgs<ExtArgs>
   _count?: boolean | Prisma.EmployeeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EmployeeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   shift?: boolean | Prisma.Employee$shiftArgs<ExtArgs>
+  company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
 }
 export type EmployeeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   shift?: boolean | Prisma.Employee$shiftArgs<ExtArgs>
+  company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
 }
 
 export type $EmployeePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Employee"
   objects: {
     shift: Prisma.$ShiftPayload<ExtArgs> | null
+    company: Prisma.$CompanyPayload<ExtArgs>
     settings: Prisma.$EmployeeSettingPayload<ExtArgs> | null
     bank: Prisma.$EmployeeBankDetailsPayload<ExtArgs> | null
     attendances: Prisma.$AttendancePayload<ExtArgs>[]
     leaves: Prisma.$LeavePayload<ExtArgs>[]
+    geofences: Prisma.$GeofencePayload<ExtArgs>[]
+    categories: Prisma.$CategoryPayload<ExtArgs>[]
+    tasks: Prisma.$TaskPayload<ExtArgs>[]
+    createdDecisions: Prisma.$DecisionPayload<ExtArgs>[]
+    decisionParticipations: Prisma.$DecisionParticipantPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1507,6 +2878,7 @@ export type $EmployeePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     gender: $Enums.Gender | null
     bloodGroup: $Enums.BloodGroup | null
     shiftId: string | null
+    companyId: string
   }, ExtArgs["result"]["employee"]>
   composites: {}
 }
@@ -1902,10 +3274,16 @@ readonly fields: EmployeeFieldRefs;
 export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   shift<T extends Prisma.Employee$shiftArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$shiftArgs<ExtArgs>>): Prisma.Prisma__ShiftClient<runtime.Types.Result.GetResult<Prisma.$ShiftPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  company<T extends Prisma.CompanyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyDefaultArgs<ExtArgs>>): Prisma.Prisma__CompanyClient<runtime.Types.Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   settings<T extends Prisma.Employee$settingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$settingsArgs<ExtArgs>>): Prisma.Prisma__EmployeeSettingClient<runtime.Types.Result.GetResult<Prisma.$EmployeeSettingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   bank<T extends Prisma.Employee$bankArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$bankArgs<ExtArgs>>): Prisma.Prisma__EmployeeBankDetailsClient<runtime.Types.Result.GetResult<Prisma.$EmployeeBankDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   attendances<T extends Prisma.Employee$attendancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$attendancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leaves<T extends Prisma.Employee$leavesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$leavesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeavePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  geofences<T extends Prisma.Employee$geofencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$geofencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GeofencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  categories<T extends Prisma.Employee$categoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tasks<T extends Prisma.Employee$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdDecisions<T extends Prisma.Employee$createdDecisionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$createdDecisionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DecisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  decisionParticipations<T extends Prisma.Employee$decisionParticipationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$decisionParticipationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DecisionParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1953,6 +3331,7 @@ export interface EmployeeFieldRefs {
   readonly gender: Prisma.FieldRef<"Employee", 'Gender'>
   readonly bloodGroup: Prisma.FieldRef<"Employee", 'BloodGroup'>
   readonly shiftId: Prisma.FieldRef<"Employee", 'String'>
+  readonly companyId: Prisma.FieldRef<"Employee", 'String'>
 }
     
 
@@ -2451,6 +3830,126 @@ export type Employee$leavesArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.LeaveScalarFieldEnum | Prisma.LeaveScalarFieldEnum[]
+}
+
+/**
+ * Employee.geofences
+ */
+export type Employee$geofencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Geofence
+   */
+  select?: Prisma.GeofenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Geofence
+   */
+  omit?: Prisma.GeofenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GeofenceInclude<ExtArgs> | null
+  where?: Prisma.GeofenceWhereInput
+  orderBy?: Prisma.GeofenceOrderByWithRelationInput | Prisma.GeofenceOrderByWithRelationInput[]
+  cursor?: Prisma.GeofenceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GeofenceScalarFieldEnum | Prisma.GeofenceScalarFieldEnum[]
+}
+
+/**
+ * Employee.categories
+ */
+export type Employee$categoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Category
+   */
+  select?: Prisma.CategorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Category
+   */
+  omit?: Prisma.CategoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CategoryInclude<ExtArgs> | null
+  where?: Prisma.CategoryWhereInput
+  orderBy?: Prisma.CategoryOrderByWithRelationInput | Prisma.CategoryOrderByWithRelationInput[]
+  cursor?: Prisma.CategoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CategoryScalarFieldEnum | Prisma.CategoryScalarFieldEnum[]
+}
+
+/**
+ * Employee.tasks
+ */
+export type Employee$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Task
+   */
+  select?: Prisma.TaskSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Task
+   */
+  omit?: Prisma.TaskOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskInclude<ExtArgs> | null
+  where?: Prisma.TaskWhereInput
+  orderBy?: Prisma.TaskOrderByWithRelationInput | Prisma.TaskOrderByWithRelationInput[]
+  cursor?: Prisma.TaskWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
+}
+
+/**
+ * Employee.createdDecisions
+ */
+export type Employee$createdDecisionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Decision
+   */
+  select?: Prisma.DecisionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Decision
+   */
+  omit?: Prisma.DecisionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DecisionInclude<ExtArgs> | null
+  where?: Prisma.DecisionWhereInput
+  orderBy?: Prisma.DecisionOrderByWithRelationInput | Prisma.DecisionOrderByWithRelationInput[]
+  cursor?: Prisma.DecisionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DecisionScalarFieldEnum | Prisma.DecisionScalarFieldEnum[]
+}
+
+/**
+ * Employee.decisionParticipations
+ */
+export type Employee$decisionParticipationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DecisionParticipant
+   */
+  select?: Prisma.DecisionParticipantSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DecisionParticipant
+   */
+  omit?: Prisma.DecisionParticipantOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DecisionParticipantInclude<ExtArgs> | null
+  where?: Prisma.DecisionParticipantWhereInput
+  orderBy?: Prisma.DecisionParticipantOrderByWithRelationInput | Prisma.DecisionParticipantOrderByWithRelationInput[]
+  cursor?: Prisma.DecisionParticipantWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DecisionParticipantScalarFieldEnum | Prisma.DecisionParticipantScalarFieldEnum[]
 }
 
 /**

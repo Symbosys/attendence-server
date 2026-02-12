@@ -12,13 +12,19 @@ import { createGeofenceSchema, geofenceIdSchema, updateGeofenceSchema } from "..
  * @access Private
  */
 export const createGeofence = asyncHandler(async (req: AuthRequest, res: Response, next: NextFunction) => {
-  const validatedData = createGeofenceSchema.parse(req.body);
+  const { employeeIds, ...geofenceData } = createGeofenceSchema.parse(req.body);
   const companyId = req.user.id;
 
   const geofence = await prisma.geofence.create({
     data: {
-      ...validatedData,
+      ...geofenceData,
       companyId,
+      employees: {
+        connect: employeeIds?.map((id) => ({ id })) || [],
+      },
+    },
+    include: {
+      employees: true,
     },
   });
 
@@ -52,6 +58,9 @@ export const getGeofenceById = asyncHandler(async (req: AuthRequest, res: Respon
 
   const geofence = await prisma.geofence.findFirst({
     where: { id, companyId },
+    include: {
+      employees: true,
+    },
   });
 
   if (!geofence) {
@@ -68,7 +77,7 @@ export const getGeofenceById = asyncHandler(async (req: AuthRequest, res: Respon
  */
 export const updateGeofence = asyncHandler(async (req: AuthRequest, res: Response, next: NextFunction) => {
   const { id } = geofenceIdSchema.parse(req.params);
-  const validatedData = updateGeofenceSchema.parse(req.body);
+  const { employeeIds, ...geofenceData } = updateGeofenceSchema.parse(req.body);
   const companyId = req.user.id;
 
   const geofence = await prisma.geofence.findFirst({
@@ -81,7 +90,17 @@ export const updateGeofence = asyncHandler(async (req: AuthRequest, res: Respons
 
   const updatedGeofence = await prisma.geofence.update({
     where: { id },
-    data: validatedData,
+    data: {
+      ...geofenceData,
+      employees: employeeIds
+        ? {
+            set: employeeIds.map((id) => ({ id })),
+          }
+        : undefined,
+    },
+    include: {
+      employees: true,
+    },
   });
 
   return SuccessResponse(res, "Geofence updated successfully", updatedGeofence, statusCode.OK);

@@ -249,8 +249,7 @@ export type GeofenceWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Geofence"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Geofence"> | Date | string
   company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
-  checkInAttendance?: Prisma.AttendanceListRelationFilter
-  checkOutAttendance?: Prisma.AttendanceListRelationFilter
+  employees?: Prisma.EmployeeListRelationFilter
 }
 
 export type GeofenceOrderByWithRelationInput = {
@@ -263,8 +262,7 @@ export type GeofenceOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   company?: Prisma.CompanyOrderByWithRelationInput
-  checkInAttendance?: Prisma.AttendanceOrderByRelationAggregateInput
-  checkOutAttendance?: Prisma.AttendanceOrderByRelationAggregateInput
+  employees?: Prisma.EmployeeOrderByRelationAggregateInput
 }
 
 export type GeofenceWhereUniqueInput = Prisma.AtLeast<{
@@ -280,8 +278,7 @@ export type GeofenceWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Geofence"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Geofence"> | Date | string
   company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
-  checkInAttendance?: Prisma.AttendanceListRelationFilter
-  checkOutAttendance?: Prisma.AttendanceListRelationFilter
+  employees?: Prisma.EmployeeListRelationFilter
 }, "id">
 
 export type GeofenceOrderByWithAggregationInput = {
@@ -323,8 +320,7 @@ export type GeofenceCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   company: Prisma.CompanyCreateNestedOneWithoutGeofencesInput
-  checkInAttendance?: Prisma.AttendanceCreateNestedManyWithoutCheckInGeofenceInput
-  checkOutAttendance?: Prisma.AttendanceCreateNestedManyWithoutCheckOutGeofenceInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutGeofencesInput
 }
 
 export type GeofenceUncheckedCreateInput = {
@@ -336,8 +332,7 @@ export type GeofenceUncheckedCreateInput = {
   companyId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  checkInAttendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutCheckInGeofenceInput
-  checkOutAttendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutCheckOutGeofenceInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutGeofencesInput
 }
 
 export type GeofenceUpdateInput = {
@@ -349,8 +344,7 @@ export type GeofenceUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   company?: Prisma.CompanyUpdateOneRequiredWithoutGeofencesNestedInput
-  checkInAttendance?: Prisma.AttendanceUpdateManyWithoutCheckInGeofenceNestedInput
-  checkOutAttendance?: Prisma.AttendanceUpdateManyWithoutCheckOutGeofenceNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutGeofencesNestedInput
 }
 
 export type GeofenceUncheckedUpdateInput = {
@@ -362,8 +356,7 @@ export type GeofenceUncheckedUpdateInput = {
   companyId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  checkInAttendance?: Prisma.AttendanceUncheckedUpdateManyWithoutCheckInGeofenceNestedInput
-  checkOutAttendance?: Prisma.AttendanceUncheckedUpdateManyWithoutCheckOutGeofenceNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutGeofencesNestedInput
 }
 
 export type GeofenceCreateManyInput = {
@@ -453,11 +446,6 @@ export type GeofenceSumOrderByAggregateInput = {
   radius?: Prisma.SortOrder
 }
 
-export type GeofenceNullableScalarRelationFilter = {
-  is?: Prisma.GeofenceWhereInput | null
-  isNot?: Prisma.GeofenceWhereInput | null
-}
-
 export type GeofenceCreateNestedManyWithoutCompanyInput = {
   create?: Prisma.XOR<Prisma.GeofenceCreateWithoutCompanyInput, Prisma.GeofenceUncheckedCreateWithoutCompanyInput> | Prisma.GeofenceCreateWithoutCompanyInput[] | Prisma.GeofenceUncheckedCreateWithoutCompanyInput[]
   connectOrCreate?: Prisma.GeofenceCreateOrConnectWithoutCompanyInput | Prisma.GeofenceCreateOrConnectWithoutCompanyInput[]
@@ -500,44 +488,50 @@ export type GeofenceUncheckedUpdateManyWithoutCompanyNestedInput = {
   deleteMany?: Prisma.GeofenceScalarWhereInput | Prisma.GeofenceScalarWhereInput[]
 }
 
+export type GeofenceCreateNestedManyWithoutEmployeesInput = {
+  create?: Prisma.XOR<Prisma.GeofenceCreateWithoutEmployeesInput, Prisma.GeofenceUncheckedCreateWithoutEmployeesInput> | Prisma.GeofenceCreateWithoutEmployeesInput[] | Prisma.GeofenceUncheckedCreateWithoutEmployeesInput[]
+  connectOrCreate?: Prisma.GeofenceCreateOrConnectWithoutEmployeesInput | Prisma.GeofenceCreateOrConnectWithoutEmployeesInput[]
+  connect?: Prisma.GeofenceWhereUniqueInput | Prisma.GeofenceWhereUniqueInput[]
+}
+
+export type GeofenceUncheckedCreateNestedManyWithoutEmployeesInput = {
+  create?: Prisma.XOR<Prisma.GeofenceCreateWithoutEmployeesInput, Prisma.GeofenceUncheckedCreateWithoutEmployeesInput> | Prisma.GeofenceCreateWithoutEmployeesInput[] | Prisma.GeofenceUncheckedCreateWithoutEmployeesInput[]
+  connectOrCreate?: Prisma.GeofenceCreateOrConnectWithoutEmployeesInput | Prisma.GeofenceCreateOrConnectWithoutEmployeesInput[]
+  connect?: Prisma.GeofenceWhereUniqueInput | Prisma.GeofenceWhereUniqueInput[]
+}
+
+export type GeofenceUpdateManyWithoutEmployeesNestedInput = {
+  create?: Prisma.XOR<Prisma.GeofenceCreateWithoutEmployeesInput, Prisma.GeofenceUncheckedCreateWithoutEmployeesInput> | Prisma.GeofenceCreateWithoutEmployeesInput[] | Prisma.GeofenceUncheckedCreateWithoutEmployeesInput[]
+  connectOrCreate?: Prisma.GeofenceCreateOrConnectWithoutEmployeesInput | Prisma.GeofenceCreateOrConnectWithoutEmployeesInput[]
+  upsert?: Prisma.GeofenceUpsertWithWhereUniqueWithoutEmployeesInput | Prisma.GeofenceUpsertWithWhereUniqueWithoutEmployeesInput[]
+  set?: Prisma.GeofenceWhereUniqueInput | Prisma.GeofenceWhereUniqueInput[]
+  disconnect?: Prisma.GeofenceWhereUniqueInput | Prisma.GeofenceWhereUniqueInput[]
+  delete?: Prisma.GeofenceWhereUniqueInput | Prisma.GeofenceWhereUniqueInput[]
+  connect?: Prisma.GeofenceWhereUniqueInput | Prisma.GeofenceWhereUniqueInput[]
+  update?: Prisma.GeofenceUpdateWithWhereUniqueWithoutEmployeesInput | Prisma.GeofenceUpdateWithWhereUniqueWithoutEmployeesInput[]
+  updateMany?: Prisma.GeofenceUpdateManyWithWhereWithoutEmployeesInput | Prisma.GeofenceUpdateManyWithWhereWithoutEmployeesInput[]
+  deleteMany?: Prisma.GeofenceScalarWhereInput | Prisma.GeofenceScalarWhereInput[]
+}
+
+export type GeofenceUncheckedUpdateManyWithoutEmployeesNestedInput = {
+  create?: Prisma.XOR<Prisma.GeofenceCreateWithoutEmployeesInput, Prisma.GeofenceUncheckedCreateWithoutEmployeesInput> | Prisma.GeofenceCreateWithoutEmployeesInput[] | Prisma.GeofenceUncheckedCreateWithoutEmployeesInput[]
+  connectOrCreate?: Prisma.GeofenceCreateOrConnectWithoutEmployeesInput | Prisma.GeofenceCreateOrConnectWithoutEmployeesInput[]
+  upsert?: Prisma.GeofenceUpsertWithWhereUniqueWithoutEmployeesInput | Prisma.GeofenceUpsertWithWhereUniqueWithoutEmployeesInput[]
+  set?: Prisma.GeofenceWhereUniqueInput | Prisma.GeofenceWhereUniqueInput[]
+  disconnect?: Prisma.GeofenceWhereUniqueInput | Prisma.GeofenceWhereUniqueInput[]
+  delete?: Prisma.GeofenceWhereUniqueInput | Prisma.GeofenceWhereUniqueInput[]
+  connect?: Prisma.GeofenceWhereUniqueInput | Prisma.GeofenceWhereUniqueInput[]
+  update?: Prisma.GeofenceUpdateWithWhereUniqueWithoutEmployeesInput | Prisma.GeofenceUpdateWithWhereUniqueWithoutEmployeesInput[]
+  updateMany?: Prisma.GeofenceUpdateManyWithWhereWithoutEmployeesInput | Prisma.GeofenceUpdateManyWithWhereWithoutEmployeesInput[]
+  deleteMany?: Prisma.GeofenceScalarWhereInput | Prisma.GeofenceScalarWhereInput[]
+}
+
 export type FloatFieldUpdateOperationsInput = {
   set?: number
   increment?: number
   decrement?: number
   multiply?: number
   divide?: number
-}
-
-export type GeofenceCreateNestedOneWithoutCheckInAttendanceInput = {
-  create?: Prisma.XOR<Prisma.GeofenceCreateWithoutCheckInAttendanceInput, Prisma.GeofenceUncheckedCreateWithoutCheckInAttendanceInput>
-  connectOrCreate?: Prisma.GeofenceCreateOrConnectWithoutCheckInAttendanceInput
-  connect?: Prisma.GeofenceWhereUniqueInput
-}
-
-export type GeofenceCreateNestedOneWithoutCheckOutAttendanceInput = {
-  create?: Prisma.XOR<Prisma.GeofenceCreateWithoutCheckOutAttendanceInput, Prisma.GeofenceUncheckedCreateWithoutCheckOutAttendanceInput>
-  connectOrCreate?: Prisma.GeofenceCreateOrConnectWithoutCheckOutAttendanceInput
-  connect?: Prisma.GeofenceWhereUniqueInput
-}
-
-export type GeofenceUpdateOneWithoutCheckInAttendanceNestedInput = {
-  create?: Prisma.XOR<Prisma.GeofenceCreateWithoutCheckInAttendanceInput, Prisma.GeofenceUncheckedCreateWithoutCheckInAttendanceInput>
-  connectOrCreate?: Prisma.GeofenceCreateOrConnectWithoutCheckInAttendanceInput
-  upsert?: Prisma.GeofenceUpsertWithoutCheckInAttendanceInput
-  disconnect?: Prisma.GeofenceWhereInput | boolean
-  delete?: Prisma.GeofenceWhereInput | boolean
-  connect?: Prisma.GeofenceWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.GeofenceUpdateToOneWithWhereWithoutCheckInAttendanceInput, Prisma.GeofenceUpdateWithoutCheckInAttendanceInput>, Prisma.GeofenceUncheckedUpdateWithoutCheckInAttendanceInput>
-}
-
-export type GeofenceUpdateOneWithoutCheckOutAttendanceNestedInput = {
-  create?: Prisma.XOR<Prisma.GeofenceCreateWithoutCheckOutAttendanceInput, Prisma.GeofenceUncheckedCreateWithoutCheckOutAttendanceInput>
-  connectOrCreate?: Prisma.GeofenceCreateOrConnectWithoutCheckOutAttendanceInput
-  upsert?: Prisma.GeofenceUpsertWithoutCheckOutAttendanceInput
-  disconnect?: Prisma.GeofenceWhereInput | boolean
-  delete?: Prisma.GeofenceWhereInput | boolean
-  connect?: Prisma.GeofenceWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.GeofenceUpdateToOneWithWhereWithoutCheckOutAttendanceInput, Prisma.GeofenceUpdateWithoutCheckOutAttendanceInput>, Prisma.GeofenceUncheckedUpdateWithoutCheckOutAttendanceInput>
 }
 
 export type GeofenceCreateWithoutCompanyInput = {
@@ -548,8 +542,7 @@ export type GeofenceCreateWithoutCompanyInput = {
   radius: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  checkInAttendance?: Prisma.AttendanceCreateNestedManyWithoutCheckInGeofenceInput
-  checkOutAttendance?: Prisma.AttendanceCreateNestedManyWithoutCheckOutGeofenceInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutGeofencesInput
 }
 
 export type GeofenceUncheckedCreateWithoutCompanyInput = {
@@ -560,8 +553,7 @@ export type GeofenceUncheckedCreateWithoutCompanyInput = {
   radius: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  checkInAttendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutCheckInGeofenceInput
-  checkOutAttendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutCheckOutGeofenceInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutGeofencesInput
 }
 
 export type GeofenceCreateOrConnectWithoutCompanyInput = {
@@ -604,7 +596,7 @@ export type GeofenceScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Geofence"> | Date | string
 }
 
-export type GeofenceCreateWithoutCheckInAttendanceInput = {
+export type GeofenceCreateWithoutEmployeesInput = {
   id?: string
   name: string
   latitude: number
@@ -613,10 +605,9 @@ export type GeofenceCreateWithoutCheckInAttendanceInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   company: Prisma.CompanyCreateNestedOneWithoutGeofencesInput
-  checkOutAttendance?: Prisma.AttendanceCreateNestedManyWithoutCheckOutGeofenceInput
 }
 
-export type GeofenceUncheckedCreateWithoutCheckInAttendanceInput = {
+export type GeofenceUncheckedCreateWithoutEmployeesInput = {
   id?: string
   name: string
   latitude: number
@@ -625,111 +616,27 @@ export type GeofenceUncheckedCreateWithoutCheckInAttendanceInput = {
   companyId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  checkOutAttendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutCheckOutGeofenceInput
 }
 
-export type GeofenceCreateOrConnectWithoutCheckInAttendanceInput = {
+export type GeofenceCreateOrConnectWithoutEmployeesInput = {
   where: Prisma.GeofenceWhereUniqueInput
-  create: Prisma.XOR<Prisma.GeofenceCreateWithoutCheckInAttendanceInput, Prisma.GeofenceUncheckedCreateWithoutCheckInAttendanceInput>
+  create: Prisma.XOR<Prisma.GeofenceCreateWithoutEmployeesInput, Prisma.GeofenceUncheckedCreateWithoutEmployeesInput>
 }
 
-export type GeofenceCreateWithoutCheckOutAttendanceInput = {
-  id?: string
-  name: string
-  latitude: number
-  longitude: number
-  radius: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  company: Prisma.CompanyCreateNestedOneWithoutGeofencesInput
-  checkInAttendance?: Prisma.AttendanceCreateNestedManyWithoutCheckInGeofenceInput
-}
-
-export type GeofenceUncheckedCreateWithoutCheckOutAttendanceInput = {
-  id?: string
-  name: string
-  latitude: number
-  longitude: number
-  radius: number
-  companyId: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  checkInAttendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutCheckInGeofenceInput
-}
-
-export type GeofenceCreateOrConnectWithoutCheckOutAttendanceInput = {
+export type GeofenceUpsertWithWhereUniqueWithoutEmployeesInput = {
   where: Prisma.GeofenceWhereUniqueInput
-  create: Prisma.XOR<Prisma.GeofenceCreateWithoutCheckOutAttendanceInput, Prisma.GeofenceUncheckedCreateWithoutCheckOutAttendanceInput>
+  update: Prisma.XOR<Prisma.GeofenceUpdateWithoutEmployeesInput, Prisma.GeofenceUncheckedUpdateWithoutEmployeesInput>
+  create: Prisma.XOR<Prisma.GeofenceCreateWithoutEmployeesInput, Prisma.GeofenceUncheckedCreateWithoutEmployeesInput>
 }
 
-export type GeofenceUpsertWithoutCheckInAttendanceInput = {
-  update: Prisma.XOR<Prisma.GeofenceUpdateWithoutCheckInAttendanceInput, Prisma.GeofenceUncheckedUpdateWithoutCheckInAttendanceInput>
-  create: Prisma.XOR<Prisma.GeofenceCreateWithoutCheckInAttendanceInput, Prisma.GeofenceUncheckedCreateWithoutCheckInAttendanceInput>
-  where?: Prisma.GeofenceWhereInput
+export type GeofenceUpdateWithWhereUniqueWithoutEmployeesInput = {
+  where: Prisma.GeofenceWhereUniqueInput
+  data: Prisma.XOR<Prisma.GeofenceUpdateWithoutEmployeesInput, Prisma.GeofenceUncheckedUpdateWithoutEmployeesInput>
 }
 
-export type GeofenceUpdateToOneWithWhereWithoutCheckInAttendanceInput = {
-  where?: Prisma.GeofenceWhereInput
-  data: Prisma.XOR<Prisma.GeofenceUpdateWithoutCheckInAttendanceInput, Prisma.GeofenceUncheckedUpdateWithoutCheckInAttendanceInput>
-}
-
-export type GeofenceUpdateWithoutCheckInAttendanceInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.FloatFieldUpdateOperationsInput | number
-  longitude?: Prisma.FloatFieldUpdateOperationsInput | number
-  radius?: Prisma.FloatFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  company?: Prisma.CompanyUpdateOneRequiredWithoutGeofencesNestedInput
-  checkOutAttendance?: Prisma.AttendanceUpdateManyWithoutCheckOutGeofenceNestedInput
-}
-
-export type GeofenceUncheckedUpdateWithoutCheckInAttendanceInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.FloatFieldUpdateOperationsInput | number
-  longitude?: Prisma.FloatFieldUpdateOperationsInput | number
-  radius?: Prisma.FloatFieldUpdateOperationsInput | number
-  companyId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  checkOutAttendance?: Prisma.AttendanceUncheckedUpdateManyWithoutCheckOutGeofenceNestedInput
-}
-
-export type GeofenceUpsertWithoutCheckOutAttendanceInput = {
-  update: Prisma.XOR<Prisma.GeofenceUpdateWithoutCheckOutAttendanceInput, Prisma.GeofenceUncheckedUpdateWithoutCheckOutAttendanceInput>
-  create: Prisma.XOR<Prisma.GeofenceCreateWithoutCheckOutAttendanceInput, Prisma.GeofenceUncheckedCreateWithoutCheckOutAttendanceInput>
-  where?: Prisma.GeofenceWhereInput
-}
-
-export type GeofenceUpdateToOneWithWhereWithoutCheckOutAttendanceInput = {
-  where?: Prisma.GeofenceWhereInput
-  data: Prisma.XOR<Prisma.GeofenceUpdateWithoutCheckOutAttendanceInput, Prisma.GeofenceUncheckedUpdateWithoutCheckOutAttendanceInput>
-}
-
-export type GeofenceUpdateWithoutCheckOutAttendanceInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.FloatFieldUpdateOperationsInput | number
-  longitude?: Prisma.FloatFieldUpdateOperationsInput | number
-  radius?: Prisma.FloatFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  company?: Prisma.CompanyUpdateOneRequiredWithoutGeofencesNestedInput
-  checkInAttendance?: Prisma.AttendanceUpdateManyWithoutCheckInGeofenceNestedInput
-}
-
-export type GeofenceUncheckedUpdateWithoutCheckOutAttendanceInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  latitude?: Prisma.FloatFieldUpdateOperationsInput | number
-  longitude?: Prisma.FloatFieldUpdateOperationsInput | number
-  radius?: Prisma.FloatFieldUpdateOperationsInput | number
-  companyId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  checkInAttendance?: Prisma.AttendanceUncheckedUpdateManyWithoutCheckInGeofenceNestedInput
+export type GeofenceUpdateManyWithWhereWithoutEmployeesInput = {
+  where: Prisma.GeofenceScalarWhereInput
+  data: Prisma.XOR<Prisma.GeofenceUpdateManyMutationInput, Prisma.GeofenceUncheckedUpdateManyWithoutEmployeesInput>
 }
 
 export type GeofenceCreateManyCompanyInput = {
@@ -750,8 +657,7 @@ export type GeofenceUpdateWithoutCompanyInput = {
   radius?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  checkInAttendance?: Prisma.AttendanceUpdateManyWithoutCheckInGeofenceNestedInput
-  checkOutAttendance?: Prisma.AttendanceUpdateManyWithoutCheckOutGeofenceNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutGeofencesNestedInput
 }
 
 export type GeofenceUncheckedUpdateWithoutCompanyInput = {
@@ -762,8 +668,7 @@ export type GeofenceUncheckedUpdateWithoutCompanyInput = {
   radius?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  checkInAttendance?: Prisma.AttendanceUncheckedUpdateManyWithoutCheckInGeofenceNestedInput
-  checkOutAttendance?: Prisma.AttendanceUncheckedUpdateManyWithoutCheckOutGeofenceNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutGeofencesNestedInput
 }
 
 export type GeofenceUncheckedUpdateManyWithoutCompanyInput = {
@@ -776,19 +681,50 @@ export type GeofenceUncheckedUpdateManyWithoutCompanyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type GeofenceUpdateWithoutEmployeesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  longitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  radius?: Prisma.FloatFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company?: Prisma.CompanyUpdateOneRequiredWithoutGeofencesNestedInput
+}
+
+export type GeofenceUncheckedUpdateWithoutEmployeesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  longitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  radius?: Prisma.FloatFieldUpdateOperationsInput | number
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type GeofenceUncheckedUpdateManyWithoutEmployeesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  longitude?: Prisma.FloatFieldUpdateOperationsInput | number
+  radius?: Prisma.FloatFieldUpdateOperationsInput | number
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 
 /**
  * Count Type GeofenceCountOutputType
  */
 
 export type GeofenceCountOutputType = {
-  checkInAttendance: number
-  checkOutAttendance: number
+  employees: number
 }
 
 export type GeofenceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  checkInAttendance?: boolean | GeofenceCountOutputTypeCountCheckInAttendanceArgs
-  checkOutAttendance?: boolean | GeofenceCountOutputTypeCountCheckOutAttendanceArgs
+  employees?: boolean | GeofenceCountOutputTypeCountEmployeesArgs
 }
 
 /**
@@ -804,15 +740,8 @@ export type GeofenceCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ext
 /**
  * GeofenceCountOutputType without action
  */
-export type GeofenceCountOutputTypeCountCheckInAttendanceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AttendanceWhereInput
-}
-
-/**
- * GeofenceCountOutputType without action
- */
-export type GeofenceCountOutputTypeCountCheckOutAttendanceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AttendanceWhereInput
+export type GeofenceCountOutputTypeCountEmployeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EmployeeWhereInput
 }
 
 
@@ -826,8 +755,7 @@ export type GeofenceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   createdAt?: boolean
   updatedAt?: boolean
   company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
-  checkInAttendance?: boolean | Prisma.Geofence$checkInAttendanceArgs<ExtArgs>
-  checkOutAttendance?: boolean | Prisma.Geofence$checkOutAttendanceArgs<ExtArgs>
+  employees?: boolean | Prisma.Geofence$employeesArgs<ExtArgs>
   _count?: boolean | Prisma.GeofenceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["geofence"]>
 
@@ -869,8 +797,7 @@ export type GeofenceSelectScalar = {
 export type GeofenceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "latitude" | "longitude" | "radius" | "companyId" | "createdAt" | "updatedAt", ExtArgs["result"]["geofence"]>
 export type GeofenceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
-  checkInAttendance?: boolean | Prisma.Geofence$checkInAttendanceArgs<ExtArgs>
-  checkOutAttendance?: boolean | Prisma.Geofence$checkOutAttendanceArgs<ExtArgs>
+  employees?: boolean | Prisma.Geofence$employeesArgs<ExtArgs>
   _count?: boolean | Prisma.GeofenceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type GeofenceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -884,8 +811,7 @@ export type $GeofencePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "Geofence"
   objects: {
     company: Prisma.$CompanyPayload<ExtArgs>
-    checkInAttendance: Prisma.$AttendancePayload<ExtArgs>[]
-    checkOutAttendance: Prisma.$AttendancePayload<ExtArgs>[]
+    employees: Prisma.$EmployeePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1291,8 +1217,7 @@ readonly fields: GeofenceFieldRefs;
 export interface Prisma__GeofenceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   company<T extends Prisma.CompanyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyDefaultArgs<ExtArgs>>): Prisma.Prisma__CompanyClient<runtime.Types.Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  checkInAttendance<T extends Prisma.Geofence$checkInAttendanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Geofence$checkInAttendanceArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  checkOutAttendance<T extends Prisma.Geofence$checkOutAttendanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Geofence$checkOutAttendanceArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  employees<T extends Prisma.Geofence$employeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Geofence$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1726,51 +1651,27 @@ export type GeofenceDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
- * Geofence.checkInAttendance
+ * Geofence.employees
  */
-export type Geofence$checkInAttendanceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Geofence$employeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Attendance
+   * Select specific fields to fetch from the Employee
    */
-  select?: Prisma.AttendanceSelect<ExtArgs> | null
+  select?: Prisma.EmployeeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Attendance
+   * Omit specific fields from the Employee
    */
-  omit?: Prisma.AttendanceOmit<ExtArgs> | null
+  omit?: Prisma.EmployeeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.AttendanceInclude<ExtArgs> | null
-  where?: Prisma.AttendanceWhereInput
-  orderBy?: Prisma.AttendanceOrderByWithRelationInput | Prisma.AttendanceOrderByWithRelationInput[]
-  cursor?: Prisma.AttendanceWhereUniqueInput
+  include?: Prisma.EmployeeInclude<ExtArgs> | null
+  where?: Prisma.EmployeeWhereInput
+  orderBy?: Prisma.EmployeeOrderByWithRelationInput | Prisma.EmployeeOrderByWithRelationInput[]
+  cursor?: Prisma.EmployeeWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.AttendanceScalarFieldEnum | Prisma.AttendanceScalarFieldEnum[]
-}
-
-/**
- * Geofence.checkOutAttendance
- */
-export type Geofence$checkOutAttendanceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Attendance
-   */
-  select?: Prisma.AttendanceSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Attendance
-   */
-  omit?: Prisma.AttendanceOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AttendanceInclude<ExtArgs> | null
-  where?: Prisma.AttendanceWhereInput
-  orderBy?: Prisma.AttendanceOrderByWithRelationInput | Prisma.AttendanceOrderByWithRelationInput[]
-  cursor?: Prisma.AttendanceWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AttendanceScalarFieldEnum | Prisma.AttendanceScalarFieldEnum[]
+  distinct?: Prisma.EmployeeScalarFieldEnum | Prisma.EmployeeScalarFieldEnum[]
 }
 
 /**

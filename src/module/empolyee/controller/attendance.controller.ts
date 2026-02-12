@@ -67,7 +67,6 @@ export const checkIn = asyncHandler(async (req: Request, res: Response, next: Ne
   }
 
   // 3. Geofence Validation
-  let checkInGeofenceId: string | undefined = undefined;
   if (employee.settings?.punchFromGeofence === "PUNCH_FROM_GEOFENCE") {
     if (latitude === undefined || longitude === undefined) {
       return next(new ErrorResponse("Location access required for geofence punch", statusCode.Bad_Request));
@@ -94,7 +93,6 @@ export const checkIn = asyncHandler(async (req: Request, res: Response, next: Ne
 
       if (distance <= geofence.radius) {
         isWithinGeofence = true;
-        checkInGeofenceId = geofence.id;
         break;
       }
     }
@@ -132,7 +130,6 @@ export const checkIn = asyncHandler(async (req: Request, res: Response, next: Ne
       checkIn: now,
       checkInLat: latitude,
       checkInLng: longitude,
-      checkInGeofenceId,
       status,
       remarks,
     },
@@ -142,7 +139,6 @@ export const checkIn = asyncHandler(async (req: Request, res: Response, next: Ne
       checkIn: now,
       checkInLat: latitude,
       checkInLng: longitude,
-      checkInGeofenceId,
       status,
       remarks,
     },
@@ -198,7 +194,6 @@ export const checkOut = asyncHandler(async (req: Request, res: Response, next: N
   }
 
   // 2. Geofence Validation
-  let checkOutGeofenceId: string | undefined = undefined;
   if (attendanceRecord.employee.settings?.punchFromGeofence === "PUNCH_FROM_GEOFENCE") {
     if (latitude === undefined || longitude === undefined) {
       return next(new ErrorResponse("Location access required for geofence punch", statusCode.Bad_Request));
@@ -219,7 +214,6 @@ export const checkOut = asyncHandler(async (req: Request, res: Response, next: N
 
       if (distance <= geofence.radius) {
         isWithinGeofence = true;
-        checkOutGeofenceId = geofence.id;
         break;
       }
     }
@@ -236,7 +230,6 @@ export const checkOut = asyncHandler(async (req: Request, res: Response, next: N
       checkOut: now,
       checkOutLat: latitude,
       checkOutLng: longitude,
-      checkOutGeofenceId,
       remarks: remarks || attendanceRecord.remarks,
     },
   });
@@ -271,8 +264,6 @@ export const getAttendance = asyncHandler(async (req: Request, res: Response) =>
           employeeCode: true,
         },
       },
-      checkInGeofence: true,
-      checkOutGeofence: true,
     },
   });
 

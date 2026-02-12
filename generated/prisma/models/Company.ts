@@ -294,6 +294,11 @@ export type CompanyWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   geofences?: Prisma.GeofenceListRelationFilter
   shifts?: Prisma.ShiftListRelationFilter
+  employees?: Prisma.EmployeeListRelationFilter
+  categories?: Prisma.CategoryListRelationFilter
+  tasks?: Prisma.TaskListRelationFilter
+  decisions?: Prisma.DecisionListRelationFilter
+  holidays?: Prisma.HolidayListRelationFilter
 }
 
 export type CompanyOrderByWithRelationInput = {
@@ -314,6 +319,11 @@ export type CompanyOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   geofences?: Prisma.GeofenceOrderByRelationAggregateInput
   shifts?: Prisma.ShiftOrderByRelationAggregateInput
+  employees?: Prisma.EmployeeOrderByRelationAggregateInput
+  categories?: Prisma.CategoryOrderByRelationAggregateInput
+  tasks?: Prisma.TaskOrderByRelationAggregateInput
+  decisions?: Prisma.DecisionOrderByRelationAggregateInput
+  holidays?: Prisma.HolidayOrderByRelationAggregateInput
 }
 
 export type CompanyWhereUniqueInput = Prisma.AtLeast<{
@@ -337,6 +347,11 @@ export type CompanyWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   geofences?: Prisma.GeofenceListRelationFilter
   shifts?: Prisma.ShiftListRelationFilter
+  employees?: Prisma.EmployeeListRelationFilter
+  categories?: Prisma.CategoryListRelationFilter
+  tasks?: Prisma.TaskListRelationFilter
+  decisions?: Prisma.DecisionListRelationFilter
+  holidays?: Prisma.HolidayListRelationFilter
 }, "id" | "code" | "email" | "phone" | "gstNumber">
 
 export type CompanyOrderByWithAggregationInput = {
@@ -401,6 +416,11 @@ export type CompanyCreateInput = {
   updatedAt?: Date | string
   geofences?: Prisma.GeofenceCreateNestedManyWithoutCompanyInput
   shifts?: Prisma.ShiftCreateNestedManyWithoutCompanyInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutCompanyInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutCompanyInput
+  decisions?: Prisma.DecisionCreateNestedManyWithoutCompanyInput
+  holidays?: Prisma.HolidayCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateInput = {
@@ -421,6 +441,11 @@ export type CompanyUncheckedCreateInput = {
   updatedAt?: Date | string
   geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutCompanyInput
   shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutCompanyInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCompanyInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCompanyInput
+  decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCompanyInput
+  holidays?: Prisma.HolidayUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUpdateInput = {
@@ -441,6 +466,11 @@ export type CompanyUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   geofences?: Prisma.GeofenceUpdateManyWithoutCompanyNestedInput
   shifts?: Prisma.ShiftUpdateManyWithoutCompanyNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutCompanyNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutCompanyNestedInput
+  decisions?: Prisma.DecisionUpdateManyWithoutCompanyNestedInput
+  holidays?: Prisma.HolidayUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateInput = {
@@ -461,6 +491,11 @@ export type CompanyUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutCompanyNestedInput
   shifts?: Prisma.ShiftUncheckedUpdateManyWithoutCompanyNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutCompanyNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutCompanyNestedInput
+  decisions?: Prisma.DecisionUncheckedUpdateManyWithoutCompanyNestedInput
+  holidays?: Prisma.HolidayUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateManyInput = {
@@ -628,6 +663,20 @@ export type CompanyUpdateOneRequiredWithoutShiftsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutShiftsInput, Prisma.CompanyUpdateWithoutShiftsInput>, Prisma.CompanyUncheckedUpdateWithoutShiftsInput>
 }
 
+export type CompanyCreateNestedOneWithoutEmployeesInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutEmployeesInput, Prisma.CompanyUncheckedCreateWithoutEmployeesInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutEmployeesInput
+  connect?: Prisma.CompanyWhereUniqueInput
+}
+
+export type CompanyUpdateOneRequiredWithoutEmployeesNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutEmployeesInput, Prisma.CompanyUncheckedCreateWithoutEmployeesInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutEmployeesInput
+  upsert?: Prisma.CompanyUpsertWithoutEmployeesInput
+  connect?: Prisma.CompanyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutEmployeesInput, Prisma.CompanyUpdateWithoutEmployeesInput>, Prisma.CompanyUncheckedUpdateWithoutEmployeesInput>
+}
+
 export type CompanyCreateNestedOneWithoutGeofencesInput = {
   create?: Prisma.XOR<Prisma.CompanyCreateWithoutGeofencesInput, Prisma.CompanyUncheckedCreateWithoutGeofencesInput>
   connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutGeofencesInput
@@ -640,6 +689,62 @@ export type CompanyUpdateOneRequiredWithoutGeofencesNestedInput = {
   upsert?: Prisma.CompanyUpsertWithoutGeofencesInput
   connect?: Prisma.CompanyWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutGeofencesInput, Prisma.CompanyUpdateWithoutGeofencesInput>, Prisma.CompanyUncheckedUpdateWithoutGeofencesInput>
+}
+
+export type CompanyCreateNestedOneWithoutCategoriesInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutCategoriesInput, Prisma.CompanyUncheckedCreateWithoutCategoriesInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutCategoriesInput
+  connect?: Prisma.CompanyWhereUniqueInput
+}
+
+export type CompanyUpdateOneRequiredWithoutCategoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutCategoriesInput, Prisma.CompanyUncheckedCreateWithoutCategoriesInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutCategoriesInput
+  upsert?: Prisma.CompanyUpsertWithoutCategoriesInput
+  connect?: Prisma.CompanyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutCategoriesInput, Prisma.CompanyUpdateWithoutCategoriesInput>, Prisma.CompanyUncheckedUpdateWithoutCategoriesInput>
+}
+
+export type CompanyCreateNestedOneWithoutTasksInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutTasksInput, Prisma.CompanyUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutTasksInput
+  connect?: Prisma.CompanyWhereUniqueInput
+}
+
+export type CompanyUpdateOneRequiredWithoutTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutTasksInput, Prisma.CompanyUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutTasksInput
+  upsert?: Prisma.CompanyUpsertWithoutTasksInput
+  connect?: Prisma.CompanyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutTasksInput, Prisma.CompanyUpdateWithoutTasksInput>, Prisma.CompanyUncheckedUpdateWithoutTasksInput>
+}
+
+export type CompanyCreateNestedOneWithoutDecisionsInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutDecisionsInput, Prisma.CompanyUncheckedCreateWithoutDecisionsInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutDecisionsInput
+  connect?: Prisma.CompanyWhereUniqueInput
+}
+
+export type CompanyUpdateOneRequiredWithoutDecisionsNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutDecisionsInput, Prisma.CompanyUncheckedCreateWithoutDecisionsInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutDecisionsInput
+  upsert?: Prisma.CompanyUpsertWithoutDecisionsInput
+  connect?: Prisma.CompanyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutDecisionsInput, Prisma.CompanyUpdateWithoutDecisionsInput>, Prisma.CompanyUncheckedUpdateWithoutDecisionsInput>
+}
+
+export type CompanyCreateNestedOneWithoutHolidaysInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutHolidaysInput, Prisma.CompanyUncheckedCreateWithoutHolidaysInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutHolidaysInput
+  connect?: Prisma.CompanyWhereUniqueInput
+}
+
+export type CompanyUpdateOneRequiredWithoutHolidaysNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutHolidaysInput, Prisma.CompanyUncheckedCreateWithoutHolidaysInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutHolidaysInput
+  upsert?: Prisma.CompanyUpsertWithoutHolidaysInput
+  connect?: Prisma.CompanyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutHolidaysInput, Prisma.CompanyUpdateWithoutHolidaysInput>, Prisma.CompanyUncheckedUpdateWithoutHolidaysInput>
 }
 
 export type CompanyCreateWithoutShiftsInput = {
@@ -659,6 +764,11 @@ export type CompanyCreateWithoutShiftsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   geofences?: Prisma.GeofenceCreateNestedManyWithoutCompanyInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutCompanyInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutCompanyInput
+  decisions?: Prisma.DecisionCreateNestedManyWithoutCompanyInput
+  holidays?: Prisma.HolidayCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutShiftsInput = {
@@ -678,6 +788,11 @@ export type CompanyUncheckedCreateWithoutShiftsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutCompanyInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCompanyInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCompanyInput
+  decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCompanyInput
+  holidays?: Prisma.HolidayUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutShiftsInput = {
@@ -713,6 +828,11 @@ export type CompanyUpdateWithoutShiftsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   geofences?: Prisma.GeofenceUpdateManyWithoutCompanyNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutCompanyNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutCompanyNestedInput
+  decisions?: Prisma.DecisionUpdateManyWithoutCompanyNestedInput
+  holidays?: Prisma.HolidayUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutShiftsInput = {
@@ -732,6 +852,123 @@ export type CompanyUncheckedUpdateWithoutShiftsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutCompanyNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutCompanyNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutCompanyNestedInput
+  decisions?: Prisma.DecisionUncheckedUpdateManyWithoutCompanyNestedInput
+  holidays?: Prisma.HolidayUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyCreateWithoutEmployeesInput = {
+  id?: string
+  name?: string | null
+  code: string
+  numberOfEmployees?: number | null
+  address?: string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  gstNumber?: string | null
+  estiblishedDate?: Date | string | null
+  status?: $Enums.CompanyStatus
+  payPeriod?: $Enums.PayPeriod
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  geofences?: Prisma.GeofenceCreateNestedManyWithoutCompanyInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutCompanyInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutCompanyInput
+  decisions?: Prisma.DecisionCreateNestedManyWithoutCompanyInput
+  holidays?: Prisma.HolidayCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutEmployeesInput = {
+  id?: string
+  name?: string | null
+  code: string
+  numberOfEmployees?: number | null
+  address?: string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  gstNumber?: string | null
+  estiblishedDate?: Date | string | null
+  status?: $Enums.CompanyStatus
+  payPeriod?: $Enums.PayPeriod
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutCompanyInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCompanyInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCompanyInput
+  decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCompanyInput
+  holidays?: Prisma.HolidayUncheckedCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyCreateOrConnectWithoutEmployeesInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutEmployeesInput, Prisma.CompanyUncheckedCreateWithoutEmployeesInput>
+}
+
+export type CompanyUpsertWithoutEmployeesInput = {
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutEmployeesInput, Prisma.CompanyUncheckedUpdateWithoutEmployeesInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutEmployeesInput, Prisma.CompanyUncheckedCreateWithoutEmployeesInput>
+  where?: Prisma.CompanyWhereInput
+}
+
+export type CompanyUpdateToOneWithWhereWithoutEmployeesInput = {
+  where?: Prisma.CompanyWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutEmployeesInput, Prisma.CompanyUncheckedUpdateWithoutEmployeesInput>
+}
+
+export type CompanyUpdateWithoutEmployeesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  numberOfEmployees?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estiblishedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumCompanyStatusFieldUpdateOperationsInput | $Enums.CompanyStatus
+  payPeriod?: Prisma.EnumPayPeriodFieldUpdateOperationsInput | $Enums.PayPeriod
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  geofences?: Prisma.GeofenceUpdateManyWithoutCompanyNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutCompanyNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutCompanyNestedInput
+  decisions?: Prisma.DecisionUpdateManyWithoutCompanyNestedInput
+  holidays?: Prisma.HolidayUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutEmployeesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  numberOfEmployees?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estiblishedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumCompanyStatusFieldUpdateOperationsInput | $Enums.CompanyStatus
+  payPeriod?: Prisma.EnumPayPeriodFieldUpdateOperationsInput | $Enums.PayPeriod
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutCompanyNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutCompanyNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutCompanyNestedInput
+  decisions?: Prisma.DecisionUncheckedUpdateManyWithoutCompanyNestedInput
+  holidays?: Prisma.HolidayUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateWithoutGeofencesInput = {
@@ -751,6 +988,11 @@ export type CompanyCreateWithoutGeofencesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   shifts?: Prisma.ShiftCreateNestedManyWithoutCompanyInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutCompanyInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutCompanyInput
+  decisions?: Prisma.DecisionCreateNestedManyWithoutCompanyInput
+  holidays?: Prisma.HolidayCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutGeofencesInput = {
@@ -770,6 +1012,11 @@ export type CompanyUncheckedCreateWithoutGeofencesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutCompanyInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCompanyInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCompanyInput
+  decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCompanyInput
+  holidays?: Prisma.HolidayUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutGeofencesInput = {
@@ -805,6 +1052,11 @@ export type CompanyUpdateWithoutGeofencesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   shifts?: Prisma.ShiftUpdateManyWithoutCompanyNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutCompanyNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutCompanyNestedInput
+  decisions?: Prisma.DecisionUpdateManyWithoutCompanyNestedInput
+  holidays?: Prisma.HolidayUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutGeofencesInput = {
@@ -824,6 +1076,459 @@ export type CompanyUncheckedUpdateWithoutGeofencesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   shifts?: Prisma.ShiftUncheckedUpdateManyWithoutCompanyNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutCompanyNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutCompanyNestedInput
+  decisions?: Prisma.DecisionUncheckedUpdateManyWithoutCompanyNestedInput
+  holidays?: Prisma.HolidayUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyCreateWithoutCategoriesInput = {
+  id?: string
+  name?: string | null
+  code: string
+  numberOfEmployees?: number | null
+  address?: string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  gstNumber?: string | null
+  estiblishedDate?: Date | string | null
+  status?: $Enums.CompanyStatus
+  payPeriod?: $Enums.PayPeriod
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  geofences?: Prisma.GeofenceCreateNestedManyWithoutCompanyInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutCompanyInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutCompanyInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutCompanyInput
+  decisions?: Prisma.DecisionCreateNestedManyWithoutCompanyInput
+  holidays?: Prisma.HolidayCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutCategoriesInput = {
+  id?: string
+  name?: string | null
+  code: string
+  numberOfEmployees?: number | null
+  address?: string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  gstNumber?: string | null
+  estiblishedDate?: Date | string | null
+  status?: $Enums.CompanyStatus
+  payPeriod?: $Enums.PayPeriod
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutCompanyInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutCompanyInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCompanyInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCompanyInput
+  decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCompanyInput
+  holidays?: Prisma.HolidayUncheckedCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyCreateOrConnectWithoutCategoriesInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutCategoriesInput, Prisma.CompanyUncheckedCreateWithoutCategoriesInput>
+}
+
+export type CompanyUpsertWithoutCategoriesInput = {
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutCategoriesInput, Prisma.CompanyUncheckedUpdateWithoutCategoriesInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutCategoriesInput, Prisma.CompanyUncheckedCreateWithoutCategoriesInput>
+  where?: Prisma.CompanyWhereInput
+}
+
+export type CompanyUpdateToOneWithWhereWithoutCategoriesInput = {
+  where?: Prisma.CompanyWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutCategoriesInput, Prisma.CompanyUncheckedUpdateWithoutCategoriesInput>
+}
+
+export type CompanyUpdateWithoutCategoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  numberOfEmployees?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estiblishedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumCompanyStatusFieldUpdateOperationsInput | $Enums.CompanyStatus
+  payPeriod?: Prisma.EnumPayPeriodFieldUpdateOperationsInput | $Enums.PayPeriod
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  geofences?: Prisma.GeofenceUpdateManyWithoutCompanyNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutCompanyNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutCompanyNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutCompanyNestedInput
+  decisions?: Prisma.DecisionUpdateManyWithoutCompanyNestedInput
+  holidays?: Prisma.HolidayUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutCategoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  numberOfEmployees?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estiblishedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumCompanyStatusFieldUpdateOperationsInput | $Enums.CompanyStatus
+  payPeriod?: Prisma.EnumPayPeriodFieldUpdateOperationsInput | $Enums.PayPeriod
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutCompanyNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutCompanyNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutCompanyNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutCompanyNestedInput
+  decisions?: Prisma.DecisionUncheckedUpdateManyWithoutCompanyNestedInput
+  holidays?: Prisma.HolidayUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyCreateWithoutTasksInput = {
+  id?: string
+  name?: string | null
+  code: string
+  numberOfEmployees?: number | null
+  address?: string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  gstNumber?: string | null
+  estiblishedDate?: Date | string | null
+  status?: $Enums.CompanyStatus
+  payPeriod?: $Enums.PayPeriod
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  geofences?: Prisma.GeofenceCreateNestedManyWithoutCompanyInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutCompanyInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutCompanyInput
+  decisions?: Prisma.DecisionCreateNestedManyWithoutCompanyInput
+  holidays?: Prisma.HolidayCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutTasksInput = {
+  id?: string
+  name?: string | null
+  code: string
+  numberOfEmployees?: number | null
+  address?: string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  gstNumber?: string | null
+  estiblishedDate?: Date | string | null
+  status?: $Enums.CompanyStatus
+  payPeriod?: $Enums.PayPeriod
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutCompanyInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutCompanyInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCompanyInput
+  decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCompanyInput
+  holidays?: Prisma.HolidayUncheckedCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyCreateOrConnectWithoutTasksInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutTasksInput, Prisma.CompanyUncheckedCreateWithoutTasksInput>
+}
+
+export type CompanyUpsertWithoutTasksInput = {
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutTasksInput, Prisma.CompanyUncheckedUpdateWithoutTasksInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutTasksInput, Prisma.CompanyUncheckedCreateWithoutTasksInput>
+  where?: Prisma.CompanyWhereInput
+}
+
+export type CompanyUpdateToOneWithWhereWithoutTasksInput = {
+  where?: Prisma.CompanyWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutTasksInput, Prisma.CompanyUncheckedUpdateWithoutTasksInput>
+}
+
+export type CompanyUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  numberOfEmployees?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estiblishedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumCompanyStatusFieldUpdateOperationsInput | $Enums.CompanyStatus
+  payPeriod?: Prisma.EnumPayPeriodFieldUpdateOperationsInput | $Enums.PayPeriod
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  geofences?: Prisma.GeofenceUpdateManyWithoutCompanyNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutCompanyNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutCompanyNestedInput
+  decisions?: Prisma.DecisionUpdateManyWithoutCompanyNestedInput
+  holidays?: Prisma.HolidayUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  numberOfEmployees?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estiblishedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumCompanyStatusFieldUpdateOperationsInput | $Enums.CompanyStatus
+  payPeriod?: Prisma.EnumPayPeriodFieldUpdateOperationsInput | $Enums.PayPeriod
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutCompanyNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutCompanyNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutCompanyNestedInput
+  decisions?: Prisma.DecisionUncheckedUpdateManyWithoutCompanyNestedInput
+  holidays?: Prisma.HolidayUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyCreateWithoutDecisionsInput = {
+  id?: string
+  name?: string | null
+  code: string
+  numberOfEmployees?: number | null
+  address?: string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  gstNumber?: string | null
+  estiblishedDate?: Date | string | null
+  status?: $Enums.CompanyStatus
+  payPeriod?: $Enums.PayPeriod
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  geofences?: Prisma.GeofenceCreateNestedManyWithoutCompanyInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutCompanyInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutCompanyInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutCompanyInput
+  holidays?: Prisma.HolidayCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutDecisionsInput = {
+  id?: string
+  name?: string | null
+  code: string
+  numberOfEmployees?: number | null
+  address?: string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  gstNumber?: string | null
+  estiblishedDate?: Date | string | null
+  status?: $Enums.CompanyStatus
+  payPeriod?: $Enums.PayPeriod
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutCompanyInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutCompanyInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCompanyInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCompanyInput
+  holidays?: Prisma.HolidayUncheckedCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyCreateOrConnectWithoutDecisionsInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutDecisionsInput, Prisma.CompanyUncheckedCreateWithoutDecisionsInput>
+}
+
+export type CompanyUpsertWithoutDecisionsInput = {
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutDecisionsInput, Prisma.CompanyUncheckedUpdateWithoutDecisionsInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutDecisionsInput, Prisma.CompanyUncheckedCreateWithoutDecisionsInput>
+  where?: Prisma.CompanyWhereInput
+}
+
+export type CompanyUpdateToOneWithWhereWithoutDecisionsInput = {
+  where?: Prisma.CompanyWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutDecisionsInput, Prisma.CompanyUncheckedUpdateWithoutDecisionsInput>
+}
+
+export type CompanyUpdateWithoutDecisionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  numberOfEmployees?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estiblishedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumCompanyStatusFieldUpdateOperationsInput | $Enums.CompanyStatus
+  payPeriod?: Prisma.EnumPayPeriodFieldUpdateOperationsInput | $Enums.PayPeriod
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  geofences?: Prisma.GeofenceUpdateManyWithoutCompanyNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutCompanyNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutCompanyNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutCompanyNestedInput
+  holidays?: Prisma.HolidayUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutDecisionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  numberOfEmployees?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estiblishedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumCompanyStatusFieldUpdateOperationsInput | $Enums.CompanyStatus
+  payPeriod?: Prisma.EnumPayPeriodFieldUpdateOperationsInput | $Enums.PayPeriod
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutCompanyNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutCompanyNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutCompanyNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutCompanyNestedInput
+  holidays?: Prisma.HolidayUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyCreateWithoutHolidaysInput = {
+  id?: string
+  name?: string | null
+  code: string
+  numberOfEmployees?: number | null
+  address?: string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  gstNumber?: string | null
+  estiblishedDate?: Date | string | null
+  status?: $Enums.CompanyStatus
+  payPeriod?: $Enums.PayPeriod
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  geofences?: Prisma.GeofenceCreateNestedManyWithoutCompanyInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutCompanyInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutCompanyInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutCompanyInput
+  decisions?: Prisma.DecisionCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutHolidaysInput = {
+  id?: string
+  name?: string | null
+  code: string
+  numberOfEmployees?: number | null
+  address?: string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  gstNumber?: string | null
+  estiblishedDate?: Date | string | null
+  status?: $Enums.CompanyStatus
+  payPeriod?: $Enums.PayPeriod
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutCompanyInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutCompanyInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCompanyInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCompanyInput
+  decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyCreateOrConnectWithoutHolidaysInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutHolidaysInput, Prisma.CompanyUncheckedCreateWithoutHolidaysInput>
+}
+
+export type CompanyUpsertWithoutHolidaysInput = {
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutHolidaysInput, Prisma.CompanyUncheckedUpdateWithoutHolidaysInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutHolidaysInput, Prisma.CompanyUncheckedCreateWithoutHolidaysInput>
+  where?: Prisma.CompanyWhereInput
+}
+
+export type CompanyUpdateToOneWithWhereWithoutHolidaysInput = {
+  where?: Prisma.CompanyWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutHolidaysInput, Prisma.CompanyUncheckedUpdateWithoutHolidaysInput>
+}
+
+export type CompanyUpdateWithoutHolidaysInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  numberOfEmployees?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estiblishedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumCompanyStatusFieldUpdateOperationsInput | $Enums.CompanyStatus
+  payPeriod?: Prisma.EnumPayPeriodFieldUpdateOperationsInput | $Enums.PayPeriod
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  geofences?: Prisma.GeofenceUpdateManyWithoutCompanyNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutCompanyNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutCompanyNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutCompanyNestedInput
+  decisions?: Prisma.DecisionUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutHolidaysInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  numberOfEmployees?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estiblishedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumCompanyStatusFieldUpdateOperationsInput | $Enums.CompanyStatus
+  payPeriod?: Prisma.EnumPayPeriodFieldUpdateOperationsInput | $Enums.PayPeriod
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutCompanyNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutCompanyNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutCompanyNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutCompanyNestedInput
+  decisions?: Prisma.DecisionUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 
@@ -834,11 +1539,21 @@ export type CompanyUncheckedUpdateWithoutGeofencesInput = {
 export type CompanyCountOutputType = {
   geofences: number
   shifts: number
+  employees: number
+  categories: number
+  tasks: number
+  decisions: number
+  holidays: number
 }
 
 export type CompanyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   geofences?: boolean | CompanyCountOutputTypeCountGeofencesArgs
   shifts?: boolean | CompanyCountOutputTypeCountShiftsArgs
+  employees?: boolean | CompanyCountOutputTypeCountEmployeesArgs
+  categories?: boolean | CompanyCountOutputTypeCountCategoriesArgs
+  tasks?: boolean | CompanyCountOutputTypeCountTasksArgs
+  decisions?: boolean | CompanyCountOutputTypeCountDecisionsArgs
+  holidays?: boolean | CompanyCountOutputTypeCountHolidaysArgs
 }
 
 /**
@@ -865,6 +1580,41 @@ export type CompanyCountOutputTypeCountShiftsArgs<ExtArgs extends runtime.Types.
   where?: Prisma.ShiftWhereInput
 }
 
+/**
+ * CompanyCountOutputType without action
+ */
+export type CompanyCountOutputTypeCountEmployeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EmployeeWhereInput
+}
+
+/**
+ * CompanyCountOutputType without action
+ */
+export type CompanyCountOutputTypeCountCategoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CategoryWhereInput
+}
+
+/**
+ * CompanyCountOutputType without action
+ */
+export type CompanyCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TaskWhereInput
+}
+
+/**
+ * CompanyCountOutputType without action
+ */
+export type CompanyCountOutputTypeCountDecisionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DecisionWhereInput
+}
+
+/**
+ * CompanyCountOutputType without action
+ */
+export type CompanyCountOutputTypeCountHolidaysArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HolidayWhereInput
+}
+
 
 export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -884,6 +1634,11 @@ export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   updatedAt?: boolean
   geofences?: boolean | Prisma.Company$geofencesArgs<ExtArgs>
   shifts?: boolean | Prisma.Company$shiftsArgs<ExtArgs>
+  employees?: boolean | Prisma.Company$employeesArgs<ExtArgs>
+  categories?: boolean | Prisma.Company$categoriesArgs<ExtArgs>
+  tasks?: boolean | Prisma.Company$tasksArgs<ExtArgs>
+  decisions?: boolean | Prisma.Company$decisionsArgs<ExtArgs>
+  holidays?: boolean | Prisma.Company$holidaysArgs<ExtArgs>
   _count?: boolean | Prisma.CompanyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["company"]>
 
@@ -945,6 +1700,11 @@ export type CompanyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type CompanyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   geofences?: boolean | Prisma.Company$geofencesArgs<ExtArgs>
   shifts?: boolean | Prisma.Company$shiftsArgs<ExtArgs>
+  employees?: boolean | Prisma.Company$employeesArgs<ExtArgs>
+  categories?: boolean | Prisma.Company$categoriesArgs<ExtArgs>
+  tasks?: boolean | Prisma.Company$tasksArgs<ExtArgs>
+  decisions?: boolean | Prisma.Company$decisionsArgs<ExtArgs>
+  holidays?: boolean | Prisma.Company$holidaysArgs<ExtArgs>
   _count?: boolean | Prisma.CompanyCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CompanyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -955,6 +1715,11 @@ export type $CompanyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     geofences: Prisma.$GeofencePayload<ExtArgs>[]
     shifts: Prisma.$ShiftPayload<ExtArgs>[]
+    employees: Prisma.$EmployeePayload<ExtArgs>[]
+    categories: Prisma.$CategoryPayload<ExtArgs>[]
+    tasks: Prisma.$TaskPayload<ExtArgs>[]
+    decisions: Prisma.$DecisionPayload<ExtArgs>[]
+    holidays: Prisma.$HolidayPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1368,6 +2133,11 @@ export interface Prisma__CompanyClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   geofences<T extends Prisma.Company$geofencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$geofencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GeofencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   shifts<T extends Prisma.Company$shiftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$shiftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  employees<T extends Prisma.Company$employeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  categories<T extends Prisma.Company$categoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tasks<T extends Prisma.Company$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  decisions<T extends Prisma.Company$decisionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$decisionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DecisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  holidays<T extends Prisma.Company$holidaysArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$holidaysArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HolidayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1845,6 +2615,126 @@ export type Company$shiftsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.ShiftScalarFieldEnum | Prisma.ShiftScalarFieldEnum[]
+}
+
+/**
+ * Company.employees
+ */
+export type Company$employeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Employee
+   */
+  select?: Prisma.EmployeeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Employee
+   */
+  omit?: Prisma.EmployeeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmployeeInclude<ExtArgs> | null
+  where?: Prisma.EmployeeWhereInput
+  orderBy?: Prisma.EmployeeOrderByWithRelationInput | Prisma.EmployeeOrderByWithRelationInput[]
+  cursor?: Prisma.EmployeeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EmployeeScalarFieldEnum | Prisma.EmployeeScalarFieldEnum[]
+}
+
+/**
+ * Company.categories
+ */
+export type Company$categoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Category
+   */
+  select?: Prisma.CategorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Category
+   */
+  omit?: Prisma.CategoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CategoryInclude<ExtArgs> | null
+  where?: Prisma.CategoryWhereInput
+  orderBy?: Prisma.CategoryOrderByWithRelationInput | Prisma.CategoryOrderByWithRelationInput[]
+  cursor?: Prisma.CategoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CategoryScalarFieldEnum | Prisma.CategoryScalarFieldEnum[]
+}
+
+/**
+ * Company.tasks
+ */
+export type Company$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Task
+   */
+  select?: Prisma.TaskSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Task
+   */
+  omit?: Prisma.TaskOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskInclude<ExtArgs> | null
+  where?: Prisma.TaskWhereInput
+  orderBy?: Prisma.TaskOrderByWithRelationInput | Prisma.TaskOrderByWithRelationInput[]
+  cursor?: Prisma.TaskWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
+}
+
+/**
+ * Company.decisions
+ */
+export type Company$decisionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Decision
+   */
+  select?: Prisma.DecisionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Decision
+   */
+  omit?: Prisma.DecisionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DecisionInclude<ExtArgs> | null
+  where?: Prisma.DecisionWhereInput
+  orderBy?: Prisma.DecisionOrderByWithRelationInput | Prisma.DecisionOrderByWithRelationInput[]
+  cursor?: Prisma.DecisionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DecisionScalarFieldEnum | Prisma.DecisionScalarFieldEnum[]
+}
+
+/**
+ * Company.holidays
+ */
+export type Company$holidaysArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Holiday
+   */
+  select?: Prisma.HolidaySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Holiday
+   */
+  omit?: Prisma.HolidayOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HolidayInclude<ExtArgs> | null
+  where?: Prisma.HolidayWhereInput
+  orderBy?: Prisma.HolidayOrderByWithRelationInput | Prisma.HolidayOrderByWithRelationInput[]
+  cursor?: Prisma.HolidayWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.HolidayScalarFieldEnum | Prisma.HolidayScalarFieldEnum[]
 }
 
 /**
