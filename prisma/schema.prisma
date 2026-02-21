@@ -32,13 +32,14 @@ model Company {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  geofences  Geofence[]
-  shifts     Shift[]
-  employees  Employee[]
-  categories Category[]
-  tasks      Task[]
-  decisions  Decision[]
-  holidays   Holiday[]
+  geofences     Geofence[]
+  shifts        Shift[]
+  employees     Employee[]
+  categories    Category[]
+  tasks         Task[]
+  decisions     Decision[]
+  holidays      Holiday[]
+  subscriptions Subscription[]
 }
 
 enum DecisionStatus {
@@ -389,4 +390,62 @@ model Holiday {
 
   @@index([companyId])
   @@index([date])
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+model SubscriptionPlan {
+  id            String  @id @default(cuid())
+  name          String  @unique
+  description   String?
+  price         Float
+  employeeLimit Int
+  durationDays  Int
+  isActive      Boolean @default(true)
+
+  subscriptions Subscription[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Subscription {
+  id        String  @id @default(cuid())
+  companyId String
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  planId String
+  plan   SubscriptionPlan @relation(fields: [planId], references: [id])
+
+  startDate DateTime           @default(now())
+  endDate   DateTime
+  status    SubscriptionStatus @default(ACTIVE)
+
+  transactionId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([companyId])
+  @@index([planId])
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  ADMIN
+}
+
+model Admin {
+  id       String    @id @default(cuid())
+  email    String    @unique
+  password String
+  name     String?
+  role     AdminRole @default(SUPER_ADMIN)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

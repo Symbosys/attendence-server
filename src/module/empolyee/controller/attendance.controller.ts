@@ -2,21 +2,31 @@ import type { NextFunction, Request, Response } from "express";
 import { prisma } from "../../../config/prisma.js";
 import { asyncHandler } from "../../../middleware/error.middleware.js";
 import { statusCode } from "../../../types/type.js";
+import { getDistance } from "../../../utils/haversine.js";
 import { ErrorResponse, SuccessResponse } from "../../../utils/response.util.js";
 import { CheckInValidator, CheckOutValidator, GetAttendanceValidator } from "../validator/attendance.validator.js";
 
 /**
- * Helper to calculate distance between two coordinates in meters (Haversine Formula)
+ * Helper to get YYYY-MM-DD string from a Date object without timezone shifts.
+ * This is crucial for matching records from the database.
  */
-const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
-  const R = 6371e3; // Earth radius in meters
-  const dLat = ((lat2 - lat1) * Math.PI) / 180;
-  const dLon = ((lon2 - lon1) * Math.PI) / 180;
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return R * c;
+const getDateString = (date: Date) => {
+  const d = new Date(date);
+  // If it's a UTC-locked date from getBusinessDate, we use UTC components
+  // If it's a Prisma @db.Date, it comes as local-midnight. 
+  // To stay safe, we extract the local components which Prisma preserves.
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const getUTCDateString = (date: Date) => {
+  const d = new Date(date);
+  const year = d.getUTCFullYear();
+  const month = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(d.getUTCDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 };
 
 /**
@@ -25,6 +35,7 @@ const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => 
  * @access Private/Employee
  */
 export const checkIn = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+  console.log("Check-in payload:", req.body);
   const validatedData = CheckInValidator.parse(req.body);
   const { employeeId, latitude, longitude, remarks } = validatedData;
 
@@ -33,15 +44,8 @@ export const checkIn = asyncHandler(async (req: Request, res: Response, next: Ne
     where: { id: employeeId },
     include: {
       settings: true,
-      shift: {
-        include: {
-          company: {
-            include: {
-              geofences: true,
-            },
-          },
-        },
-      },
+      geofences: true,
+      shift: true,
     },
   });
 
@@ -72,22 +76,16 @@ export const checkIn = asyncHandler(async (req: Request, res: Response, next: Ne
       return next(new ErrorResponse("Location access required for geofence punch", statusCode.Bad_Request));
     }
 
-    if (!employee.shift) {
-      return next(new ErrorResponse("No shift assigned to this employee. Attendance cannot be recorded without a shift.", statusCode.Bad_Request));
-    }
+    const assignedGeofences = employee.geofences;
 
-    const companyGeofences = employee.shift.company.geofences;
-    
-    if (companyGeofences.length === 0) {
-      return next(new ErrorResponse("No geofences are defined for your company. Please set up a geofence first.", statusCode.Forbidden));
+    if (assignedGeofences.length === 0) {
+      return next(new ErrorResponse("you are not assigned to any geo fence", statusCode.Forbidden));
     }
 
     let isWithinGeofence = false;
-
-    // For debugging, track the closest distance
     let minDistance = Infinity;
 
-    for (const geofence of companyGeofences) {
+    for (const geofence of assignedGeofences) {
       const distance = getDistance(latitude, longitude, geofence.latitude, geofence.longitude);
       if (distance < minDistance) minDistance = distance;
 
@@ -153,6 +151,7 @@ export const checkIn = asyncHandler(async (req: Request, res: Response, next: Ne
  * @access Private/Employee
  */
 export const checkOut = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+  console.log("Check-out payload:", req.body);
   const validatedData = CheckOutValidator.parse(req.body);
   const { employeeId, latitude, longitude, remarks } = validatedData;
 
@@ -171,15 +170,7 @@ export const checkOut = asyncHandler(async (req: Request, res: Response, next: N
       employee: {
         include: {
           settings: true,
-          shift: {
-            include: {
-              company: {
-                include: {
-                  geofences: true,
-                },
-              },
-            },
-          },
+          geofences: true,
         },
       },
     },
@@ -199,16 +190,16 @@ export const checkOut = asyncHandler(async (req: Request, res: Response, next: N
       return next(new ErrorResponse("Location access required for geofence punch", statusCode.Bad_Request));
     }
 
-    const companyGeofences = attendanceRecord.employee.shift?.company?.geofences || [];
-    
-    if (companyGeofences.length === 0) {
-      return next(new ErrorResponse("No geofences are defined for your company. Please set up a geofence first.", statusCode.Forbidden));
+    const assignedGeofences = attendanceRecord.employee.geofences;
+
+    if (assignedGeofences.length === 0) {
+      return next(new ErrorResponse("you are not assigned to any geo fence", statusCode.Forbidden));
     }
 
     let isWithinGeofence = false;
     let minDistance = Infinity;
 
-    for (const geofence of companyGeofences) {
+    for (const geofence of assignedGeofences) {
       const distance = getDistance(latitude, longitude, geofence.latitude, geofence.longitude);
       if (distance < minDistance) minDistance = distance;
 

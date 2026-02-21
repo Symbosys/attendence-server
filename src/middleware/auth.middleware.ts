@@ -54,3 +54,34 @@ export const protectCompany = asyncHandler(async (req: AuthRequest, res: Respons
     return next(new ErrorResponse("Authentication failed", statusCode.Unauthorized));
   }
 });
+
+export const protectAdmin = asyncHandler(async (req: AuthRequest, res: Response, next: NextFunction) => {
+  let token;
+
+  if (req.headers.authorization?.startsWith("Bearer ")) {
+    token = req.headers.authorization.split(" ")[1];
+  } else if (req.cookies?.admin_token) {
+    token = req.cookies.admin_token;
+  }
+
+  if (!token) {
+    return next(new ErrorResponse("Admin access denied. Please login.", statusCode.Unauthorized));
+  }
+
+  try {
+    const decoded = verifyToken(token) as any;
+    
+    if (decoded instanceof Error || (decoded && decoded.name === "JsonWebTokenError")) {
+      return next(new ErrorResponse("Invalid or expired session.", statusCode.Unauthorized));
+    }
+
+    if (!decoded || !decoded.id || !decoded.role) {
+      return next(new ErrorResponse("Invalid admin credentials.", statusCode.Unauthorized));
+    }
+
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return next(new ErrorResponse("Admin authentication failed", statusCode.Unauthorized));
+  }
+});

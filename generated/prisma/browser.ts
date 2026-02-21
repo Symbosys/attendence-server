@@ -87,3 +87,18 @@ export type DecisionParticipant = Prisma.DecisionParticipantModel
  * 
  */
 export type Holiday = Prisma.HolidayModel
+/**
+ * Model SubscriptionPlan
+ * 
+ */
+export type SubscriptionPlan = Prisma.SubscriptionPlanModel
+/**
+ * Model Subscription
+ * 
+ */
+export type Subscription = Prisma.SubscriptionModel
+/**
+ * Model Admin
+ * 
+ */
+export type Admin = Prisma.AdminModel

@@ -13,6 +13,9 @@ import companyRoute from "./module/company/routes/company.routes";
 import geofenceRoute from "./module/company/routes/geofence.route";
 import shiftRoute from "./module/company/routes/sift.routes";
 
+//admin routes
+import adminRoutes from "./module/admin/routes/admin.routes";
+
 //employee routes
 import decisionRoutes from "./module/decision/routes/decision.routes";
 import attendanceRoutes from "./module/empolyee/routes/attendance.routes";
@@ -21,6 +24,7 @@ import employeeCategoryRoute from "./module/empolyee/routes/employee.category.ro
 import employeeOnboardingRoute from "./module/empolyee/routes/employee.routes";
 import holidayRoutes from "./module/holiday/routes/holiday.routes";
 import leavesRoutes from "./module/leaves/routes/leaves.route";
+import subscriptionPlanRoutes from "./module/subscriptionPlane/routes/subscriptionPlan.routes";
 import taskRoutes from "./module/task/routes/task.routes";
 
 
@@ -32,13 +36,16 @@ const app = express();
  */
 app.use(express.json({ limit: "20mb" }));
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
-app.use(helmet());
+app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    origin: [
+      "http://localhost:8080",
+      "http://192.168.1.5:8080"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     credentials: true,
   })
 );
@@ -83,6 +90,12 @@ app.use("/api/v1/leaves", leavesRoutes);
 app.use("/api/v1/task", taskRoutes);
 app.use("/api/v1/decision", decisionRoutes);
 app.use("/api/v1/holiday", holidayRoutes);
+app.use("/api/v1/subscription-plan", subscriptionPlanRoutes);
+
+/**
+ * Admin routes
+ */
+app.use("/api/v1/admin", adminRoutes);
 
 
 app.use(errorMiddleware);

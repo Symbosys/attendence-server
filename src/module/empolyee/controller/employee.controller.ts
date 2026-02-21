@@ -3,12 +3,12 @@ import type { NextFunction, Request, Response } from "express";
 import { randomUUID } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import type { Prisma } from "../../../../generated/prisma/client.js";
 import { prisma } from "../../../config/prisma.js";
 import { asyncHandler } from "../../../middleware/error.middleware.js";
 import { statusCode } from "../../../types/type.js";
 import { ErrorResponse, SuccessResponse } from "../../../utils/response.util.js";
 import { EmployeeIdValidator, EmployeeOnboardValidator, GetEmployeesQueryValidator } from "../validator/employee.validator.js";
-import type { Prisma } from "../../../../generated/prisma/client.js";
 
 /**
  * @desc Onboard a new employee with settings and bank details

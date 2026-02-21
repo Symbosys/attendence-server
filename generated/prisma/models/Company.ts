@@ -299,6 +299,7 @@ export type CompanyWhereInput = {
   tasks?: Prisma.TaskListRelationFilter
   decisions?: Prisma.DecisionListRelationFilter
   holidays?: Prisma.HolidayListRelationFilter
+  subscriptions?: Prisma.SubscriptionListRelationFilter
 }
 
 export type CompanyOrderByWithRelationInput = {
@@ -324,6 +325,7 @@ export type CompanyOrderByWithRelationInput = {
   tasks?: Prisma.TaskOrderByRelationAggregateInput
   decisions?: Prisma.DecisionOrderByRelationAggregateInput
   holidays?: Prisma.HolidayOrderByRelationAggregateInput
+  subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
 }
 
 export type CompanyWhereUniqueInput = Prisma.AtLeast<{
@@ -352,6 +354,7 @@ export type CompanyWhereUniqueInput = Prisma.AtLeast<{
   tasks?: Prisma.TaskListRelationFilter
   decisions?: Prisma.DecisionListRelationFilter
   holidays?: Prisma.HolidayListRelationFilter
+  subscriptions?: Prisma.SubscriptionListRelationFilter
 }, "id" | "code" | "email" | "phone" | "gstNumber">
 
 export type CompanyOrderByWithAggregationInput = {
@@ -421,6 +424,7 @@ export type CompanyCreateInput = {
   tasks?: Prisma.TaskCreateNestedManyWithoutCompanyInput
   decisions?: Prisma.DecisionCreateNestedManyWithoutCompanyInput
   holidays?: Prisma.HolidayCreateNestedManyWithoutCompanyInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateInput = {
@@ -446,6 +450,7 @@ export type CompanyUncheckedCreateInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCompanyInput
   decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCompanyInput
   holidays?: Prisma.HolidayUncheckedCreateNestedManyWithoutCompanyInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUpdateInput = {
@@ -471,6 +476,7 @@ export type CompanyUpdateInput = {
   tasks?: Prisma.TaskUpdateManyWithoutCompanyNestedInput
   decisions?: Prisma.DecisionUpdateManyWithoutCompanyNestedInput
   holidays?: Prisma.HolidayUpdateManyWithoutCompanyNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateInput = {
@@ -496,6 +502,7 @@ export type CompanyUncheckedUpdateInput = {
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutCompanyNestedInput
   decisions?: Prisma.DecisionUncheckedUpdateManyWithoutCompanyNestedInput
   holidays?: Prisma.HolidayUncheckedUpdateManyWithoutCompanyNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateManyInput = {
@@ -747,6 +754,20 @@ export type CompanyUpdateOneRequiredWithoutHolidaysNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutHolidaysInput, Prisma.CompanyUpdateWithoutHolidaysInput>, Prisma.CompanyUncheckedUpdateWithoutHolidaysInput>
 }
 
+export type CompanyCreateNestedOneWithoutSubscriptionsInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutSubscriptionsInput, Prisma.CompanyUncheckedCreateWithoutSubscriptionsInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutSubscriptionsInput
+  connect?: Prisma.CompanyWhereUniqueInput
+}
+
+export type CompanyUpdateOneRequiredWithoutSubscriptionsNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutSubscriptionsInput, Prisma.CompanyUncheckedCreateWithoutSubscriptionsInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutSubscriptionsInput
+  upsert?: Prisma.CompanyUpsertWithoutSubscriptionsInput
+  connect?: Prisma.CompanyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutSubscriptionsInput, Prisma.CompanyUpdateWithoutSubscriptionsInput>, Prisma.CompanyUncheckedUpdateWithoutSubscriptionsInput>
+}
+
 export type CompanyCreateWithoutShiftsInput = {
   id?: string
   name?: string | null
@@ -769,6 +790,7 @@ export type CompanyCreateWithoutShiftsInput = {
   tasks?: Prisma.TaskCreateNestedManyWithoutCompanyInput
   decisions?: Prisma.DecisionCreateNestedManyWithoutCompanyInput
   holidays?: Prisma.HolidayCreateNestedManyWithoutCompanyInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutShiftsInput = {
@@ -793,6 +815,7 @@ export type CompanyUncheckedCreateWithoutShiftsInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCompanyInput
   decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCompanyInput
   holidays?: Prisma.HolidayUncheckedCreateNestedManyWithoutCompanyInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutShiftsInput = {
@@ -833,6 +856,7 @@ export type CompanyUpdateWithoutShiftsInput = {
   tasks?: Prisma.TaskUpdateManyWithoutCompanyNestedInput
   decisions?: Prisma.DecisionUpdateManyWithoutCompanyNestedInput
   holidays?: Prisma.HolidayUpdateManyWithoutCompanyNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutShiftsInput = {
@@ -857,6 +881,7 @@ export type CompanyUncheckedUpdateWithoutShiftsInput = {
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutCompanyNestedInput
   decisions?: Prisma.DecisionUncheckedUpdateManyWithoutCompanyNestedInput
   holidays?: Prisma.HolidayUncheckedUpdateManyWithoutCompanyNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateWithoutEmployeesInput = {
@@ -881,6 +906,7 @@ export type CompanyCreateWithoutEmployeesInput = {
   tasks?: Prisma.TaskCreateNestedManyWithoutCompanyInput
   decisions?: Prisma.DecisionCreateNestedManyWithoutCompanyInput
   holidays?: Prisma.HolidayCreateNestedManyWithoutCompanyInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutEmployeesInput = {
@@ -905,6 +931,7 @@ export type CompanyUncheckedCreateWithoutEmployeesInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCompanyInput
   decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCompanyInput
   holidays?: Prisma.HolidayUncheckedCreateNestedManyWithoutCompanyInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutEmployeesInput = {
@@ -945,6 +972,7 @@ export type CompanyUpdateWithoutEmployeesInput = {
   tasks?: Prisma.TaskUpdateManyWithoutCompanyNestedInput
   decisions?: Prisma.DecisionUpdateManyWithoutCompanyNestedInput
   holidays?: Prisma.HolidayUpdateManyWithoutCompanyNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutEmployeesInput = {
@@ -969,6 +997,7 @@ export type CompanyUncheckedUpdateWithoutEmployeesInput = {
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutCompanyNestedInput
   decisions?: Prisma.DecisionUncheckedUpdateManyWithoutCompanyNestedInput
   holidays?: Prisma.HolidayUncheckedUpdateManyWithoutCompanyNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateWithoutGeofencesInput = {
@@ -993,6 +1022,7 @@ export type CompanyCreateWithoutGeofencesInput = {
   tasks?: Prisma.TaskCreateNestedManyWithoutCompanyInput
   decisions?: Prisma.DecisionCreateNestedManyWithoutCompanyInput
   holidays?: Prisma.HolidayCreateNestedManyWithoutCompanyInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutGeofencesInput = {
@@ -1017,6 +1047,7 @@ export type CompanyUncheckedCreateWithoutGeofencesInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCompanyInput
   decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCompanyInput
   holidays?: Prisma.HolidayUncheckedCreateNestedManyWithoutCompanyInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutGeofencesInput = {
@@ -1057,6 +1088,7 @@ export type CompanyUpdateWithoutGeofencesInput = {
   tasks?: Prisma.TaskUpdateManyWithoutCompanyNestedInput
   decisions?: Prisma.DecisionUpdateManyWithoutCompanyNestedInput
   holidays?: Prisma.HolidayUpdateManyWithoutCompanyNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutGeofencesInput = {
@@ -1081,6 +1113,7 @@ export type CompanyUncheckedUpdateWithoutGeofencesInput = {
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutCompanyNestedInput
   decisions?: Prisma.DecisionUncheckedUpdateManyWithoutCompanyNestedInput
   holidays?: Prisma.HolidayUncheckedUpdateManyWithoutCompanyNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateWithoutCategoriesInput = {
@@ -1105,6 +1138,7 @@ export type CompanyCreateWithoutCategoriesInput = {
   tasks?: Prisma.TaskCreateNestedManyWithoutCompanyInput
   decisions?: Prisma.DecisionCreateNestedManyWithoutCompanyInput
   holidays?: Prisma.HolidayCreateNestedManyWithoutCompanyInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutCategoriesInput = {
@@ -1129,6 +1163,7 @@ export type CompanyUncheckedCreateWithoutCategoriesInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCompanyInput
   decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCompanyInput
   holidays?: Prisma.HolidayUncheckedCreateNestedManyWithoutCompanyInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutCategoriesInput = {
@@ -1169,6 +1204,7 @@ export type CompanyUpdateWithoutCategoriesInput = {
   tasks?: Prisma.TaskUpdateManyWithoutCompanyNestedInput
   decisions?: Prisma.DecisionUpdateManyWithoutCompanyNestedInput
   holidays?: Prisma.HolidayUpdateManyWithoutCompanyNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutCategoriesInput = {
@@ -1193,6 +1229,7 @@ export type CompanyUncheckedUpdateWithoutCategoriesInput = {
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutCompanyNestedInput
   decisions?: Prisma.DecisionUncheckedUpdateManyWithoutCompanyNestedInput
   holidays?: Prisma.HolidayUncheckedUpdateManyWithoutCompanyNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateWithoutTasksInput = {
@@ -1217,6 +1254,7 @@ export type CompanyCreateWithoutTasksInput = {
   categories?: Prisma.CategoryCreateNestedManyWithoutCompanyInput
   decisions?: Prisma.DecisionCreateNestedManyWithoutCompanyInput
   holidays?: Prisma.HolidayCreateNestedManyWithoutCompanyInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutTasksInput = {
@@ -1241,6 +1279,7 @@ export type CompanyUncheckedCreateWithoutTasksInput = {
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCompanyInput
   decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCompanyInput
   holidays?: Prisma.HolidayUncheckedCreateNestedManyWithoutCompanyInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutTasksInput = {
@@ -1281,6 +1320,7 @@ export type CompanyUpdateWithoutTasksInput = {
   categories?: Prisma.CategoryUpdateManyWithoutCompanyNestedInput
   decisions?: Prisma.DecisionUpdateManyWithoutCompanyNestedInput
   holidays?: Prisma.HolidayUpdateManyWithoutCompanyNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutTasksInput = {
@@ -1305,6 +1345,7 @@ export type CompanyUncheckedUpdateWithoutTasksInput = {
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutCompanyNestedInput
   decisions?: Prisma.DecisionUncheckedUpdateManyWithoutCompanyNestedInput
   holidays?: Prisma.HolidayUncheckedUpdateManyWithoutCompanyNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateWithoutDecisionsInput = {
@@ -1329,6 +1370,7 @@ export type CompanyCreateWithoutDecisionsInput = {
   categories?: Prisma.CategoryCreateNestedManyWithoutCompanyInput
   tasks?: Prisma.TaskCreateNestedManyWithoutCompanyInput
   holidays?: Prisma.HolidayCreateNestedManyWithoutCompanyInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutDecisionsInput = {
@@ -1353,6 +1395,7 @@ export type CompanyUncheckedCreateWithoutDecisionsInput = {
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCompanyInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCompanyInput
   holidays?: Prisma.HolidayUncheckedCreateNestedManyWithoutCompanyInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutDecisionsInput = {
@@ -1393,6 +1436,7 @@ export type CompanyUpdateWithoutDecisionsInput = {
   categories?: Prisma.CategoryUpdateManyWithoutCompanyNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutCompanyNestedInput
   holidays?: Prisma.HolidayUpdateManyWithoutCompanyNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutDecisionsInput = {
@@ -1417,6 +1461,7 @@ export type CompanyUncheckedUpdateWithoutDecisionsInput = {
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutCompanyNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutCompanyNestedInput
   holidays?: Prisma.HolidayUncheckedUpdateManyWithoutCompanyNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateWithoutHolidaysInput = {
@@ -1441,6 +1486,7 @@ export type CompanyCreateWithoutHolidaysInput = {
   categories?: Prisma.CategoryCreateNestedManyWithoutCompanyInput
   tasks?: Prisma.TaskCreateNestedManyWithoutCompanyInput
   decisions?: Prisma.DecisionCreateNestedManyWithoutCompanyInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutHolidaysInput = {
@@ -1465,6 +1511,7 @@ export type CompanyUncheckedCreateWithoutHolidaysInput = {
   categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCompanyInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCompanyInput
   decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCompanyInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutHolidaysInput = {
@@ -1505,6 +1552,7 @@ export type CompanyUpdateWithoutHolidaysInput = {
   categories?: Prisma.CategoryUpdateManyWithoutCompanyNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutCompanyNestedInput
   decisions?: Prisma.DecisionUpdateManyWithoutCompanyNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutHolidaysInput = {
@@ -1529,6 +1577,123 @@ export type CompanyUncheckedUpdateWithoutHolidaysInput = {
   categories?: Prisma.CategoryUncheckedUpdateManyWithoutCompanyNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutCompanyNestedInput
   decisions?: Prisma.DecisionUncheckedUpdateManyWithoutCompanyNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyCreateWithoutSubscriptionsInput = {
+  id?: string
+  name?: string | null
+  code: string
+  numberOfEmployees?: number | null
+  address?: string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  gstNumber?: string | null
+  estiblishedDate?: Date | string | null
+  status?: $Enums.CompanyStatus
+  payPeriod?: $Enums.PayPeriod
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  geofences?: Prisma.GeofenceCreateNestedManyWithoutCompanyInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutCompanyInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CategoryCreateNestedManyWithoutCompanyInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutCompanyInput
+  decisions?: Prisma.DecisionCreateNestedManyWithoutCompanyInput
+  holidays?: Prisma.HolidayCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutSubscriptionsInput = {
+  id?: string
+  name?: string | null
+  code: string
+  numberOfEmployees?: number | null
+  address?: string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: string | null
+  phone?: string | null
+  website?: string | null
+  gstNumber?: string | null
+  estiblishedDate?: Date | string | null
+  status?: $Enums.CompanyStatus
+  payPeriod?: $Enums.PayPeriod
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  geofences?: Prisma.GeofenceUncheckedCreateNestedManyWithoutCompanyInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutCompanyInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutCompanyInput
+  categories?: Prisma.CategoryUncheckedCreateNestedManyWithoutCompanyInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCompanyInput
+  decisions?: Prisma.DecisionUncheckedCreateNestedManyWithoutCompanyInput
+  holidays?: Prisma.HolidayUncheckedCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyCreateOrConnectWithoutSubscriptionsInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutSubscriptionsInput, Prisma.CompanyUncheckedCreateWithoutSubscriptionsInput>
+}
+
+export type CompanyUpsertWithoutSubscriptionsInput = {
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutSubscriptionsInput, Prisma.CompanyUncheckedUpdateWithoutSubscriptionsInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutSubscriptionsInput, Prisma.CompanyUncheckedCreateWithoutSubscriptionsInput>
+  where?: Prisma.CompanyWhereInput
+}
+
+export type CompanyUpdateToOneWithWhereWithoutSubscriptionsInput = {
+  where?: Prisma.CompanyWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutSubscriptionsInput, Prisma.CompanyUncheckedUpdateWithoutSubscriptionsInput>
+}
+
+export type CompanyUpdateWithoutSubscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  numberOfEmployees?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estiblishedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumCompanyStatusFieldUpdateOperationsInput | $Enums.CompanyStatus
+  payPeriod?: Prisma.EnumPayPeriodFieldUpdateOperationsInput | $Enums.PayPeriod
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  geofences?: Prisma.GeofenceUpdateManyWithoutCompanyNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutCompanyNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CategoryUpdateManyWithoutCompanyNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutCompanyNestedInput
+  decisions?: Prisma.DecisionUpdateManyWithoutCompanyNestedInput
+  holidays?: Prisma.HolidayUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutSubscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  numberOfEmployees?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gstNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estiblishedDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumCompanyStatusFieldUpdateOperationsInput | $Enums.CompanyStatus
+  payPeriod?: Prisma.EnumPayPeriodFieldUpdateOperationsInput | $Enums.PayPeriod
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  geofences?: Prisma.GeofenceUncheckedUpdateManyWithoutCompanyNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutCompanyNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutCompanyNestedInput
+  categories?: Prisma.CategoryUncheckedUpdateManyWithoutCompanyNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutCompanyNestedInput
+  decisions?: Prisma.DecisionUncheckedUpdateManyWithoutCompanyNestedInput
+  holidays?: Prisma.HolidayUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 
@@ -1544,6 +1709,7 @@ export type CompanyCountOutputType = {
   tasks: number
   decisions: number
   holidays: number
+  subscriptions: number
 }
 
 export type CompanyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1554,6 +1720,7 @@ export type CompanyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   tasks?: boolean | CompanyCountOutputTypeCountTasksArgs
   decisions?: boolean | CompanyCountOutputTypeCountDecisionsArgs
   holidays?: boolean | CompanyCountOutputTypeCountHolidaysArgs
+  subscriptions?: boolean | CompanyCountOutputTypeCountSubscriptionsArgs
 }
 
 /**
@@ -1615,6 +1782,13 @@ export type CompanyCountOutputTypeCountHolidaysArgs<ExtArgs extends runtime.Type
   where?: Prisma.HolidayWhereInput
 }
 
+/**
+ * CompanyCountOutputType without action
+ */
+export type CompanyCountOutputTypeCountSubscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SubscriptionWhereInput
+}
+
 
 export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1639,6 +1813,7 @@ export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   tasks?: boolean | Prisma.Company$tasksArgs<ExtArgs>
   decisions?: boolean | Prisma.Company$decisionsArgs<ExtArgs>
   holidays?: boolean | Prisma.Company$holidaysArgs<ExtArgs>
+  subscriptions?: boolean | Prisma.Company$subscriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.CompanyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["company"]>
 
@@ -1705,6 +1880,7 @@ export type CompanyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   tasks?: boolean | Prisma.Company$tasksArgs<ExtArgs>
   decisions?: boolean | Prisma.Company$decisionsArgs<ExtArgs>
   holidays?: boolean | Prisma.Company$holidaysArgs<ExtArgs>
+  subscriptions?: boolean | Prisma.Company$subscriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.CompanyCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CompanyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1720,6 +1896,7 @@ export type $CompanyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     tasks: Prisma.$TaskPayload<ExtArgs>[]
     decisions: Prisma.$DecisionPayload<ExtArgs>[]
     holidays: Prisma.$HolidayPayload<ExtArgs>[]
+    subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2138,6 +2315,7 @@ export interface Prisma__CompanyClient<T, Null = never, ExtArgs extends runtime.
   tasks<T extends Prisma.Company$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   decisions<T extends Prisma.Company$decisionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$decisionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DecisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   holidays<T extends Prisma.Company$holidaysArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$holidaysArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HolidayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  subscriptions<T extends Prisma.Company$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2735,6 +2913,30 @@ export type Company$holidaysArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.HolidayScalarFieldEnum | Prisma.HolidayScalarFieldEnum[]
+}
+
+/**
+ * Company.subscriptions
+ */
+export type Company$subscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Subscription
+   */
+  select?: Prisma.SubscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Subscription
+   */
+  omit?: Prisma.SubscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubscriptionInclude<ExtArgs> | null
+  where?: Prisma.SubscriptionWhereInput
+  orderBy?: Prisma.SubscriptionOrderByWithRelationInput | Prisma.SubscriptionOrderByWithRelationInput[]
+  cursor?: Prisma.SubscriptionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SubscriptionScalarFieldEnum | Prisma.SubscriptionScalarFieldEnum[]
 }
 
 /**
