@@ -42,6 +42,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: [
+      // for local development URL
       "http://localhost:8080",
       "http://192.168.1.13:8080"
     ],
