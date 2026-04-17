@@ -43,7 +43,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:8080",
-      "http://192.168.1.5:8080"
+      "http://192.168.1.13:8080"
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     credentials: true,

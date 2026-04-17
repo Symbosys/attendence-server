@@ -7,26 +7,66 @@ import { ErrorResponse, SuccessResponse } from "../../../utils/response.util.js"
 import { CheckInValidator, CheckOutValidator, GetAttendanceValidator } from "../validator/attendance.validator.js";
 
 /**
- * Helper to get YYYY-MM-DD string from a Date object without timezone shifts.
- * This is crucial for matching records from the database.
+ * App timezone fallback when client timezone is unavailable.
  */
-const getDateString = (date: Date) => {
-  const d = new Date(date);
-  // If it's a UTC-locked date from getBusinessDate, we use UTC components
-  // If it's a Prisma @db.Date, it comes as local-midnight. 
-  // To stay safe, we extract the local components which Prisma preserves.
-  const year = d.getFullYear();
-  const month = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
+const DEFAULT_TIMEZONE = process.env.APP_TIMEZONE ?? "UTC";
+
+const isValidTimezone = (timezone: string) => {
+  try {
+    Intl.DateTimeFormat("en-US", { timeZone: timezone });
+    return true;
+  } catch {
+    return false;
+  }
 };
 
-const getUTCDateString = (date: Date) => {
-  const d = new Date(date);
-  const year = d.getUTCFullYear();
-  const month = String(d.getUTCMonth() + 1).padStart(2, '0');
-  const day = String(d.getUTCDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
+const getRequestTimezone = (req: Request) => {
+  const timezoneHeader = req.headers["x-timezone"];
+  const requestedTimezone = typeof timezoneHeader === "string" ? timezoneHeader : DEFAULT_TIMEZONE;
+  return isValidTimezone(requestedTimezone) ? requestedTimezone : DEFAULT_TIMEZONE;
+};
+
+const getDatePartsForTimezone = (date: Date, timezone: string) => {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: timezone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+
+  const year = Number(parts.find((part) => part.type === "year")?.value);
+  const month = Number(parts.find((part) => part.type === "month")?.value);
+  const day = Number(parts.find((part) => part.type === "day")?.value);
+
+  return { year, month, day };
+};
+
+/**
+ * Converts a timestamp to date-only value (00:00 UTC) for a given timezone.
+ * This keeps DB date comparison stable across server/client timezone differences.
+ */
+const getDateOnlyForTimezone = (date: Date, timezone: string) => {
+  const { year, month, day } = getDatePartsForTimezone(date, timezone);
+  return new Date(Date.UTC(year, month - 1, day));
+};
+
+const parseDateOnlyInput = (input: string) => {
+  const trimmedInput = input.trim();
+  const dateOnlyMatch = /^(\d{4})-(\d{2})-(\d{2})$/.exec(trimmedInput);
+
+  if (dateOnlyMatch) {
+    const year = Number(dateOnlyMatch[1]);
+    const month = Number(dateOnlyMatch[2]);
+    const day = Number(dateOnlyMatch[3]);
+    return new Date(Date.UTC(year, month - 1, day));
+  }
+
+  const parsedDate = new Date(trimmedInput);
+  if (Number.isNaN(parsedDate.getTime())) {
+    throw new Error("Invalid date");
+  }
+
+  return new Date(Date.UTC(parsedDate.getUTCFullYear(), parsedDate.getUTCMonth(), parsedDate.getUTCDate()));
 };
 
 /**
@@ -54,7 +94,8 @@ export const checkIn = asyncHandler(async (req: Request, res: Response, next: Ne
   }
 
   const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const timezone = getRequestTimezone(req);
+  const today = getDateOnlyForTimezone(now, timezone);
 
   // 2. Check if already checked-in for today
   const existingAttendance = await prisma.attendance.findUnique({
@@ -156,7 +197,8 @@ export const checkOut = asyncHandler(async (req: Request, res: Response, next: N
   const { employeeId, latitude, longitude, remarks } = validatedData;
 
   const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const timezone = getRequestTimezone(req);
+  const today = getDateOnlyForTimezone(now, timezone);
 
   // 1. Find today's attendance record
   const attendanceRecord = await prisma.attendance.findUnique({
@@ -236,12 +278,13 @@ export const checkOut = asyncHandler(async (req: Request, res: Response, next: N
 export const getAttendance = asyncHandler(async (req: Request, res: Response) => {
   const { employeeId, startDate, endDate } = GetAttendanceValidator.parse(req.query);
 
-  const where: any = {};
+  const where: Record<string, unknown> = {};
   if (employeeId) where.employeeId = employeeId;
   if (startDate || endDate) {
-    where.date = {};
-    if (startDate) where.date.gte = new Date(startDate);
-    if (endDate) where.date.lte = new Date(endDate);
+    const dateFilter: Record<string, Date> = {};
+    if (startDate) dateFilter.gte = parseDateOnlyInput(startDate);
+    if (endDate) dateFilter.lte = parseDateOnlyInput(endDate);
+    where.date = dateFilter;
   }
 
   const attendance = await prisma.attendance.findMany({
@@ -268,8 +311,8 @@ export const getAttendance = asyncHandler(async (req: Request, res: Response) =>
  */
 export const getDailyAttendanceSummary = asyncHandler(async (req: Request, res: Response) => {
   const dateStr = req.query.date as string;
-  const targetDate = dateStr ? new Date(dateStr) : new Date();
-  targetDate.setHours(0, 0, 0, 0);
+  const timezone = getRequestTimezone(req);
+  const targetDate = dateStr ? parseDateOnlyInput(dateStr) : getDateOnlyForTimezone(new Date(), timezone);
 
   const attendance = await prisma.attendance.findMany({
     where: {
