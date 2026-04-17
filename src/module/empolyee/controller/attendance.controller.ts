@@ -42,7 +42,7 @@ const getDatePartsForTimezone = (date: Date, timezone: string) => {
 };
 
 /**
- * Converts a timestamp to date-only value (00:00 UTC) for a given timezone.
+ * Converts a timestamp to date-only value (00:00 UTC).
  * This keeps DB date comparison stable across server/client timezone differences.
  */
 const getDateOnlyForTimezone = (date: Date, timezone: string) => {
