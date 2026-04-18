@@ -44,7 +44,7 @@ app.use(
     origin: [
       // for local development URL
       "http://localhost:8080",
-      "http://192.168.1.13:8080"
+      "http://192.168.1.10:8080"
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     credentials: true,

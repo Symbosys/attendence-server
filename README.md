@@ -12,10 +12,14 @@ To run:
 bun run index.ts
 ```
 
+run docker
+
+```bash
+docker-compose up --build
+```
+
 This project was created using `bun init` in bun v1.3.5. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
-
-
 
 write api in industry standard way and clean code archicture way
 
-be carefull make no mistake 
+be carefull make no mistake
