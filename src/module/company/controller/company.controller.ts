@@ -4,7 +4,9 @@ import { asyncHandler } from "../../../middleware/error.middleware.js";
 import { statusCode } from "../../../types/type.js";
 import { ErrorResponse, SuccessResponse } from "../../../utils/response.util.js";
 import { generateCompanyCode } from "../../../utils/utils.js";
+import fs from "node:fs";
 import { CompanyIdValidator, OnboardValidator } from "../validator/company.validator.js";
+import { uploadToCloudinary } from "../../../config/cloudinary.js";
 
 /**
  * @desc Onboard a new company or update existing one
@@ -19,10 +21,24 @@ export const onboard = asyncHandler(async (req: Request, res: Response, next: Ne
   // Handle Logo Upload
   let logoData = undefined;
   if (req.file) {
-    logoData = {
-      public_id: req.file.filename,
-      secure_url: `/uploads/${req.file.filename}`,
-    };
+    try {
+      const fileBuffer = fs.readFileSync(req.file.path);
+      const result = await uploadToCloudinary(fileBuffer, "company_logos");
+      logoData = {
+        public_id: result.public_id,
+        secure_url: result.secure_url,
+      };
+
+      // Cleanup local file
+      if (fs.existsSync(req.file.path)) {
+        fs.unlinkSync(req.file.path);
+      }
+    } catch (error: any) {
+      if (req.file && req.file.path && fs.existsSync(req.file.path)) {
+        fs.unlinkSync(req.file.path);
+      }
+      return next(new ErrorResponse(error.message || "Failed to upload logo to Cloudinary", statusCode.Internal_Server_Error));
+    }
   }
 
   let company;

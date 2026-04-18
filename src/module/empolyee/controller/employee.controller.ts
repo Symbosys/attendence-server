@@ -9,6 +9,7 @@ import { asyncHandler } from "../../../middleware/error.middleware.js";
 import { statusCode } from "../../../types/type.js";
 import { ErrorResponse, SuccessResponse } from "../../../utils/response.util.js";
 import { EmployeeIdValidator, EmployeeOnboardValidator, GetEmployeesQueryValidator } from "../validator/employee.validator.js";
+import { uploadToCloudinary, deleteFromCloudinary } from "../../../config/cloudinary.js";
 
 /**
  * @desc Onboard a new employee with settings and bank details
@@ -379,31 +380,52 @@ export const updateProfilePicture = asyncHandler(async (req: Request, res: Respo
     return next(new ErrorResponse("Employee not found", statusCode.Not_Found));
   }
 
-  // Delete old profile picture if exists
-  if (employee.profilePicture) {
-    const oldPic = employee.profilePicture as any;
-    if (oldPic.path) {
-      const oldPath = path.join(process.cwd(), oldPic.path);
-      if (fs.existsSync(oldPath)) {
-        fs.unlinkSync(oldPath);
+  try {
+    // 1. Delete old profile picture if exists from Cloudinary
+    if (employee.profilePicture) {
+      const oldPic = employee.profilePicture as any;
+      if (oldPic.public_id) {
+        await deleteFromCloudinary(oldPic.public_id);
+      } else if (oldPic.path) {
+        // Fallback for legacy local files
+        const oldPath = path.join(process.cwd(), oldPic.path);
+        if (fs.existsSync(oldPath)) {
+          fs.unlinkSync(oldPath);
+        }
       }
     }
+
+    // 2. Upload to Cloudinary
+    const fileBuffer = fs.readFileSync(req.file.path);
+    const result = await uploadToCloudinary(fileBuffer, "employee_profiles");
+
+    const profilePicture = {
+      public_id: result.public_id,
+      url: result.secure_url,
+      secure_url: result.secure_url,
+      filename: req.file.filename,
+      mimetype: req.file.mimetype,
+      size: req.file.size,
+    };
+
+    const updatedEmployee = await prisma.employee.update({
+      where: { id },
+      data: { profilePicture },
+    });
+
+    // 3. Cleanup local file
+    if (fs.existsSync(req.file.path)) {
+      fs.unlinkSync(req.file.path);
+    }
+
+    return SuccessResponse(res, "Profile picture updated successfully", updatedEmployee, statusCode.OK);
+  } catch (error: any) {
+    // Cleanup local file on error
+    if (req.file && req.file.path && fs.existsSync(req.file.path)) {
+      fs.unlinkSync(req.file.path);
+    }
+    return next(new ErrorResponse(error.message || "Failed to upload image to Cloudinary", statusCode.Internal_Server_Error));
   }
-
-  const profilePicture = {
-    url: `/uploads/${req.file.filename}`,
-    path: req.file.path.replace(/\\/g, "/"), // Multer path is relative to cwd if destination is "uploads/"
-    filename: req.file.filename,
-    mimetype: req.file.mimetype,
-    size: req.file.size,
-  };
-
-  const updatedEmployee = await prisma.employee.update({
-    where: { id },
-    data: { profilePicture },
-  });
-
-  return SuccessResponse(res, "Profile picture updated successfully", updatedEmployee, statusCode.OK);
 });
 
 /**
@@ -427,7 +449,10 @@ export const deleteProfilePicture = asyncHandler(async (req: Request, res: Respo
   }
 
   const pic = employee.profilePicture as any;
-  if (pic.path) {
+  if (pic.public_id) {
+    await deleteFromCloudinary(pic.public_id);
+  } else if (pic.path) {
+    // Fallback for legacy local files
     const filePath = path.join(process.cwd(), pic.path);
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);
