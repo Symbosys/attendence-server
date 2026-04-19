@@ -73,6 +73,7 @@ export function removeUndefined<T extends object>(obj: T): {
 }
 
 
+// generate company code
 export const generateCompanyCode = () => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   let code = '';
