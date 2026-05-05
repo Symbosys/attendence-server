@@ -1,12 +1,12 @@
 import type { NextFunction, Request, Response } from "express";
+import fs from "node:fs";
+import { uploadToCloudinary } from "../../../config/cloudinary.js";
 import { prisma } from "../../../config/prisma.js";
 import { asyncHandler } from "../../../middleware/error.middleware.js";
 import { statusCode } from "../../../types/type.js";
 import { ErrorResponse, SuccessResponse } from "../../../utils/response.util.js";
 import { generateCompanyCode } from "../../../utils/utils.js";
-import fs from "node:fs";
 import { CompanyIdValidator, OnboardValidator } from "../validator/company.validator.js";
-import { uploadToCloudinary } from "../../../config/cloudinary.js";
 
 /**
  * @desc Onboard a new company or update existing one
@@ -14,8 +14,28 @@ import { uploadToCloudinary } from "../../../config/cloudinary.js";
  * @access Private
  */
 export const onboard = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  const validatedData = OnboardValidator.parse(req.body);
+  const validatedData = OnboardValidator.parse(req.body) as any;
+
+  // Map any variations of business name to the standard 'name' field
+  const resolvedName = validatedData.name || validatedData.businessName || validatedData.companyName || req.body.name || req.body.businessName || req.body.companyName || req.body.business_name || req.body.company_name;
   
+  if (resolvedName) {
+    validatedData.name = resolvedName;
+  }
+
+  // Handle date resolution (matching the misspelled schema field)
+  const resolvedDate = validatedData.estiblishedDate || (req.body.establishedDate ? new Date(req.body.establishedDate) : undefined) || (req.body.estiblishedDate ? new Date(req.body.estiblishedDate) : undefined);
+  if (resolvedDate) {
+    validatedData.estiblishedDate = resolvedDate;
+  }
+
+  // Remove alias fields that are not in the Prisma schema
+  delete (validatedData as any).businessName;
+  delete (validatedData as any).companyName;
+  delete (validatedData as any).business_name;
+  delete (validatedData as any).company_name;
+  delete (validatedData as any).establishedDate;
+
   const { email, phone, code } = validatedData;
   
   // Handle Logo Upload
@@ -62,6 +82,7 @@ export const onboard = asyncHandler(async (req: Request, res: Response, next: Ne
       where: { id: company.id },
       data: {
         ...validatedData,
+        name: validatedData.name, // Explicitly set resolved name
         logo: logoData || company.logo || undefined,
       },
     });
@@ -70,6 +91,7 @@ export const onboard = asyncHandler(async (req: Request, res: Response, next: Ne
     company = await prisma.company.create({
       data: {
         ...validatedData,
+        name: validatedData.name, // Explicitly set resolved name
         logo: logoData,
         // If code wasn't provided, generate one
         code: code || generateCompanyCode(),
