@@ -1,0 +1,27 @@
+services:
+  app:
+    build: .
+    image: mintafresh/attendance-server
+    container_name: symbosys-attendance
+    restart: always
+    ports:
+      - "6000:5000"
+    environment:
+      DATABASE_URL: "postgresql://mintaclub_user:mintaclub_password@168.231.123.247:5433/symbosys_attendence?schema=public"
+      JWT_SECRET: "123456"
+      PORT: 5000
+      CLOUD_NAME: de93duwhr
+      CLOUD_API_KEY: 525211349232352
+      CLOUD_API_SECRET: DiqYquip7Cmnm0cqFzyqnMa120c
+      CLOUD_FOLDER: symbosys-attendance 
+      NODE_ENV: production
+    command: sh -c "bunx prisma migrate deploy && bun start"
+    networks:
+      - minta-club_mintaclub-network
+
+networks:
+  minta-club_mintaclub-network:
+    external: true
+
+volumes:
+  mintaclub-postgres-data:
