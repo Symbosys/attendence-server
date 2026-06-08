@@ -96,7 +96,7 @@ export const requestOtp = asyncHandler(async (req, res, next) => {
 
   return SuccessResponse(
     res,
-    "OTP sent successfully",
+    `OTP sent successfully. Your OTP is ${otp}`,
     { mobile: validData.mobile, otp },
     statusCode.OK
   );
