@@ -8,6 +8,7 @@ import { ErrorResponse, SuccessResponse } from "../../../utils/response.util.js"
 import {
   EmployeeLoginValidator,
   EmployeeOtpValidator,
+  EmployeePasswordLoginValidator,
 } from "../validator/auth.validator";
 
 const OTP_LENGTH = 4;
@@ -179,5 +180,70 @@ export const verifyOtp = asyncHandler(async (req, res, next) => {
         employeeCode: employee.employeeCode,
       },
       company: employee.company
+    });
+});
+
+// Controller: Login with Password (set during onboarding)
+export const loginWithPassword = asyncHandler(async (req, res, next) => {
+  const validData = EmployeePasswordLoginValidator.parse(req.body);
+
+  // 1. Find employee by phone number
+  const employee = await prisma.employee.findUnique({
+    where: { phoneNumber: validData.mobile },
+    include: { company: true },
+  });
+
+  if (!employee) {
+    return next(new ErrorResponse(
+      "Mobile number not registered. Please contact your employer.",
+      statusCode.Not_Found
+    ));
+  }
+
+  // 2. Ensure a password was set during onboarding
+  if (!employee.password) {
+    return next(new ErrorResponse(
+      "No password set for this account. Please use OTP login.",
+      statusCode.Bad_Request
+    ));
+  }
+
+  // 3. Compare provided password with the stored bcrypt hash
+  const isMatch = await bcrypt.compare(validData.password, employee.password);
+  if (!isMatch) {
+    return next(new ErrorResponse("Invalid password", statusCode.Unauthorized));
+  }
+
+  // 4. Issue JWT (same payload as OTP login)
+  const token = generateToken({
+    phone: validData.mobile,
+    id: employee.id.toString(),
+    userId: employee.userId,
+  });
+
+  return res
+    .status(statusCode.OK)
+    .cookie("employee_token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    })
+    .header("Authorization", `Bearer ${token}`)
+    .json({
+      success: true,
+      message: "Login successful",
+      token,
+      employee: {
+        id: employee.id,
+        userId: employee.userId,
+        firstname: employee.firstname,
+        lastname: employee.lastname,
+        email: employee.email,
+        phoneNumber: employee.phoneNumber,
+        designation: employee.designation,
+        employeeCode: employee.employeeCode,
+      },
+      company: employee.company,
     });
 });
