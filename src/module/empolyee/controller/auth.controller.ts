@@ -229,6 +229,7 @@ export const loginWithPassword = asyncHandler(async (req, res, next) => {
       sameSite: "strict",
       maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
     })
+    // headers
     .header("Authorization", `Bearer ${token}`)
     .json({
       success: true,
